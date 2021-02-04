@@ -1,6 +1,8 @@
 #runr"""
 """
 	AUTHOR: Alexander Petrov
+	Without any permission whatsoever, this file should NOT be distributed
+
 
 	   You should pick/define 'q' before loading the following routines in SAGE.
 	   The routines are based on:
@@ -8,6 +10,8 @@
 				   http://link.springer.com/article/10.1007%2FBF01410204
 		 [Tha]  Function Field Arithmetic, World Scientific, ISBN: 978-981-238-839-1.
 				   http://www.worldscientific.com/worldscibooks/10.1142/5535
+
+	This version differs from the original only by minors changes in order to fix some bugs
 """
 # def Setting(q=3):
 # 	r"""
@@ -37,6 +41,7 @@
 
 # Setting()
 
+q=3
 F.<prim_root_mod_q> = FiniteField(q)
 P.<T> = PolynomialRing(F)
 P1.<u> = PowerSeriesRing(FractionField(P))
