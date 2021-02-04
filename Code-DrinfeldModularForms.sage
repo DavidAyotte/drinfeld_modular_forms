@@ -1,62 +1,75 @@
-#runr"""
+
+Init_text = """
+*********************************************************************************
+**   MAIN AUTHOR: Alex Petrov                                                  **
+**   This file should NOT be distributed without any permission whatsoever.    **
+*********************************************************************************
+
+To see a list of available functions type 'AvailableFunctions()'
+To see a descriptions of a specific function 'Fun_Name' 
+type 'Fun_Name?'
+
+To use the functions defined in this file
+you should choose any prime power q and run the command:
+
+    sage: Setting(q)
+
+Initial value q = 3
 """
-	AUTHOR: Alexander Petrov
-	Without any permission whatsoever, this file should NOT be distributed
 
-
-	   You should pick/define 'q' before loading the following routines in SAGE.
-	   The routines are based on:
-		 [Gek] On the coefficients of Drinfeld modular forms, Invent. Math. Volume 93, Issue 3, pp 667-700, 1988.
-				   http://link.springer.com/article/10.1007%2FBF01410204
-		 [Tha]  Function Field Arithmetic, World Scientific, ISBN: 978-981-238-839-1.
-				   http://www.worldscientific.com/worldscibooks/10.1142/5535
+""" 	
+	The routines are based on:
+		[Gek] On the coefficients of Drinfeld modular forms, Invent. Math. Volume 93, Issue 3, pp 667-700, 1988.
+			http://link.springer.com/article/10.1007%2FBF01410204
+		[Tha]  Function Field Arithmetic, World Scientific, ISBN: 978-981-238-839-1.
+			http://www.worldscientific.com/worldscibooks/10.1142/5535
 
 	This version differs from the original only by minors changes in order to fix some bugs
 """
-# def Setting(q=3):
-# 	r"""
-# 	Changes the setting of the whole file. Given a prime power 'q', this function defines four global variable:
-# 		- 'F' a finite field of 'q' elements with generator 'prim_root_mod_q';
-# 		- 'P' a univariate polynomial ring in 'T' over 'F';
-# 		- 'P1' a power series ring in 'u' over 'FractionField(P)'
-# 		- 'P2' a univariate polynomial ring in 'X' over 'FractionField(P)'
 
-# 	INPUTS: - A prime power 'q'
-# 	"""
-# 	global F.<prim_root_mod_q> = FiniteField(q)
-# 	global P.<T> = PolynomialRing(F)
-# 	global P1.<u> = PowerSeriesRing(FractionField(P))
-# 	global P2.<X> = PolynomialRing(FractionField(P))
+print(Init_text)
 
-# 	print("----->")
-# 	print("The following objects have been initiated globally:")
-# 	print("--- 'F' a finite field of 'q' elements with generator 'prim_root_mod_q';")
-# 	print("--- 'P' a univariate polynomial ring in 'T' over 'F'; ")
-# 	print("--- 'P1' a power series ring in 'u' over 'FractionField(P)'.")
-# 	print("<-----")
-# 	print("To see a list of available functions type 'AvailableFunctions()'")
-# 	print("To see a descriptions of a specific function 'Fun_Name' ")
-# 	print("type 'Fun_Name?'")
-# 	print(" ")
+def Setting(q_):
+	r"""
+	This functions defines GLOBALLY the following variables:
 
-# Setting()
+		q, F, prim_root_mod_q, P, T, P1, u, P2, X
 
-q=3
-F.<prim_root_mod_q> = FiniteField(q)
-P.<T> = PolynomialRing(F)
-P1.<u> = PowerSeriesRing(FractionField(P))
-P2.<X> = PolynomialRing(FractionField(P))
+	where:
 
-print("----->")
-print("The following objects have been initiated globally:")
-print("--- 'F' a finite field of 'q' elements with generator 'prim_root_mod_q';")
-print("--- 'P' a univariate polynomial ring in 'T' over 'F'; ")
-print("--- 'P1' a power series ring in 'u' over 'FractionField(P)'.")
-print("<-----")
-print("To see a list of available functions type 'AvailableFunctions()'")
-print("To see a descriptions of a specific function 'Fun_Name' ")
-print("type 'Fun_Name?'")
-print(" ")
+		--- 'F' is a finite field of 'q' elements with generator 'prim_root_mod_q';
+		--- 'P' is a univariate polynomial ring in 'T' over 'F'; 
+		--- 'P1' is a power series ring in 'u' over 'FractionField(P)'.
+
+	This routine is automatically runned when loading this file in Sage with initial value q = 3
+	
+	INPUTS: q_ a prime power
+	"""
+	global q
+	global F
+	global prim_root_mod_q
+	global P
+	global T
+	global P1
+	global u
+	global P2
+	global X
+
+	q = q_
+	F = FiniteField(q)
+	prim_root_mod_q = F.gen()
+	P = PolynomialRing(F, "T")
+	T = P.gen()
+	P1 = PowerSeriesRing(FractionField(P), "u")
+	u = P1.gen()
+	P2 = PolynomialRing(FractionField(P), "X")
+	X = P2.gen()
+
+	print("The following objects have been initiated GLOBALLY:")
+	print("--- 'F' a finite field of 'q' elements with generator 'prim_root_mod_q';")
+	print("--- 'P' a univariate polynomial ring in 'T' over 'F'; ")
+	print("--- 'P1' a power series ring in 'u' over 'FractionField(P)'.")
+Setting(3)
 
 def AvailableFunctions():
 	print("Setting")
@@ -774,7 +787,7 @@ def BasisFor_M_k_m(k, m, preCision, GG = [], HH = []):
 	Ans = []
 	for j in range(0, biggest_power_of_h + 1):
 		hpower = m + j*(q-1)
-	gpower = (k-m*(q+1) - j*(q^2 - 1))/(q-1)
+		gpower = (k-m*(q+1) - j*(q^2 - 1))/(q-1)
 	Ans = Ans + [GG[gpower]*HH[hpower] + O(u^preCision)]
 	return Ans
 
