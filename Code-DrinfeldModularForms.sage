@@ -65,6 +65,7 @@ def Setting(q_):
 	P2 = PolynomialRing(FractionField(P), "X")
 	X = P2.gen()
 
+	print("New function field setting q = {} \n".format(q))
 	print("The following objects have been initiated GLOBALLY:")
 	print("--- 'F' a finite field of 'q' elements with generator 'prim_root_mod_q';")
 	print("--- 'P' a univariate polynomial ring in 'T' over 'F'; ")
