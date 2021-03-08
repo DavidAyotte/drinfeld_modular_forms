@@ -1,9 +1,12 @@
 
 Init_text = """
-*********************************************************************************
-**   MAIN AUTHOR: Alex Petrov                                                  **
-**   This file should NOT be distributed without any permission whatsoever.    **
-*********************************************************************************
+**********************************
+**   MAIN AUTHOR: Alex Petrov   **
+**********************************
+
+This file is an updated version of the original file "AlexPetrov-Original-code-Drinfeldmodularforms-Sage.sage"
+fixing minor bugs and formating issues. A new function "Setting" was added to change easily the value of q.
+
 
 To see a list of available functions type 'AvailableFunctions()'
 To see a descriptions of a specific function 'Fun_Name' 
@@ -14,18 +17,18 @@ you should choose any prime power q and run the command:
 
     sage: Setting(q)
 
-Initial value q = 3
+Default value is q = 3
+
+References: 	
+The routines are based on:
+	[Gek] On the coefficients of Drinfeld modular forms, Invent. Math. Volume 93, Issue 3, pp 667-700, 1988.
+		http://link.springer.com/article/10.1007%2FBF01410204
+	[Tha]  Function Field Arithmetic, World Scientific, ISBN: 978-981-238-839-1.
+		http://www.worldscientific.com/worldscibooks/10.1142/5535
+
 """
 
-""" 	
-	The routines are based on:
-		[Gek] On the coefficients of Drinfeld modular forms, Invent. Math. Volume 93, Issue 3, pp 667-700, 1988.
-			http://link.springer.com/article/10.1007%2FBF01410204
-		[Tha]  Function Field Arithmetic, World Scientific, ISBN: 978-981-238-839-1.
-			http://www.worldscientific.com/worldscibooks/10.1142/5535
-
-	This version differs from the original only by minors changes in order to fix some bugs
-"""
+#TODO: fix the formating issue for the documentation (add break line character at the end of each line)
 
 print(Init_text)
 

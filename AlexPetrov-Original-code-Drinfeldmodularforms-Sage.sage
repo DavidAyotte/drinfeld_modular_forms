@@ -1,6 +1,5 @@
 runr"""
 	AUTHOR: Alexander Petrov
-	Without any permission whatsoever, this file should NOT be distributed
 
        You should pick/define 'q' before loading the following routines in SAGE.
        The routines are based on:
