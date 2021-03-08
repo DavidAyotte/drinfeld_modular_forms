@@ -1,4 +1,4 @@
-# DrinfeldModularForms
+# Drinfeld Modular Forms
 
 This repo is a work in progress. Many changes might be done in the future.
 
