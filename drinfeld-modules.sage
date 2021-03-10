@@ -1,5 +1,6 @@
 
 #TODO: add documentation
+#TODO: resolve doctests TypeError (or create a sage-trac ticket)
 
 class DrinfeldModule:
     def __init__(self, K, coef):
