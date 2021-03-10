@@ -57,8 +57,17 @@ class DrinfeldModule:
     def __repr__(self):
         return "Drinfeld module of rank %s for the %s defined by T |--> %s"%(self.rank(), self.function_field, str(self.action_of_T()))
 
-def CarlitzModule(K):
-    return DrinfeldModule(K, [1])
+    def __call__(self, a):
+        return self.action(a)
+
+class CarlitzModule(DrinfeldModule):
+    def __init__(self, K):
+        DrinfeldModule.__init__(self, K, [1])
+
+
+
+# def CarlitzModule(K):
+#     return DrinfeldModule(K, [1])
 
 
 
