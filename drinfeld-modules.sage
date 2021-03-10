@@ -7,6 +7,36 @@ class DrinfeldModule:
         self.coefficients = coef
 
     def ring_of_regular_functions(self):
+        r"""
+        Return the subring of function regular at infinity of the defining function field.
+
+        OUTPUT: The polynomial ring F_q[T] where F_q is the finite field of q elements.
+
+        EXAMPLES:
+
+            sage: K.<T> = FunctionField(GF(5, 'a'));
+            sage: C = CarlitzModule(K);
+            sage: C.ring_of_regular_functions()
+            Univariate Polynomial Ring in T over Finite Field of size 5
+
+        Changing the name for the generator of the function field will also change the name of the generator::
+
+            sage: K.<U> = FunctionField(GF(13^2, 'b'));
+            sage: D = DrinfeldModule(K, [1,1]);
+            sage: D.ring_of_regular_functions()
+            Univariate Polynomial Ring in U over Finite Field in b of size 13^2
+
+        TESTS::
+
+            sage: K.<T> = FunctionField(GF(5, 'a'));
+            sage: C = CarlitzModule(K);
+            sage: C.ring_of_regular_functions()
+            Univariate Polynomial Ring in T over Finite Field of size 5
+            sage: K.<U> = FunctionField(GF(13^2, 'b'));
+            sage: D = DrinfeldModule(K, [1,1]);
+            sage: D.ring_of_regular_functions()
+            Univariate Polynomial Ring in U over Finite Field in b of size 13^2
+        """
         return PolynomialRing(self.function_field.constant_base_field(), self.function_field.gen())
 
     def symbolic_additive_polynomials(self):
@@ -63,11 +93,6 @@ class DrinfeldModule:
 class CarlitzModule(DrinfeldModule):
     def __init__(self, K):
         DrinfeldModule.__init__(self, K, [1])
-
-
-
-# def CarlitzModule(K):
-#     return DrinfeldModule(K, [1])
 
 
 
