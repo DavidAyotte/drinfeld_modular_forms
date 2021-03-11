@@ -117,7 +117,22 @@ class DrinfeldModule:
         return len(self.coefficients)
 
     def characteristic(self):
-        return self.function_field.constant_field().characteristic()
+        r"""
+        This method return the caracteristic of the function field.
+
+        OUTPUT: An integer corresponding to the characteristic of the base function field, that is the characteristic of the constants
+        base field F_q.
+
+        EXAMPLES:
+
+            sage: K.<T> = FunctionField(GF(7^3, 'a'))
+            sage: C = CarlitzModule(K)
+            sage: C.characteristic()
+            7
+            sage: K.characteristic()
+            7
+        """
+        return self.function_field.characteristic()
 
     def prime_power_of_constant_field(self):
         F = self.function_field.constant_base_field()
