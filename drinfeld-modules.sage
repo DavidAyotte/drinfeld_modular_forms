@@ -51,15 +51,30 @@ This code is based on the original code written by Alex Petrov (see the file "pe
 #                  https://www.gnu.org/licenses/
 # ****************************************************************************
 
-#TODO: add documentation
-
 
 class AdditivePolynomials:
     #TODO: implement this class
     pass
 
 class DrinfeldModule:
+    r"""
+    This class defines a Drinfeld module.
 
+    INPUT:
+
+    - ``K`` -- A function field over a finite field.
+    - ``coef`` -- A list [a1, a2,..., an] corresponding to to the additive polynomial T*X + a1*X^q + a2*X^(q^2) + ... + an*X^(q^n). 
+
+    EXAMPLES:
+
+        sage: K.<T> = FunctionField(GF(3))
+        sage: D = DrinfeldModule(K, [1,2]); D
+        Drinfeld module of rank 2 over the Rational function field in T over Finite Field of size 3 defined by T |--> 2*X^9 + X^3 + T*X
+        sage: D(T)
+        2*X^9 + X^3 + T*X
+        sage: D(T^2+1)
+        X^81 + X^27 + (2*T^9 + 2*T + 1)*X^9 + (T^3 + T)*X^3 + (T^2 + 1)*X
+    """
     def __init__(self, K, coef):
         if K.constant_base_field().cardinality() == Infinity:
             raise ValueError("The constant base field must be a finite field")
@@ -319,9 +334,3 @@ class CarlitzModule(DrinfeldModule):
         DrinfeldModule.__init__(self, K, [1])
 
     #TODO: add more methods relative to CarlitzModule
-
-
-
-    
-
-
