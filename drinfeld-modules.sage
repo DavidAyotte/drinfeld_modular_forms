@@ -35,7 +35,7 @@ The call method is implemented to compute the image of a given Drinfeld module a
 
 AUTHORS:
 
-- DAVID AYOTTE (2021): initial version
+- DAVID AYOTTE (2021): initial version, https://github.com/DavidAyotte/drinfeld-modular-forms
 
 This code is based on the original code written by Alex Petrov (see the file "petrov/AlexPetrov-original-code-drinfeld-modular-forms.sage")
 
@@ -230,6 +230,9 @@ class DrinfeldModule:
     def frobenius(self):
         return K.frobenius_endomorphism()^(self.prime_power_of_constant_field())
 
+    def q(self):
+        return self.characteristic()^(self.prime_power_of_constant_field())
+
     def action_of_T(self, exp=1):
         r"""
         This method return the action of the Drinfeld module at T^exp (T being the generator of the function field).
@@ -322,6 +325,15 @@ class DrinfeldModule:
         for power, coeff in enumerate(coeffs):
             action += coeff*self.action_of_T(exp=power)
         return action
+
+    def j_invariant(self):
+        if self.rank() != 2:
+            raise ValueError("The j-invariant is only defined for rank 2 Drinfeld Module (current rank: %s)"%(self.rank()))
+        g = self.coefficients[0]
+        delta = self.coefficients[1]
+        q = self.characteristic()^self.prime_power_of_constant_field()
+        return g^(q-1)/delta
+
         
     def __repr__(self):
         return "Drinfeld module of rank %s over the %s defined by T |--> %s"%(self.rank(), self.function_field, str(self.action_of_T()))
@@ -330,7 +342,37 @@ class DrinfeldModule:
         return self.action(a)
 
 class CarlitzModule(DrinfeldModule):
+    #TODO add documentation
     def __init__(self, K):
         DrinfeldModule.__init__(self, K, [1])
+
+    def Br(self, n):
+        if n < 0:
+            raise ValueError("The value of n must be a non-negative integer")
+        T = self.function_field.gen()
+        p = self.characteristic()
+        q = p^self.prime_power_of_constant_field()
+        return T^(q^n)-T
+
+    def monic_pol_products(self, deg):
+        if deg < 0:
+            raise ValueError("deg must be a non-negative integer")
+        if deg == 0:
+            return self.function_field(1)
+        prod = 1
+        for j in range(1, deg+1):
+            prod *= self.Br(j)^(self.q()^(deg-j))
+        return prod
+
+    def LCM_monic_pol(self, deg):
+        if deg < 0:
+            raise ValueError("deg must be non-negative integer")
+        if deg == 0:
+            return self.function_field(1)
+        prod = 1
+        for i in range(1, deg+1):
+            prod *= self.Br(i)
+        return prod
+
 
     #TODO: add more methods relative to CarlitzModule
