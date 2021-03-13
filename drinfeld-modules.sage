@@ -374,5 +374,15 @@ class CarlitzModule(DrinfeldModule):
             prod *= self.Br(i)
         return prod
 
+    def action(self, a):
+        X = self.symbolic_additive_polynomials().gen()
+        T = self.function_field.gen()
+        f=a*X
+        d = len(a.list())
+        aux = (a^self.q() - a)/(self.Br(1))
+        for i in range(1, d+1):
+            f += aux*X^(self.q()^i)
+            aux = (aux^self.q() - aux)/self.Br(i + 1)
+        return f
 
     #TODO: add more methods relative to CarlitzModule
