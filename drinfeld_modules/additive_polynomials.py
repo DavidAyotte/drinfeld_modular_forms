@@ -29,6 +29,24 @@ from sage.structure.richcmp import op_EQ, op_NE
 from .defaults import DEFAULT_VARIABLE, DEFAULT_FROBENIUS
 
 class AdditivePolynomialElement(RingElement):
+    r"""
+    Elements of additive polynomials ring.
+
+    An additive polynomial is an endomorphism over a rational function field `K`
+    given by a polynomial in `\tau : x \mapsto x^q`, the Frobenius endomorphism,
+
+    .. MATH::
+
+        a_0 \tau^0 + a_1 \tau + \cdots + a_r \tau^r.
+
+    Note that multiplication is given by composition:
+
+    .. MATH::
+
+        \tau \alpha = \alpha^q \tau
+
+    for any `\alpha \in K`.
+    """
     def __init__(self, parent, polynomial):
         if not isinstance(polynomial, Polynomial):
             raise ValueError("the given argument should be a univariate polynomial")
@@ -115,6 +133,7 @@ class AdditivePolynomials(Parent):
 
         EXAMPLES::
 
+            sage: from drinfeld_modules import *
             sage: AdditivePolynomials(GF(3^6)).ring_of_constants()
             Finite Field in z6 of size 3^6
             sage: AdditivePolynomials(GF(5)).ring_of_constants()
