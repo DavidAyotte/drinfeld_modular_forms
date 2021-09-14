@@ -19,7 +19,7 @@ package_name = 'drinfeld_modules'
 package_folder = "../../drinfeld_modules"
 authors = u"David Ayotte"
 
-import six
+#import six
 import sys
 import os
 from sage.env import SAGE_DOC_SRC, SAGE_DOC, SAGE_SRC
