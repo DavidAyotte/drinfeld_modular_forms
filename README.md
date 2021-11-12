@@ -1,5 +1,14 @@
-# Drinfeld Modules SageMath Package
+# Drinfeld Modules
 
-This repo is a work in progress. Many changes might be done in the future.
+This SageMath package provides an implementation of Drinfeld modules
 
-Most of the code on the original code written by Alex Petrov (see the file "petrov/AlexPetrov-original-code-drinfeld-modular-forms.sage").
+To install this package, first clone this repository and then run the `make`
+command (inside the repository main folder). Next, to use it in your SageMath
+session you just need to type:
+
+`sage: from drinfeld_modules import *`.
+
+This package is still in development and some parts of the code is
+based on the initial implementation of Alex Petrov located here:
+
+`petrov/AlexPetrov-original-code-drinfeld-modular-forms.sage`.

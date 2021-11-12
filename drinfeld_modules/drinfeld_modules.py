@@ -26,6 +26,11 @@ from sage.rings.fraction_field import is_FractionField
 from sage.structure.parent import Parent
 
 class DrinfeldModule(Parent):
+    r"""
+    Base class of a Drinfeld module.
+
+    TODO: add documentation
+    """
     def __init__(self, *args, name='𝜏'):
         if not isinstance(name, str):
             raise TypeError('the name of the Frobenius must be string')
@@ -111,7 +116,8 @@ class DrinfeldModule(Parent):
 
         EXAMPLES::
 
-            sage: K.<T> = FunctionField(GF(3^2))
+            sage: from drinfeld_modules import *
+            sage: A.<T> = GF(5 ** 2)['T']
             sage: DrinfeldModule(T).rank()
             1
             sage: DrinfeldModule(T, T^2, T).rank()
@@ -125,32 +131,66 @@ class DrinfeldModule(Parent):
 
         EXAMPLES::
 
-            sage: K.<T> = FunctionField(GF(3^2))
+            sage: from drinfeld_modules import *
+            sage: A.<T> = GF(5 ** 2)['T']
             sage: phi_T = DrinfeldModule(T).operator_polynomial(); phi_T
-            T*Frob + T
+            T*𝜏 + T
             sage: phi_T.parent()
-            Ore Polynomial Ring in Frob over Rational function field in T over Finite Field in z2 of size 3^2 twisted by Frob
+            Ore Polynomial Ring in 𝜏 over Fraction Field of Univariate Polynomial Ring in T over Finite Field in z2 of size 5^2 twisted by Frob
         """
         return self._operator_polynomial
 
     def base_field(self):
-        return self._base_field
-
-    regular_functions_at_infinity = base_field # alias
-
-    def constant_base_field(self):
         r"""
-        Return the field of constant of the base function field.
+        Return the base field of the given Drinfeld module.
 
         EXAMPLES::
 
-            sage: K.<T> = FunctionField(GF(7))
-            sage: DrinfeldModule(T).constant_base_field()
+            sage: from drinfeld_modules import *
+            sage: A.<T> = GF(11 ** 3)['T']
+            sage: phi = DrinfeldModule(T^2)
+            sage: phi.base_field()
+            Fraction Field of Univariate Polynomial Ring in T over Finite Field in z3 of size 11^3
+        """
+        return self._base_field
+
+    def base_polynomial_ring(self):
+        r"""
+        Return the ring of regular functions outside infinity.
+
+        EXAMPLES::
+
+            sage: from drinfeld_modules import *
+            sage: A.<T> = GF(19)['T']
+            sage: C = DrinfeldModule(A.one())
+            sage: C.base_polynomial_ring()
+            Univariate Polynomial Ring in T over Finite Field of size 19
+            sage: C.base_polynomial_ring() is A
+            True
+
+        An alias of this method is ``regular_functions_outside_infinity``::
+
+            sage: C.regular_functions_outside_infinity()
+            Univariate Polynomial Ring in T over Finite Field of size 19
+        """
+        return self._base_field.ring_of_integers()
+
+    regular_functions_outside_infinity = base_polynomial_ring # alias
+
+    def field_of_constants(self):
+        r"""
+        Return the field of constants of the base function field.
+
+        EXAMPLES::
+
+            sage: from drinfeld_modules import *
+            sage: A.<T> = GF(7)['T']
+            sage: DrinfeldModule(T).field_of_constants()
             Finite Field of size 7
         """
         return self._base_field.base_ring()
 
-    ring_of_constants = constant_base_field # alias
+    ring_of_constants = field_of_constants # alias
 
     def _repr_(self):
         r"""
@@ -158,9 +198,13 @@ class DrinfeldModule(Parent):
 
         EXAMPLES::
 
-            sage: K.<T> = FunctionField(GF(13**2))
+            sage: from drinfeld_modules import *
+            sage: A.<T> = GF(13 ** 2)['T']
+            sage: DrinfeldModule(T)
+            Drinfeld Module of rank 1 over Finite Field in z2 of size 13^2 defined by:
+            T |--> T*𝜏 + T
             sage: DrinfeldModule(T, name='tau')
-            Drinfeld Module over Rational function field in T over Finite Field in z2 of size 13^2 defined by:
+            Drinfeld Module of rank 1 over Finite Field in z2 of size 13^2 defined by:
             T |--> T*tau + T
         """
         return "Drinfeld Module of rank %s over %s defined by:\n%s |--> %s" % (self.rank(), self.ring_of_constants(), self.base_ring().gen(), self.operator_polynomial())
@@ -171,11 +215,28 @@ class DrinfeldModule(Parent):
 
         INPUT:
 
-        - ``a`` (Polynomial) -- A polynomial living in the ring of regular function of the base function field.
+        - ``a`` (Polynomial) -- A polynomial living in the univariate polynomial ring of the base field.
+
+        EXAMPLES::
+
+            sage: from drinfeld_modules import *
+            sage: A.<T> = GF(3)['T']
+            sage: C = DrinfeldModule(A.one())
+            sage: C.action_endomorphism(T)
+            𝜏 + T
+            sage: C.action_endomorphism(T^2)
+            𝜏^2 + (T^3 + T)*𝜏 + T^2
+
+        This method can be accessed via the element constructor method::
+
+            sage: C(T)
+            𝜏 + T
+            sage: C(T^3)
+            𝜏^3 + (T^9 + T^3 + T)*𝜏^2 + (T^6 + T^4 + T^2)*𝜏 + T^3
         """
         if not isinstance(a, Polynomial):
             raise TypeError("the input must be a univariate polynomial")
-        if not a.base_ring() == self.constant_base_field():
+        if not a.base_ring() == self.field_of_constants():
             raise ValueError("the the constants field (%s) of the input is inconsistent with that of the Drinfeld module (%s)" % (a.base_ring(), self.constant_base_field()))
         f = self.operator_polynomial()
         action_endomorphism = self._ore_polynomial_ring.zero()
@@ -183,5 +244,4 @@ class DrinfeldModule(Parent):
             action_endomorphism += c * (f ** idx)
         return action_endomorphism
 
-    def _element_constructor_(self, a):
-        return self.action_endomorphism(a)
+    _element_constructor_ = action_endomorphism # alias
