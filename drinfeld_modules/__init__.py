@@ -1,1 +1,1 @@
-from .additive_polynomials import AdditivePolynomials
+from .drinfeld_modules import DrinfeldModule
