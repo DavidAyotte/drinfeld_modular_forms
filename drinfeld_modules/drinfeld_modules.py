@@ -33,7 +33,7 @@ class DrinfeldModule(Parent):
     """
     def __init__(self, *args, name='𝜏'):
         if not isinstance(name, str):
-            raise TypeError('the name of the Frobenius must be string')
+            raise TypeError('the name of the Frobenius must be a string')
         if len(args) == 1:
             args = args[0]
             if isinstance(args, OrePolynomial):
