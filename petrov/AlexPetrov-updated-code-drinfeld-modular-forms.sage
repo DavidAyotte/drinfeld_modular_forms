@@ -9,7 +9,7 @@ fixing minor bugs and formating issues. A new function "Setting" was added to ch
 
 
 To see a list of available functions type 'AvailableFunctions()'
-To see a descriptions of a specific function 'Fun_Name' 
+To see a descriptions of a specific function 'Fun_Name'
 type 'Fun_Name?'
 
 To use the functions defined in this file
@@ -19,7 +19,7 @@ you should choose any prime power q and run the command:
 
 Default value is q = 3
 
-References: 	
+References:
 The routines are based on:
 	[Gek] On the coefficients of Drinfeld modular forms, Invent. Math. Volume 93, Issue 3, pp 667-700, 1988.
 		http://link.springer.com/article/10.1007%2FBF01410204
@@ -41,11 +41,11 @@ def Setting(q_):
 	where:
 
 		--- 'F' is a finite field of 'q' elements with generator 'prim_root_mod_q';
-		--- 'P' is a univariate polynomial ring in 'T' over 'F'; 
+		--- 'P' is a univariate polynomial ring in 'T' over 'F';
 		--- 'P1' is a power series ring in 'u' over 'FractionField(P)'.
 
 	This routine is automatically runned when loading this file in Sage with initial value q = 3
-	
+
 	INPUTS: q_ a prime power
 	"""
 	global q

@@ -190,6 +190,9 @@ class DrinfeldModule(Parent):
         """
         return self._base_field.base_ring()
 
+    def q(self):
+        return self._base_field.base_ring().cardinality()
+
     ring_of_constants = field_of_constants # alias
 
     def _repr_(self):
@@ -245,3 +248,14 @@ class DrinfeldModule(Parent):
         return action_endomorphism
 
     _element_constructor_ = action_endomorphism # alias
+
+    def action_polynomial(self, a, name='X'):
+        act = self.action_endomorphism(a)
+        R = self.base_polynomial_ring()['X']
+        q = self.q()
+        X = R.gen()
+        coeff_list = act.coefficients(sparse=False)
+        pol = R.zero()
+        for idx, c in enumerate(coeff_list):
+            pol += c * X ** (q ** idx)
+        return pol
