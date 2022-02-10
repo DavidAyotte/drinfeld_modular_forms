@@ -1,2 +1,3 @@
 from drinfeld_modules import DrinfeldModule
 from drinfeld_modules.carlitz_module import CarlitzModule
+from drinfeld_modules.expansions import Aexpansion, compute_delta

@@ -3,7 +3,7 @@ Base class for Drinfeld modules
 
 AUTHORS:
 
-- DAVID AYOTTE (2021): initial version
+- David Ayotte (2021): initial version
 """
 
 # ****************************************************************************

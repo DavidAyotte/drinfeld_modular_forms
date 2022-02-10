@@ -16,7 +16,6 @@ AUTHORS:
 #                  https://www.gnu.org/licenses/
 # ****************************************************************************
 
-
 from drinfeld_modules import DrinfeldModule
 
 from sage.rings.all import FiniteField
