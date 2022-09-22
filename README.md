@@ -15,4 +15,4 @@ based on the initial implementation of Alex Petrov located here:
 
 ## Note:
 
-Drinfeld modules are currently being implemented in SageMath. See [https://trac.sagemath.org/ticket/33713].
+Drinfeld modules are currently being implemented in SageMath. See https://trac.sagemath.org/ticket/33713.
