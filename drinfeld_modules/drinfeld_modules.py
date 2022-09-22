@@ -1,9 +1,12 @@
 """
-Base class for Drinfeld modules
+Base class for Drinfeld modules over `\mathbb{F}_q[T]`
 
 AUTHORS:
 
 - David Ayotte (2021): initial version
+
+NOTE: Drinfeld modules are currently being implemented in SageMath. See
+https://trac.sagemath.org/ticket/33713
 """
 
 # ****************************************************************************
@@ -28,8 +31,6 @@ from sage.structure.parent import Parent
 class DrinfeldModule(Parent):
     r"""
     Base class of a Drinfeld module.
-
-    TODO: add documentation
     """
     def __init__(self, *args, name='𝜏'):
         if not isinstance(name, str):
