@@ -16,7 +16,7 @@ AUTHORS:
 #                  https://www.gnu.org/licenses/
 # ****************************************************************************
 
-from drinfeld_modules import DrinfeldModule
+from drinfeld_modular_forms import DrinfeldModule
 
 from sage.rings.all import FiniteField
 from sage.rings.real_double import RDF

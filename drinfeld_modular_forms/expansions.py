@@ -16,6 +16,9 @@ AUTHORS:
 #                  https://www.gnu.org/licenses/
 # ****************************************************************************
 
+from functools import cache
+
+@cache
 def Aexpansion(C, k, n, max_deg, prec, name='t'):
     r"""
     Return the A-expansion `\sum a^(k-n) G_n (t_a)` by using polynomials of
@@ -41,7 +44,7 @@ def Aexpansion(C, k, n, max_deg, prec, name='t'):
     normed_goss_pol = gn.coefficients()[0].inverse_of_unit() * gn
     ans = 0
     for j in range(0, max_deg + 1):
-        for a in A.monics(of_degree = j):
+        for a in A.monics(of_degree=j):
             ans = ans + a ** (k-n)*normed_goss_pol(C.ta(a, prec, name))
     return ans
 

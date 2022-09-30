@@ -25,7 +25,6 @@ from sage.rings.polynomial.ore_polynomial_element import OrePolynomial
 from sage.rings.fraction_field_element import is_FractionFieldElement
 from sage.rings.fraction_field import is_FractionField
 
-
 from sage.structure.parent import Parent
 
 class DrinfeldModule(Parent):
