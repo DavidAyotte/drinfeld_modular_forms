@@ -4,6 +4,22 @@ from sage.structure.richcmp import richcmp, op_NE, op_EQ
 class DrinfeldModularFormsRingElement(ModuleElement):
     r"""
     Element class of rings of Drinfeld modular forms.
+
+    EXAMPLES::
+
+        sage: from drinfeld_modular_forms.all import *
+        sage: A = GF(3)['T']; K = Frac(A); T = K.gen()
+        sage: M = DrinfeldModularFormsRing(K, 2)
+        sage: M.0
+        g0
+        sage: M.1
+        g1
+        sage: (T^2 + 1)*(M.0 + M.0 * M.1)
+        (T^2 + 1)*g0*g1 + (T^2 + 1)*g0
+        sage: (M.0).parent()
+        Ring of Drinfeld modular forms of rank 2 over Fraction Field of Univariate Polynomial Ring in T over Finite Field of size 3
+        sage: M.1 in M
+        True
     """
     def __init__(self, parent, polynomial):
         self.polynomial = polynomial
@@ -16,6 +32,7 @@ class DrinfeldModularFormsRingElement(ModuleElement):
 
         TESTS::
 
+            sage: from drinfeld_modular_forms.all import *
             sage: A = GF(3)['T']; K = Frac(A)
             sage: M = DrinfeldModularFormsRing(K, 2)
             sage: (M.0)._repr_()
@@ -31,6 +48,7 @@ class DrinfeldModularFormsRingElement(ModuleElement):
 
         TESTS::
 
+            sage: from drinfeld_modular_forms.all import *
             sage: A = GF(3)['T']; K = Frac(A)
             sage: M = DrinfeldModularFormsRing(K, 2)
             sage: M.0 + M.1  # indirect doctest
@@ -44,6 +62,7 @@ class DrinfeldModularFormsRingElement(ModuleElement):
 
         TESTS::
 
+            sage: from drinfeld_modular_forms.all import *
             sage: A = GF(3)['T']; K = Frac(A)
             sage: M = DrinfeldModularFormsRing(K, 2)
             sage: M.0*M.1  # indirect doctest
@@ -61,7 +80,8 @@ class DrinfeldModularFormsRingElement(ModuleElement):
 
         TESTS::
 
-            sage: A = GF(3)['T']; K = Frac(A)
+            sage: from drinfeld_modular_forms.all import *
+            sage: A = GF(3)['T']; K = Frac(A); T = K.gen()
             sage: M = DrinfeldModularFormsRing(K, 2)
             sage: (T^2 + T + 2) * M.0  # indirect doctest
             (T^2 + T - 1)*g0
@@ -80,6 +100,7 @@ class DrinfeldModularFormsRingElement(ModuleElement):
 
         TESTS::
 
+            sage: from drinfeld_modular_forms.all import *
             sage: A = GF(3)['T']; K = Frac(A)
             sage: M = DrinfeldModularFormsRing(K, 2)
             sage: -M.0  # indirect doctest
@@ -89,14 +110,15 @@ class DrinfeldModularFormsRingElement(ModuleElement):
 
     def __bool__(self):
         r"""
-        Return True wether self is zero.
+        Return True wether self is nonzero.
 
         TESTS::
 
+            sage: from drinfeld_modular_forms.all import *
             sage: A = GF(3)['T']; K = Frac(A)
             sage: M = DrinfeldModularFormsRing(K, 2)
             sage: bool(M.0)
-            False
+            True
         """
         return bool(self.polynomial)
 
@@ -106,6 +128,7 @@ class DrinfeldModularFormsRingElement(ModuleElement):
 
         TESTS::
 
+            sage: from drinfeld_modular_forms.all import *
             sage: A = GF(3)['T']; K = Frac(A)
             sage: M = DrinfeldModularFormsRing(K, 2)
             sage: M.0 == M.1
@@ -126,6 +149,7 @@ class DrinfeldModularFormsRingElement(ModuleElement):
 
         EXAMPLES::
 
+            sage: from drinfeld_modular_forms.all import *
             sage: A = GF(3)['T']; K = Frac(A)
             sage: M = DrinfeldModularFormsRing(K, 2)
             sage: u = M.one()
@@ -143,6 +167,7 @@ class DrinfeldModularFormsRingElement(ModuleElement):
 
         EXAMPLES::
 
+            sage: from drinfeld_modular_forms.all import *
             sage: A = GF(3)['T']; K = Frac(A)
             sage: M = DrinfeldModularFormsRing(K, 2)
             sage: z = M.zero()
@@ -156,4 +181,4 @@ class DrinfeldModularFormsRingElement(ModuleElement):
             sage: (0 * M.0).is_zero()
             True
         """
-        return self.polynomial.is_zero()
+        return not bool(self)
