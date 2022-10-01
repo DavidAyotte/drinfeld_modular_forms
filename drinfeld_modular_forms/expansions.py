@@ -16,6 +16,8 @@ AUTHORS:
 #                  https://www.gnu.org/licenses/
 # ****************************************************************************
 
+# TODO: refactor/reimplement this module
+
 from functools import cache
 
 @cache
@@ -38,8 +40,8 @@ def Aexpansion(C, k, n, max_deg, prec, name='t'):
     if prec >= q ** (max_deg + 1):
         print("Warning: Cannot ensure the required precision. Choose ``max_deg``, so that ``prec <= q^(max_deg + 1)``.")
     characteristic = F.characteristic()
-    if n > characteristic ** ((k-n).valuation(characteristic)):
-        print("Warning: The computed A-expansion is not a modular form.")
+    # if n > characteristic ** ((k-n).valuation(characteristic)):
+    #     print("Warning: The computed A-expansion is not a modular form.")
     gn = C.goss_polynomial(n)
     normed_goss_pol = gn.coefficients()[0].inverse_of_unit() * gn
     ans = 0
@@ -51,3 +53,7 @@ def Aexpansion(C, k, n, max_deg, prec, name='t'):
 def compute_delta(C, max_deg, prec, name='t'):
     q = C.q()
     return Aexpansion(C, q ** 2 - 1, q - 1, max_deg, prec)
+
+def compute_first_coefficient(C, max_deg, prec, name='t'):
+    q = C.q()
+    return C.bracket(1) ** (-1) + Aexpansion(C, q - 1, q - 1, max_deg, prec)
