@@ -1,7 +1,7 @@
 from sage.structure.element import ModuleElement
 from sage.structure.richcmp import richcmp, op_NE, op_EQ
 
-from .expansions import compute_delta, compute_first_coefficient
+from .expansions import compute_delta_rank_2, compute_eisentein_serie_rank_2
 from .carlitz_module import CarlitzModule
 
 class DrinfeldModularFormsRingElement(ModuleElement):
@@ -227,7 +227,7 @@ class DrinfeldModularFormsRingElement(ModuleElement):
         g0, g1 = poly_ring.gens()
         sub_dict = {}
         if degs[0]:
-            sub_dict[g0] = compute_first_coefficient(C, max_deg, prec, name)
+            sub_dict[g0] = compute_eisentein_serie_rank_2(C, max_deg, prec, name)
         if degs[1]:
-            sub_dict[g1] = compute_delta(C, max_deg, prec, name)
+            sub_dict[g1] = compute_delta_rank_2(C, max_deg, prec, name)
         return self.polynomial.subs(sub_dict)

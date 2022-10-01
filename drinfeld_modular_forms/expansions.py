@@ -50,10 +50,10 @@ def Aexpansion(C, k, n, max_deg, prec, name='t'):
             ans = ans + a ** (k-n)*normed_goss_pol(C.ta(a, prec, name))
     return ans
 
-def compute_delta(C, max_deg, prec, name='t'):
+def compute_delta_rank_2(C, max_deg, prec, name='t'):
     q = C.q()
     return Aexpansion(C, q ** 2 - 1, q - 1, max_deg, prec)
 
-def compute_first_coefficient(C, max_deg, prec, name='t'):
+def compute_eisentein_serie_rank_2(C, max_deg, prec, name='t'):
     q = C.q()
-    return C.bracket(1) ** (-1) + Aexpansion(C, q - 1, q - 1, max_deg, prec)
+    return C.bracket(1) ** (-1) - Aexpansion(C, q - 1, q - 1, max_deg, prec)
