@@ -5,7 +5,7 @@ from sage.structure.parent import Parent
 from sage.rings.function_field.function_field import FunctionField
 from sage.rings.polynomial.polynomial_ring_constructor import PolynomialRing
 from sage.rings.polynomial.term_order import TermOrder
-from sage.rings.interger import Integer
+from sage.rings.integer import Integer
 
 from .element import DrinfeldModularFormsRingElement
 
