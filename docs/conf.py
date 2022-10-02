@@ -13,10 +13,10 @@
 # serve to show the default.
 
 # General information about the project.
-project = u"Drinfeld modules"
+project = u"Drinfeld modular forms"
 copyright = u'2022, David Ayotte'
-package_name = 'drinfeld_modules'
-package_folder = "../../drinfeld_modules"
+package_name = 'drinfeld_modular_forms'
+package_folder = "../../drinfeld_modular_forms"
 authors = u"David Ayotte"
 
 import six
@@ -206,7 +206,7 @@ pygments_style = 'sphinx'
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 html_theme_path = [os.path.join(SAGE_DOC_SRC, 'common', 'themes')]
-html_theme = 'sage'
+html_theme = 'furo'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
