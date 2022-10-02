@@ -5,6 +5,7 @@ from sage.structure.parent import Parent
 from sage.rings.function_field.function_field import FunctionField
 from sage.rings.polynomial.polynomial_ring_constructor import PolynomialRing
 from sage.rings.polynomial.term_order import TermOrder
+from sage.rings.interger import Integer
 
 from .element import DrinfeldModularFormsRingElement
 
@@ -27,7 +28,8 @@ class DrinfeldModularFormsRing(Parent):
         self._base_ring = base_ring
         q = base_ring.base_ring().cardinality()
         degs = [q ** i - 1 for i in range(1, rank + 1, 1)]
-        self._poly_ring = PolynomialRing(base_ring, rank, names=names, order=TermOrder('wdeglex', degs))
+        self._poly_ring = PolynomialRing(base_ring, rank, names=names,
+                                         order=TermOrder('wdeglex', degs))
 
         Parent.__init__(self, base=base_ring, category=GradedAlgebras(base_ring))
 
@@ -35,7 +37,8 @@ class DrinfeldModularFormsRing(Parent):
         r"""
         Return the string representation of self.
         """
-        return "Ring of Drinfeld modular forms of rank %s over %s" % (self._rank, self._base_ring)
+        return ("Ring of Drinfeld modular forms of rank %s over %s"
+                % (self._rank, self._base_ring))
 
     def gen(self, n):
         r"""
@@ -127,3 +130,38 @@ class DrinfeldModularFormsRing(Parent):
             True
         """
         return self(self._poly_ring.zero())
+
+    def weighted_eisenstein_serie(self, k):
+        r"""
+        Return the Drinfeld Eisenstein serie of weight `q^k - 1`.
+
+        The method is currently only implemented for rank 2.
+
+        EXAMPLES::
+
+            sage: from drinfeld_modular_forms.all import *
+            sage: A = GF(3)['T']; K = Frac(A); T = K.gen()
+            sage: M = DrinfeldModularFormsRing(K, 2)
+            sage: M.weighted_eisenstein_serie(0)
+            0
+            sage: M.weighted_eisenstein_serie(1)
+            g0
+            sage: M.weighted_eisenstein_serie(2)
+            g0^4
+            sage: M.weighted_eisenstein_serie(3)
+            g0^13 + (-T^9 + T)*g0*g1^3
+        """
+        if not isinstance(k, (Integer, int)):
+            raise TypeError("k should be an integer")
+        if k < 0:
+            raise ValueError("the integer k (=%s) should be nonnegative" % (k))
+        if self._rank != 2:
+            raise NotImplementedError
+        q = self._base_ring.base_ring().cardinality()
+        if k == 0:
+            return self.zero()
+        if k == 1:
+            return self.gen(0)
+        T = self._base_ring.gen()
+        sqb = T ** (q ** (k - 1)) - T
+        return -sqb * self.weighted_eisenstein_serie(k - 2) * self.gen(1) ** (q ** (k - 2)) + self.weighted_eisenstein_serie(k - 1) * self.gen(0) ** (q ** (k - 1))
