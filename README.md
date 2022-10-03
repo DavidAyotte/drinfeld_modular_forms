@@ -1,34 +1,32 @@
 # Drinfeld Modular Forms
 
-This SageMath package provides an implementation for computing A-expansion of Modular Forms
+This SageMath package provides an implementation for computing with Drinfeld modular forms for `GL_r(A)`.
 
-To install this package, first clone this repository and then run the `make`
-command (inside the repository main folder). Next, to use it in your SageMath
-session you just need to type:
+To install this package, first clone this repository and then run the `make` command (inside the project main directory). If the `make` command does not work or is not available, you can also run the following command in the project main directory:
 
-`sage: from drinfeld_modules import *`.
+`sage -pip install --upgrade --no-index -v .`
 
-This package is still in development and some parts of the code is
-based on the initial implementation of Alex Petrov located here:
+If there is any changes to the current repo, you will then simply need to pull the changes and run the above command again.
 
-`petrov/AlexPetrov-original-code-drinfeld-modular-forms.sage`.
+Next, to use its functionalities in your SageMath session you just need to type:
+
+`sage: from drinfeld_modular_forms.all import *`.
 
 ## Examples:
 
 One may create the ring of Drinfeld modular forms:
 
-```sage
+```
     sage: from drinfeld_modular_forms.all import *
     sage: A = GF(3)['T']; K = Frac(A); T = K.gen()
-    sage: M = DrinfeldModularFormsRing(K, 2); M
-    Ring of Drinfeld modular forms of rank 2 over Fraction Field of Univariate Polynomial Ring in T over Finite Field of size 3
+    sage: M = DrinfeldModularFormsRing(K, 2)
     sage: M.ngens()  # number of generators
     2
 ```
 
-The elements of this ring are viewed as multivariate polynomials in a choice of generators for the ring. The default generators are the coefficient forms of a universal Drinfeld module over the Drinfeld period domain.
+The elements of this ring are viewed as multivariate polynomials in a choice of generators for the ring. The default generators are the coefficient forms of a universal Drinfeld module over the Drinfeld period domain (see theorem 17.5 in \[1\]).
 
-```sage
+```
     sage: g0, g1 = M.gens()
     sage: F = (g0 + g1)*g0; F
     g0*g1 + g0^2
@@ -37,7 +35,7 @@ Note that such elements are not necessarily modular forms as they can have mixed
 
 In the case of rank 2, one can compute the expansion at infinity of any graded form:
 
-```sage
+```
     sage: g0.t_expansion()
     1/(T^3 + 2*T) + t^2 + O(t^12)
     sage: g1.t_exansion()
@@ -45,10 +43,11 @@ In the case of rank 2, one can compute the expansion at infinity of any graded f
     sage: ((g0 + g1)*g0).t_expansion()
     1/(T^6 + T^4 + T^2) + 2*t^4 + (2/(T^3 + 2*T))*t^6 + (T^3 + 2*T)*t^10 + O(t^12)
 ```
+This is achieved via the `A`-expansion theory developed by Petrov in \[3\].
 
-It is also possible to compute the normalized Eisenstein serie of weight `q^k - 1`:
+It is also possible to compute the normalized Eisenstein serie of weight `q^k - 1` (see (6.9) in \[2\]):
 
-```sage
+```
     sage: from drinfeld_modular_forms.all import *
     sage: A = GF(3)['T']; K = Frac(A); T = K.gen()
     sage: M = DrinfeldModularFormsRing(K, 2)
@@ -59,7 +58,21 @@ It is also possible to compute the normalized Eisenstein serie of weight `q^k - 
 ## Note:
 
 Drinfeld modules are currently being implemented in SageMath. See https://trac.sagemath.org/ticket/33713.
+Whenever this ticket gets officially merged in SageMath, the functionalities on Drinfeld modules implemented in this project will be deprecated.
+
+This package is still in development and some parts of the code is
+based on the initial implementation of Alex Petrov located here:
+
+`petrov/AlexPetrov-original-code-drinfeld-modular-forms.sage`.
 
 ## Further Developments:
 
-Add Hecke operators computations.
+* Add Hecke operators computations.
+* Speed up the code for `t`-expansions.
+* Implement Sturm bound of a Drinfeld modular forms space of fixed weight.
+
+## References:
+
+* \[1\] Basson D., Breuer F., Pink R., Drinfeld modular forms of arbitrary rank, Part III: Examples, https://arxiv.org/abs/1805.12339
+* \[2\] Gekeler, E.-U., On the coefficients of Drinfelʹd modular forms. Invent. Math. 93 (1988), no. 3, 667–700
+* \[3\] Petrov A., A-expansions of Drinfeld modular forms. J. Number Theory 133 (2013), no. 7, 2247–2266
