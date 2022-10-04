@@ -1,17 +1,16 @@
-=======================================
-Drinfeld Modular Forms SageMath Package
-=======================================
+======================
+Drinfeld Modular Forms
+======================
 
 This is a SageMath package for computing with Drinfeld modular forms and their
 `t`-expansion.
 
-This work is licensed under a `Creative Commons Attribution-Share Alike
-3.0 License`__.
+This work is licensed under a `GNU General Public License`__.
 
-__ https://creativecommons.org/licenses/by-sa/3.0/
+__ https://www.gnu.org/licenses/
 
-Drinfeld Modules
-================
+Table of Contents
+=================
 
 .. toctree::
    :maxdepth: 2
