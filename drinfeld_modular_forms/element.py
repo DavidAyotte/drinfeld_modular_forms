@@ -182,7 +182,7 @@ class DrinfeldModularFormsRingElement(ModuleElement):
 
     def is_zero(self):
         r"""
-        Return ``True`` wether the given graded Drinfeld form is the additive
+        Return ``True`` whether the given graded Drinfeld form is the additive
         identity.
 
         EXAMPLES::

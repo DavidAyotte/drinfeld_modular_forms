@@ -72,7 +72,7 @@ class CarlitzModule(DrinfeldModule):
 
     def bracket(self, n):
         r"""
-        Return the element `[n] = T^(q^n) - T` where `T` is the generator of the
+        Return the element `[n] = T^{q^n} - T` where `T` is the generator of the
         polynomial base ring of self.
 
         EXAMPLES::

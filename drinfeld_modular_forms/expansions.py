@@ -23,7 +23,7 @@ from functools import cache
 @cache
 def Aexpansion(C, k, n, max_deg, prec, name='t'):
     r"""
-    Return the A-expansion `\sum a^(k-n) G_n (t_a)` by using polynomials of
+    Return the A-expansion `\sum a^{k-n} G_n (t_a)` by using polynomials of
     degree less than or equal to ``max_deg`` and up to precision ``prec``.
 
     EXAMPLES::
