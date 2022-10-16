@@ -114,10 +114,17 @@ def compute_A_expansion(k, n, polynomial_ring, max_deg, prec, name='t'):
 
 @cache
 def compute_delta_rank_2(A, max_deg, prec, name='t'):
+    r"""
+    Return the `t`-expansion of of the Drinfeld modular discriminant of weight
+    `q^2 - 1`.
+    """
     q = A.base_ring().cardinality()
     return compute_A_expansion(q ** 2 - 1, q - 1, A, max_deg, prec)
 
 @cache
 def compute_eisentein_serie_rank_2(A, max_deg, prec, name='t'):
+    r"""
+    Return the `t`-expansion of the weight `q - 1` Eisenstein serie.
+    """
     q = A.base_ring().cardinality()
     return bracket(1, A) ** (-1) - compute_A_expansion(q - 1, q - 1, A, max_deg, prec)
