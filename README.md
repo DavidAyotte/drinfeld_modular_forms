@@ -2,7 +2,7 @@
 
 This SageMath package provides an implementation for computing with Drinfeld modular forms for `GL_r(A)`.
 
-To install this package, first clone this repository and then run the `make` command (inside the project main directory). If the `make` command does not work or is not available, you can also run the following command in the project main directory:
+To install this package, first clone this repository and then run the following command (inside the project folder):
 
 `sage -pip install --upgrade --no-index -v .`
 

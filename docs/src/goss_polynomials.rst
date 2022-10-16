@@ -1,8 +1,8 @@
 ================
-Drinfeld modules
+Goss polynomials
 ================
 
-.. automodule:: drinfeld_modular_forms.drinfeld_modules
+.. automodule:: drinfeld_modular_forms.goss_polynomials
    :members:
    :undoc-members:
    :show-inheritance:

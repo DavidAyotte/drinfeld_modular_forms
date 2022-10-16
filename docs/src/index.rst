@@ -18,8 +18,8 @@ Table of Contents
    ring
    element
    expansions
+   goss_polynomials
    drinfeld_modules
-   carlitz_module
 
 
 Indices and Tables

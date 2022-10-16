@@ -84,6 +84,8 @@ class DrinfeldModularFormsRing(Parent):
             sage: M.ngens()
             5
         """
+        return self._rank
+
     def _element_constructor_(self, polynomial):
         r"""
         Return the element corresponding to the given polynomial.

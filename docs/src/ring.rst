@@ -1,5 +1,5 @@
 ==============================
-Ring of Drinfeld Modular Forms
+Ring of Drinfeld modular forms
 ==============================
 
 .. automodule:: drinfeld_modular_forms.ring
