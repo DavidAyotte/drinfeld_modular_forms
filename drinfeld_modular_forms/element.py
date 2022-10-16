@@ -2,7 +2,6 @@ from sage.structure.element import ModuleElement
 from sage.structure.richcmp import richcmp, op_NE, op_EQ
 
 from .expansions import compute_delta_rank_2, compute_eisentein_serie_rank_2
-from .carlitz_module import CarlitzModule
 
 class DrinfeldModularFormsRingElement(ModuleElement):
     r"""
@@ -221,13 +220,13 @@ class DrinfeldModularFormsRingElement(ModuleElement):
             sage: F.t_expansion()  # long time
             1/(T^6 + T^4 + T^2) + 2*t^4 + (2/(T^3 + 2*T))*t^6 + (T^3 + 2*T)*t^10 + O(t^12)
         """
-        C = CarlitzModule(self.base_ring().base())
+        A = self.base_ring().base()
         degs = self.polynomial.degrees()
         poly_ring = self.parent()._poly_ring
         g0, g1 = poly_ring.gens()
         sub_dict = {}
         if degs[0]:
-            sub_dict[g0] = compute_eisentein_serie_rank_2(C, max_deg, prec, name)
+            sub_dict[g0] = compute_eisentein_serie_rank_2(A, max_deg, prec, name)
         if degs[1]:
-            sub_dict[g1] = compute_delta_rank_2(C, max_deg, prec, name)
+            sub_dict[g1] = compute_delta_rank_2(A, max_deg, prec, name)
         return self.polynomial.subs(sub_dict)
