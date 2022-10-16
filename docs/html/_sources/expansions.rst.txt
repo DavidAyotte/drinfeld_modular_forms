@@ -1,5 +1,5 @@
 ================================
-Expansion at Infinity for Rank 2
+Expansion at infinity for rank 2
 ================================
 
 .. automodule:: drinfeld_modular_forms.expansions

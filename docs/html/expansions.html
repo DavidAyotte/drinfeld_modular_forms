@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Drinfeld Modules" href="drinfeld_modules.html" /><link rel="prev" title="Elements of Drinfeld Modular Forms rings" href="element.html" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Goss polynomials" href="goss_polynomials.html" /><link rel="prev" title="Elements of Drinfeld modular forms rings" href="element.html" />
 
     <meta name="generator" content="sphinx-4.4.0, furo 2022.06.21"/>
-        <title>Expansion at Infinity for Rank 2 - Drinfeld modular forms 0.8 documentation</title>
+        <title>Expansion at infinity for rank 2 - Drinfeld modular forms 0.8 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=40978830699223671f4072448e654b5958f38b89" />
     <link rel="stylesheet" type="text/css" href="_static/plot_directive.css" />
@@ -156,11 +156,11 @@
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="ring.html">Ring of Drinfeld Modular Forms</a></li>
-<li class="toctree-l1"><a class="reference internal" href="element.html">Elements of Drinfeld Modular Forms rings</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Expansion at Infinity for Rank 2</a></li>
-<li class="toctree-l1"><a class="reference internal" href="drinfeld_modules.html">Drinfeld Modules</a></li>
-<li class="toctree-l1"><a class="reference internal" href="carlitz_module.html">Carlitz Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ring.html">Ring of Drinfeld modular forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="element.html">Elements of Drinfeld modular forms rings</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Expansion at infinity for rank 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="goss_polynomials.html">Goss polynomials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="drinfeld_modules.html">Drinfeld modules</a></li>
 </ul>
 
 </div>
@@ -195,22 +195,21 @@
         </div>
         <article role="main">
           <section id="module-drinfeld_modular_forms.expansions">
-<span id="expansion-at-infinity-for-rank-2"></span><h1>Expansion at Infinity for Rank 2<a class="headerlink" href="#module-drinfeld_modular_forms.expansions" title="Permalink to this headline">#</a></h1>
+<span id="expansion-at-infinity-for-rank-2"></span><h1>Expansion at infinity for rank 2<a class="headerlink" href="#module-drinfeld_modular_forms.expansions" title="Permalink to this headline">#</a></h1>
 <p>Function for computing the A-expansion as defined by Petrov</p>
 <p>AUTHORS:</p>
 <ul class="simple">
 <li><p>David Ayotte (2021): initial version</p></li>
 </ul>
 <dl class="py function">
-<dt class="sig sig-object py" id="drinfeld_modular_forms.expansions.Aexpansion">
-<span class="sig-prename descclassname"><span class="pre">drinfeld_modular_forms.expansions.</span></span><span class="sig-name descname"><span class="pre">Aexpansion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">C</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_deg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prec</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'t'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#drinfeld_modular_forms.expansions.Aexpansion" title="Permalink to this definition">#</a></dt>
+<dt class="sig sig-object py" id="drinfeld_modular_forms.expansions.compute_A_expansion">
+<span class="sig-prename descclassname"><span class="pre">drinfeld_modular_forms.expansions.</span></span><span class="sig-name descname"><span class="pre">compute_A_expansion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">polynomial_ring</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_deg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prec</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'t'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#drinfeld_modular_forms.expansions.compute_A_expansion" title="Permalink to this definition">#</a></dt>
 <dd><p>Return the A-expansion <span class="math notranslate nohighlight">\(\sum a^{k-n} G_n (t_a)\)</span> by using polynomials of
 degree less than or equal to <code class="docutils literal notranslate"><span class="pre">max_deg</span></code> and up to precision <code class="docutils literal notranslate"><span class="pre">prec</span></code>.</p>
 <p>EXAMPLES:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sage</span><span class="p">:</span> <span class="kn">from</span> <span class="nn">drinfeld_modules.all</span> <span class="kn">import</span> <span class="o">*</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sage</span><span class="p">:</span> <span class="kn">from</span> <span class="nn">drinfeld_modular_forms.all</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="n">sage</span><span class="p">:</span> <span class="n">A</span><span class="o">.&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="n">GF</span><span class="p">(</span><span class="mi">3</span><span class="p">)[</span><span class="s1">&#39;T&#39;</span><span class="p">]</span>
-<span class="n">sage</span><span class="p">:</span> <span class="n">C</span> <span class="o">=</span> <span class="n">CarlitzModule</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
-<span class="n">sage</span><span class="p">:</span> <span class="n">Aexpansion</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">sage</span><span class="p">:</span> <span class="n">compute_A_expansion</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
 <span class="n">t</span> <span class="o">+</span> <span class="n">t</span><span class="o">^</span><span class="mi">5</span> <span class="o">+</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">T</span><span class="o">^</span><span class="mi">3</span> <span class="o">+</span> <span class="n">T</span><span class="p">)</span><span class="o">*</span><span class="n">t</span><span class="o">^</span><span class="mi">7</span> <span class="o">+</span> <span class="n">t</span><span class="o">^</span><span class="mi">9</span> <span class="o">+</span> <span class="p">(</span><span class="n">T</span><span class="o">^</span><span class="mi">3</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">T</span><span class="p">)</span><span class="o">*</span><span class="n">t</span><span class="o">^</span><span class="mi">11</span> <span class="o">+</span> <span class="n">O</span><span class="p">(</span><span class="n">t</span><span class="o">^</span><span class="mi">13</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -218,13 +217,57 @@ degree less than or equal to <code class="docutils literal notranslate"><span cl
 
 <dl class="py function">
 <dt class="sig sig-object py" id="drinfeld_modular_forms.expansions.compute_delta_rank_2">
-<span class="sig-prename descclassname"><span class="pre">drinfeld_modular_forms.expansions.</span></span><span class="sig-name descname"><span class="pre">compute_delta_rank_2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">C</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_deg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prec</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'t'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#drinfeld_modular_forms.expansions.compute_delta_rank_2" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">drinfeld_modular_forms.expansions.</span></span><span class="sig-name descname"><span class="pre">compute_delta_rank_2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">A</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_deg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prec</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'t'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#drinfeld_modular_forms.expansions.compute_delta_rank_2" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="drinfeld_modular_forms.expansions.compute_eisentein_serie_rank_2">
-<span class="sig-prename descclassname"><span class="pre">drinfeld_modular_forms.expansions.</span></span><span class="sig-name descname"><span class="pre">compute_eisentein_serie_rank_2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">C</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_deg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prec</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'t'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#drinfeld_modular_forms.expansions.compute_eisentein_serie_rank_2" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">drinfeld_modular_forms.expansions.</span></span><span class="sig-name descname"><span class="pre">compute_eisentein_serie_rank_2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">A</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_deg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prec</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'t'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#drinfeld_modular_forms.expansions.compute_eisentein_serie_rank_2" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="drinfeld_modular_forms.expansions.inverse_cyclotomic_polynomial">
+<span class="sig-prename descclassname"><span class="pre">drinfeld_modular_forms.expansions.</span></span><span class="sig-name descname"><span class="pre">inverse_cyclotomic_polynomial</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'X'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#drinfeld_modular_forms.expansions.inverse_cyclotomic_polynomial" title="Permalink to this definition">#</a></dt>
+<dd><p>Return the polynomial <span class="math notranslate nohighlight">\(f_a(X) = \rho_a(X^{-1}) X^{q^{\mathrm{deg}(a)}}\)</span>
+where <span class="math notranslate nohighlight">\(\rho_a\)</span> is the Carlitz module.</p>
+<p>This function is used in <a class="reference internal" href="#drinfeld_modular_forms.expansions.ta" title="drinfeld_modular_forms.expansions.ta"><code class="xref py py-func docutils literal notranslate"><span class="pre">ta()</span></code></a></p>
+<p>EXAMPLES:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sage</span><span class="p">:</span> <span class="kn">from</span> <span class="nn">drinfeld_modular_forms.all</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">sage</span><span class="p">:</span> <span class="n">A</span><span class="o">.&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="n">GF</span><span class="p">(</span><span class="mi">3</span><span class="p">)[</span><span class="s1">&#39;T&#39;</span><span class="p">]</span>
+<span class="n">sage</span><span class="p">:</span> <span class="n">inverse_cyclotomic_polynomial</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">one</span><span class="p">())</span>
+<span class="mi">1</span>
+<span class="n">sage</span><span class="p">:</span> <span class="n">inverse_cyclotomic_polynomial</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+<span class="n">T</span><span class="o">*</span><span class="n">X</span><span class="o">^</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="n">sage</span><span class="p">:</span> <span class="n">inverse_cyclotomic_polynomial</span><span class="p">(</span><span class="n">T</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">T</span><span class="o">^</span><span class="mi">2</span><span class="o">*</span><span class="n">X</span><span class="o">^</span><span class="mi">8</span> <span class="o">+</span> <span class="p">(</span><span class="n">T</span><span class="o">^</span><span class="mi">3</span> <span class="o">+</span> <span class="n">T</span><span class="p">)</span><span class="o">*</span><span class="n">X</span><span class="o">^</span><span class="mi">6</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="n">sage</span><span class="p">:</span> <span class="n">inverse_cyclotomic_polynomial</span><span class="p">(</span><span class="n">T</span><span class="o">^</span><span class="mi">2</span> <span class="o">+</span> <span class="n">T</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="p">(</span><span class="n">T</span><span class="o">^</span><span class="mi">2</span> <span class="o">+</span> <span class="n">T</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">X</span><span class="o">^</span><span class="mi">8</span> <span class="o">+</span> <span class="p">(</span><span class="n">T</span><span class="o">^</span><span class="mi">3</span> <span class="o">+</span> <span class="n">T</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">X</span><span class="o">^</span><span class="mi">6</span> <span class="o">+</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="drinfeld_modular_forms.expansions.ta">
+<span class="sig-prename descclassname"><span class="pre">drinfeld_modular_forms.expansions.</span></span><span class="sig-name descname"><span class="pre">ta</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prec</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'t'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#drinfeld_modular_forms.expansions.ta" title="Permalink to this definition">#</a></dt>
+<dd><p>Return the function <span class="math notranslate nohighlight">\(t(az)\)</span> as a power series in <span class="math notranslate nohighlight">\(t\)</span>.</p>
+<p>INPUT:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(a\)</span> – univariate polynomial over a finite field</p></li>
+<li><p><span class="math notranslate nohighlight">\(prec\)</span> (Integer, default: 10) – the precision for the power series ring</p></li>
+<li><p><span class="math notranslate nohighlight">\(name\)</span> (Str, default: ‘t’) – the name of the power series ring generator</p></li>
+</ul>
+<p>EXAMPLES:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sage</span><span class="p">:</span> <span class="kn">from</span> <span class="nn">drinfeld_modular_forms.all</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">sage</span><span class="p">:</span> <span class="n">A</span><span class="o">.&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="n">GF</span><span class="p">(</span><span class="mi">3</span><span class="p">)[</span><span class="s1">&#39;T&#39;</span><span class="p">]</span>
+<span class="n">sage</span><span class="p">:</span> <span class="n">ta</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">one</span><span class="p">())</span>
+<span class="n">t</span>
+<span class="n">sage</span><span class="p">:</span> <span class="n">ta</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+<span class="n">t</span><span class="o">^</span><span class="mi">3</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">T</span><span class="o">*</span><span class="n">t</span><span class="o">^</span><span class="mi">5</span> <span class="o">+</span> <span class="n">T</span><span class="o">^</span><span class="mi">2</span><span class="o">*</span><span class="n">t</span><span class="o">^</span><span class="mi">7</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">T</span><span class="o">^</span><span class="mi">3</span><span class="o">*</span><span class="n">t</span><span class="o">^</span><span class="mi">9</span> <span class="o">+</span> <span class="n">T</span><span class="o">^</span><span class="mi">4</span><span class="o">*</span><span class="n">t</span><span class="o">^</span><span class="mi">11</span> <span class="o">+</span> <span class="n">O</span><span class="p">(</span><span class="n">t</span><span class="o">^</span><span class="mi">13</span><span class="p">)</span>
+<span class="n">sage</span><span class="p">:</span> <span class="n">ta</span><span class="p">(</span><span class="n">T</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">t</span><span class="o">^</span><span class="mi">9</span> <span class="o">+</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">T</span><span class="o">^</span><span class="mi">3</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">T</span><span class="p">)</span><span class="o">*</span><span class="n">t</span><span class="o">^</span><span class="mi">15</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">T</span><span class="o">^</span><span class="mi">2</span><span class="o">*</span><span class="n">t</span><span class="o">^</span><span class="mi">17</span> <span class="o">+</span> <span class="n">O</span><span class="p">(</span><span class="n">t</span><span class="o">^</span><span class="mi">19</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
 
 </section>
 
@@ -233,12 +276,12 @@ degree less than or equal to <code class="docutils literal notranslate"><span cl
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="drinfeld_modules.html">
+          <a class="next-page" href="goss_polynomials.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Drinfeld Modules</div>
+                <div class="title">Goss polynomials</div>
               </div>
               <svg><use href="#svg-arrow-right"></use></svg>
             </a>
@@ -249,7 +292,7 @@ degree less than or equal to <code class="docutils literal notranslate"><span cl
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Elements of Drinfeld Modular Forms rings</div>
+                <div class="title">Elements of Drinfeld modular forms rings</div>
                 
               </div>
             </a>
