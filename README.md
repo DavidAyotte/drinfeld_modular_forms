@@ -57,7 +57,7 @@ It is also possible to compute the normalized Eisenstein serie of weight `q^k - 
 
 ## Note:
 
-Drinfeld modules are currently being implemented in SageMath. See https://trac.sagemath.org/ticket/33713.
+Drinfeld modules are currently being implemented in SageMath. See https://github.com/sagemath/sage/pull/350263.
 Whenever this ticket gets officially merged in SageMath, the functionalities on Drinfeld modules implemented in this project will be deprecated.
 
 This package is still in development and some parts of the code is
