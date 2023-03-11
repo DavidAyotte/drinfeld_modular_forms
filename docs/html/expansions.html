@@ -1,14 +1,14 @@
 <!doctype html>
-<html class="no-js">
+<html class="no-js" lang="en">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Goss polynomials" href="goss_polynomials.html" /><link rel="prev" title="Elements of Drinfeld modular forms rings" href="element.html" />
 
-    <meta name="generator" content="sphinx-4.4.0, furo 2022.06.21"/>
+    <meta name="generator" content="sphinx-5.2.3, furo 2022.09.29"/>
         <title>Expansion at infinity for rank 2 - Drinfeld modular forms 0.8 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=40978830699223671f4072448e654b5958f38b89" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=d81277517bee4d6b0349d71bb2661d4890b5617c" />
     <link rel="stylesheet" type="text/css" href="_static/plot_directive.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
     
@@ -135,7 +135,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -180,7 +180,8 @@
           <span>Back to top</span>
         </a>
         <div class="content-icon-container">
-          <div class="theme-toggle-container theme-toggle-content">
+          
+<div class="theme-toggle-container theme-toggle-content">
             <button class="theme-toggle">
               <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
               <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
@@ -188,14 +189,14 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main">
           <section id="module-drinfeld_modular_forms.expansions">
-<span id="expansion-at-infinity-for-rank-2"></span><h1>Expansion at infinity for rank 2<a class="headerlink" href="#module-drinfeld_modular_forms.expansions" title="Permalink to this headline">#</a></h1>
+<span id="expansion-at-infinity-for-rank-2"></span><h1>Expansion at infinity for rank 2<a class="headerlink" href="#module-drinfeld_modular_forms.expansions" title="Permalink to this heading">#</a></h1>
 <p>Function for computing the A-expansion as defined by Petrov</p>
 <p>AUTHORS:</p>
 <ul class="simple">
@@ -218,12 +219,15 @@ degree less than or equal to <code class="docutils literal notranslate"><span cl
 <dl class="py function">
 <dt class="sig sig-object py" id="drinfeld_modular_forms.expansions.compute_delta_rank_2">
 <span class="sig-prename descclassname"><span class="pre">drinfeld_modular_forms.expansions.</span></span><span class="sig-name descname"><span class="pre">compute_delta_rank_2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">A</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_deg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prec</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'t'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#drinfeld_modular_forms.expansions.compute_delta_rank_2" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><p>Return the <span class="math notranslate nohighlight">\(t\)</span>-expansion of of the Drinfeld modular discriminant of weight
+<span class="math notranslate nohighlight">\(q^2 - 1\)</span>.</p>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="drinfeld_modular_forms.expansions.compute_eisentein_serie_rank_2">
 <span class="sig-prename descclassname"><span class="pre">drinfeld_modular_forms.expansions.</span></span><span class="sig-name descname"><span class="pre">compute_eisentein_serie_rank_2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">A</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_deg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prec</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'t'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#drinfeld_modular_forms.expansions.compute_eisentein_serie_rank_2" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><p>Return the <span class="math notranslate nohighlight">\(t\)</span>-expansion of the weight <span class="math notranslate nohighlight">\(q - 1\)</span> Eisenstein serie.</p>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="drinfeld_modular_forms.expansions.inverse_cyclotomic_polynomial">
@@ -283,10 +287,10 @@ where <span class="math notranslate nohighlight">\(\rho_a\)</span> is the Carlit
                 </div>
                 <div class="title">Goss polynomials</div>
               </div>
-              <svg><use href="#svg-arrow-right"></use></svg>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
           <a class="prev-page" href="element.html">
-              <svg><use href="#svg-arrow-right"></use></svg>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
@@ -316,8 +320,31 @@ where <span class="math notranslate nohighlight">\(\rho_a\)</span> is the Carlit
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Expansion at infinity for rank 2</a><ul>
+<li><a class="reference internal" href="#drinfeld_modular_forms.expansions.compute_A_expansion"><code class="docutils literal notranslate"><span class="pre">compute_A_expansion()</span></code></a></li>
+<li><a class="reference internal" href="#drinfeld_modular_forms.expansions.compute_delta_rank_2"><code class="docutils literal notranslate"><span class="pre">compute_delta_rank_2()</span></code></a></li>
+<li><a class="reference internal" href="#drinfeld_modular_forms.expansions.compute_eisentein_serie_rank_2"><code class="docutils literal notranslate"><span class="pre">compute_eisentein_serie_rank_2()</span></code></a></li>
+<li><a class="reference internal" href="#drinfeld_modular_forms.expansions.inverse_cyclotomic_polynomial"><code class="docutils literal notranslate"><span class="pre">inverse_cyclotomic_polynomial()</span></code></a></li>
+<li><a class="reference internal" href="#drinfeld_modular_forms.expansions.ta"><code class="docutils literal notranslate"><span class="pre">ta()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>
@@ -325,7 +352,9 @@ where <span class="math notranslate nohighlight">\(\rho_a\)</span> is the Carlit
 </div><script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/scripts/furo.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     </body>

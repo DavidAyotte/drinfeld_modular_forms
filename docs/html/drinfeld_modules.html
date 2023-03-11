@@ -1,14 +1,14 @@
 <!doctype html>
-<html class="no-js">
+<html class="no-js" lang="en">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="prev" title="Goss polynomials" href="goss_polynomials.html" />
 
-    <meta name="generator" content="sphinx-4.4.0, furo 2022.06.21"/>
+    <meta name="generator" content="sphinx-5.2.3, furo 2022.09.29"/>
         <title>Drinfeld modules - Drinfeld modular forms 0.8 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=40978830699223671f4072448e654b5958f38b89" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=d81277517bee4d6b0349d71bb2661d4890b5617c" />
     <link rel="stylesheet" type="text/css" href="_static/plot_directive.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
     
@@ -135,7 +135,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -180,7 +180,8 @@
           <span>Back to top</span>
         </a>
         <div class="content-icon-container">
-          <div class="theme-toggle-container theme-toggle-content">
+          
+<div class="theme-toggle-container theme-toggle-content">
             <button class="theme-toggle">
               <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
               <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
@@ -188,14 +189,14 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main">
           <section id="module-drinfeld_modular_forms.drinfeld_modules">
-<span id="drinfeld-modules"></span><h1>Drinfeld modules<a class="headerlink" href="#module-drinfeld_modular_forms.drinfeld_modules" title="Permalink to this headline">#</a></h1>
+<span id="drinfeld-modules"></span><h1>Drinfeld modules<a class="headerlink" href="#module-drinfeld_modular_forms.drinfeld_modules" title="Permalink to this heading">#</a></h1>
 <p>Base class for Drinfeld modules over <span class="math notranslate nohighlight">\(\mathbb{F}_q[T]\)</span></p>
 <p>AUTHORS:</p>
 <ul class="simple">
@@ -206,13 +207,13 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="drinfeld_modular_forms.drinfeld_modules.CarlitzModule">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">drinfeld_modular_forms.drinfeld_modules.</span></span><span class="sig-name descname"><span class="pre">CarlitzModule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">polynomial_base_ring</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'𝜏'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#drinfeld_modular_forms.drinfeld_modules.CarlitzModule" title="Permalink to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#drinfeld_modular_forms.drinfeld_modules.DrinfeldModule" title="drinfeld_modular_forms.drinfeld_modules.DrinfeldModule"><code class="xref py py-class docutils literal notranslate"><span class="pre">drinfeld_modular_forms.drinfeld_modules.DrinfeldModule</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#drinfeld_modular_forms.drinfeld_modules.DrinfeldModule" title="drinfeld_modular_forms.drinfeld_modules.DrinfeldModule"><code class="xref py py-class docutils literal notranslate"><span class="pre">DrinfeldModule</span></code></a></p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="drinfeld_modular_forms.drinfeld_modules.DrinfeldModule">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">drinfeld_modular_forms.drinfeld_modules.</span></span><span class="sig-name descname"><span class="pre">DrinfeldModule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'𝜏'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#drinfeld_modular_forms.drinfeld_modules.DrinfeldModule" title="Permalink to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">sage.structure.parent.Parent</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Parent</span></code></p>
 <p>Base class of a Drinfeld module.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="drinfeld_modular_forms.drinfeld_modules.DrinfeldModule.action_endomorphism">
@@ -388,7 +389,7 @@ polynomial in <code class="docutils literal notranslate"><span class="pre">name<
         <div class="related-pages">
           
           <a class="prev-page" href="goss_polynomials.html">
-              <svg><use href="#svg-arrow-right"></use></svg>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
@@ -418,8 +419,40 @@ polynomial in <code class="docutils literal notranslate"><span class="pre">name<
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Drinfeld modules</a><ul>
+<li><a class="reference internal" href="#drinfeld_modular_forms.drinfeld_modules.CarlitzModule"><code class="docutils literal notranslate"><span class="pre">CarlitzModule</span></code></a></li>
+<li><a class="reference internal" href="#drinfeld_modular_forms.drinfeld_modules.DrinfeldModule"><code class="docutils literal notranslate"><span class="pre">DrinfeldModule</span></code></a><ul>
+<li><a class="reference internal" href="#drinfeld_modular_forms.drinfeld_modules.DrinfeldModule.action_endomorphism"><code class="docutils literal notranslate"><span class="pre">DrinfeldModule.action_endomorphism()</span></code></a></li>
+<li><a class="reference internal" href="#drinfeld_modular_forms.drinfeld_modules.DrinfeldModule.action_polynomial"><code class="docutils literal notranslate"><span class="pre">DrinfeldModule.action_polynomial()</span></code></a></li>
+<li><a class="reference internal" href="#drinfeld_modular_forms.drinfeld_modules.DrinfeldModule.base_field"><code class="docutils literal notranslate"><span class="pre">DrinfeldModule.base_field()</span></code></a></li>
+<li><a class="reference internal" href="#drinfeld_modular_forms.drinfeld_modules.DrinfeldModule.base_polynomial_ring"><code class="docutils literal notranslate"><span class="pre">DrinfeldModule.base_polynomial_ring()</span></code></a></li>
+<li><a class="reference internal" href="#drinfeld_modular_forms.drinfeld_modules.DrinfeldModule.field_of_constants"><code class="docutils literal notranslate"><span class="pre">DrinfeldModule.field_of_constants()</span></code></a></li>
+<li><a class="reference internal" href="#drinfeld_modular_forms.drinfeld_modules.DrinfeldModule.operator_polynomial"><code class="docutils literal notranslate"><span class="pre">DrinfeldModule.operator_polynomial()</span></code></a></li>
+<li><a class="reference internal" href="#drinfeld_modular_forms.drinfeld_modules.DrinfeldModule.q"><code class="docutils literal notranslate"><span class="pre">DrinfeldModule.q()</span></code></a></li>
+<li><a class="reference internal" href="#drinfeld_modular_forms.drinfeld_modules.DrinfeldModule.rank"><code class="docutils literal notranslate"><span class="pre">DrinfeldModule.rank()</span></code></a></li>
+<li><a class="reference internal" href="#drinfeld_modular_forms.drinfeld_modules.DrinfeldModule.regular_functions_outside_infinity"><code class="docutils literal notranslate"><span class="pre">DrinfeldModule.regular_functions_outside_infinity()</span></code></a></li>
+<li><a class="reference internal" href="#drinfeld_modular_forms.drinfeld_modules.DrinfeldModule.ring_of_constants"><code class="docutils literal notranslate"><span class="pre">DrinfeldModule.ring_of_constants()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>
@@ -427,7 +460,9 @@ polynomial in <code class="docutils literal notranslate"><span class="pre">name<
 </div><script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/scripts/furo.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     </body>

@@ -1,14 +1,14 @@
 <!doctype html>
-<html class="no-js">
+<html class="no-js" lang="en">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Ring of Drinfeld modular forms" href="ring.html" />
 
-    <meta name="generator" content="sphinx-4.4.0, furo 2022.06.21"/>
+    <meta name="generator" content="sphinx-5.2.3, furo 2022.09.29"/>
         <title>Drinfeld modular forms 0.8 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=40978830699223671f4072448e654b5958f38b89" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=d81277517bee4d6b0349d71bb2661d4890b5617c" />
     <link rel="stylesheet" type="text/css" href="_static/plot_directive.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
     
@@ -180,7 +180,8 @@
           <span>Back to top</span>
         </a>
         <div class="content-icon-container">
-          <div class="theme-toggle-container theme-toggle-content">
+          
+<div class="theme-toggle-container theme-toggle-content">
             <button class="theme-toggle">
               <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
               <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
@@ -195,24 +196,47 @@
         </div>
         <article role="main">
           <section id="drinfeld-modular-forms">
-<h1>Drinfeld Modular Forms<a class="headerlink" href="#drinfeld-modular-forms" title="Permalink to this headline">#</a></h1>
+<h1>Drinfeld Modular Forms<a class="headerlink" href="#drinfeld-modular-forms" title="Permalink to this heading">#</a></h1>
 <p>This is a SageMath package for computing with Drinfeld modular forms and their
 <span class="math notranslate nohighlight">\(t\)</span>-expansion.</p>
 <p>This work is licensed under a <a class="reference external" href="https://www.gnu.org/licenses/">GNU General Public License</a>.</p>
 <section id="table-of-contents">
-<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Permalink to this headline">#</a></h2>
+<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Permalink to this heading">#</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="ring.html">Ring of Drinfeld modular forms</a></li>
-<li class="toctree-l1"><a class="reference internal" href="element.html">Elements of Drinfeld modular forms rings</a></li>
-<li class="toctree-l1"><a class="reference internal" href="expansions.html">Expansion at infinity for rank 2</a></li>
-<li class="toctree-l1"><a class="reference internal" href="goss_polynomials.html">Goss polynomials</a></li>
-<li class="toctree-l1"><a class="reference internal" href="drinfeld_modules.html">Drinfeld modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ring.html">Ring of Drinfeld modular forms</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ring.html#drinfeld_modular_forms.ring.DrinfeldModularFormsRing"><code class="docutils literal notranslate"><span class="pre">DrinfeldModularFormsRing</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="element.html">Elements of Drinfeld modular forms rings</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="element.html#drinfeld_modular_forms.element.DrinfeldModularFormsRingElement"><code class="docutils literal notranslate"><span class="pre">DrinfeldModularFormsRingElement</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="expansions.html">Expansion at infinity for rank 2</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="expansions.html#drinfeld_modular_forms.expansions.compute_A_expansion"><code class="docutils literal notranslate"><span class="pre">compute_A_expansion()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="expansions.html#drinfeld_modular_forms.expansions.compute_delta_rank_2"><code class="docutils literal notranslate"><span class="pre">compute_delta_rank_2()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="expansions.html#drinfeld_modular_forms.expansions.compute_eisentein_serie_rank_2"><code class="docutils literal notranslate"><span class="pre">compute_eisentein_serie_rank_2()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="expansions.html#drinfeld_modular_forms.expansions.inverse_cyclotomic_polynomial"><code class="docutils literal notranslate"><span class="pre">inverse_cyclotomic_polynomial()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="expansions.html#drinfeld_modular_forms.expansions.ta"><code class="docutils literal notranslate"><span class="pre">ta()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="goss_polynomials.html">Goss polynomials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="goss_polynomials.html#drinfeld_modular_forms.goss_polynomials.bracket"><code class="docutils literal notranslate"><span class="pre">bracket()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="goss_polynomials.html#drinfeld_modular_forms.goss_polynomials.goss_polynomial"><code class="docutils literal notranslate"><span class="pre">goss_polynomial()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="goss_polynomials.html#drinfeld_modular_forms.goss_polynomials.lcm_of_monic_polynomials"><code class="docutils literal notranslate"><span class="pre">lcm_of_monic_polynomials()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="goss_polynomials.html#drinfeld_modular_forms.goss_polynomials.product_of_monic_polynomials"><code class="docutils literal notranslate"><span class="pre">product_of_monic_polynomials()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="drinfeld_modules.html">Drinfeld modules</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="drinfeld_modules.html#drinfeld_modular_forms.drinfeld_modules.CarlitzModule"><code class="docutils literal notranslate"><span class="pre">CarlitzModule</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="drinfeld_modules.html#drinfeld_modular_forms.drinfeld_modules.DrinfeldModule"><code class="docutils literal notranslate"><span class="pre">DrinfeldModule</span></code></a></li>
+</ul>
+</li>
 </ul>
 </div>
 </section>
 <section id="indices-and-tables">
-<h2>Indices and Tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">#</a></h2>
+<h2>Indices and Tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
 <li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
@@ -233,7 +257,7 @@
                 </div>
                 <div class="title">Ring of Drinfeld modular forms</div>
               </div>
-              <svg><use href="#svg-arrow-right"></use></svg>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
           
         </div>
@@ -262,7 +286,7 @@
       <div class="toc-sticky toc-scroll">
         <div class="toc-title-container">
           <span class="toc-title">
-            Contents
+            On this page
           </span>
         </div>
         <div class="toc-tree-container">
@@ -285,7 +309,9 @@
 </div><script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/scripts/furo.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     </body>
