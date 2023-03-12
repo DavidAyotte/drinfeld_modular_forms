@@ -30,7 +30,7 @@ def bracket(n, polynomial_ring):
 
     EXAMPLES::
 
-        sage: from drinfeld_modular_forms.all import *
+        sage: from drinfeld_modular_forms import bracket
         sage: A.<T> = GF(3)['T']
         sage: bracket(1, A)
         T^3 + 2*T
@@ -53,7 +53,7 @@ def product_of_monic_polynomials(n, polynomial_ring):
 
     EXAMPLES::
 
-        sage: from drinfeld_modular_forms.all import *
+        sage: from drinfeld_modular_forms import product_of_monic_polynomials
         sage: A.<T> = GF(3)['T']
         sage: product_of_monic_polynomials(0, A)
         1
@@ -80,7 +80,7 @@ def lcm_of_monic_polynomials(n, polynomial_ring):
 
     EXAMPLES::
 
-        sage: from drinfeld_modular_forms.all import *
+        sage: from drinfeld_modular_forms import lcm_of_monic_polynomials
         sage: A.<T> = GF(3)['T']
         sage: lcm_of_monic_polynomials(1, A)
         T^3 + 2*T
@@ -104,7 +104,7 @@ def goss_polynomial(n, polynomial_ring):
 
     EXAMPLES::
 
-        sage: from drinfeld_modular_forms.all import *
+        sage: from drinfeld_modular_forms import goss_polynomial
         sage: A.<T> = GF(3)['T']
         sage: goss_polynomial(1, A)
         X

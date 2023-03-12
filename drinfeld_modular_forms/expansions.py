@@ -35,7 +35,7 @@ def inverse_cyclotomic_polynomial(a, name='X'):
 
     EXAMPLES::
 
-        sage: from drinfeld_modular_forms.all import *
+        sage: from drinfeld_modular_forms.expansions import inverse_cyclotomic_polynomial
         sage: A.<T> = GF(3)['T']
         sage: inverse_cyclotomic_polynomial(A.one())
         1
@@ -68,14 +68,14 @@ def ta(a, name='t'):
 
     EXAMPLES::
 
-        sage: from drinfeld_modular_forms.all import *
+        sage: from drinfeld_modular_forms import ta
         sage: A.<T> = GF(3)['T']
         sage: ta(A.one())
         t
         sage: ta(T)
-        t^3 + 2*T*t^5 + T^2*t^7 + 2*T^3*t^9 + T^4*t^11 + O(t^13)
+        t^3 + 2*T*t^5 + T^2*t^7 + 2*T^3*t^9 + O(t^10)
         sage: ta(T^2)
-        t^9 + (2*T^3 + 2*T)*t^15 + 2*T^2*t^17 + O(t^19)
+        t^9 + ((2*T^3+2*T)*t^15) + O(t^16)
     """
     if not a:
         return ValueError("the polynomial must be non-zero")
@@ -110,7 +110,8 @@ def coefficient_A_expansion(k, n, i, polynomial_ring):
 
     EXAMPLES::
 
-        sage: from drinfeld_modular_forms.expansions import coefficient_A_expansion
+        sage: from drinfeld_modular_forms import coefficient_A_expansion
+        sage: A = GF(3)['T']
         sage: coefficient_A_expansion(3+1, 1, 1, A)
         1
         sage: coefficient_A_expansion(3+1, 1, 0, A)
@@ -170,7 +171,7 @@ def compute_A_expansion(k, n, polynomial_ring, name='t'):
 
     EXAMPLES::
 
-        sage: from drinfeld_modular_forms.expansions import compute_A_expansion
+        sage: from drinfeld_modular_forms import compute_A_expansion
         sage: A = GF(3)['T']
         sage: D = compute_A_expansion(3+1, 1, A); D
         t + t^5 + ((2*T^3+T)*t^7) + O(t^8)
@@ -203,6 +204,17 @@ def compute_delta_rank_2(polynomial_ring, name='t'):
     corresponding to the lattice `\Lambda\_z := zA + A`. The *normalized*
     discriminant is the the form `\Delta_0(z)` such that its first nonzero
     coefficient is 1.
+
+    EXAMPLES::
+
+        sage: from drinfeld_modular_forms import compute_delta_rank_2
+        sage: A = GF(3)['T']
+        sage: D = compute_delta_rank_2(A); D
+        t^2 + 2*t^6 + O(t^8)
+        sage: D[38]
+        T^18 + 2*T^12 + 2*T^10 + T^4 + 1
+        sage: D[56]
+        2*T^27 + 2*T^3 + 2*T
     """
     q = polynomial_ring.base_ring().cardinality()
     return compute_A_expansion(q**2 - 1, q - 1, polynomial_ring, name)
@@ -225,7 +237,7 @@ def compute_eisentein_serie_rank_2(polynomial_ring, name='t'):
 
     EXAMPLES::
 
-        sage: from drinfeld_modular_forms.expansions import compute_eisentein_serie_rank_2
+        sage: from drinfeld_modular_forms import compute_eisentein_serie_rank_2
         sage: A = GF(3)['T']
         sage: E = compute_eisentein_serie_rank_2(A); E
         1 + ((2*T^3+T)*t^2) + O(t^7)

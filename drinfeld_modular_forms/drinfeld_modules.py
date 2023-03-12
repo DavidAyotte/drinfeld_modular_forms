@@ -6,7 +6,7 @@ AUTHORS:
 - David Ayotte (2021): initial version
 
 NOTE: Drinfeld modules are currently being implemented in SageMath. See
-https://trac.sagemath.org/ticket/33713
+https://github.com/sagemath/sage/pull/35026. Do not import from this file.
 """
 
 # ****************************************************************************
@@ -116,7 +116,7 @@ class DrinfeldModule(Parent):
 
         EXAMPLES::
 
-            sage: from drinfeld_modular_forms.all import *
+            sage: from drinfeld_modular_forms.drinfeld_modules import DrinfeldModule
             sage: A.<T> = GF(5 ** 2)['T']
             sage: DrinfeldModule(T).rank()
             1
@@ -131,7 +131,7 @@ class DrinfeldModule(Parent):
 
         EXAMPLES::
 
-            sage: from drinfeld_modular_forms.all import *
+            sage: from drinfeld_modular_forms.drinfeld_modules import DrinfeldModule
             sage: A.<T> = GF(5 ** 2)['T']
             sage: phi_T = DrinfeldModule(T).operator_polynomial(); phi_T
             T*𝜏 + T
@@ -146,7 +146,7 @@ class DrinfeldModule(Parent):
 
         EXAMPLES::
 
-            sage: from drinfeld_modular_forms.all import *
+            sage: from drinfeld_modular_forms.drinfeld_modules import DrinfeldModule
             sage: A.<T> = GF(11 ** 3)['T']
             sage: phi = DrinfeldModule(T^2)
             sage: phi.base_field()
@@ -160,7 +160,7 @@ class DrinfeldModule(Parent):
 
         EXAMPLES::
 
-            sage: from drinfeld_modular_forms.all import *
+            sage: from drinfeld_modular_forms.drinfeld_modules import DrinfeldModule
             sage: A.<T> = GF(19)['T']
             sage: C = DrinfeldModule(A.one())
             sage: C.base_polynomial_ring()
@@ -183,7 +183,7 @@ class DrinfeldModule(Parent):
 
         EXAMPLES::
 
-            sage: from drinfeld_modular_forms.all import *
+            sage: from drinfeld_modular_forms.drinfeld_modules import DrinfeldModule
             sage: A.<T> = GF(7)['T']
             sage: DrinfeldModule(T).field_of_constants()
             Finite Field of size 7
@@ -201,7 +201,7 @@ class DrinfeldModule(Parent):
 
         TESTS::
 
-            sage: from drinfeld_modular_forms.all import *
+            sage: from drinfeld_modular_forms.drinfeld_modules import DrinfeldModule
             sage: A.<T> = GF(13 ** 2)['T']
             sage: DrinfeldModule(T)
             Drinfeld Module of rank 1 over Finite Field in z2 of size 13^2 defined by:
@@ -222,7 +222,7 @@ class DrinfeldModule(Parent):
 
         EXAMPLES::
 
-            sage: from drinfeld_modular_forms.all import *
+            sage: from drinfeld_modular_forms.drinfeld_modules import DrinfeldModule
             sage: A.<T> = GF(3)['T']
             sage: C = DrinfeldModule(A.one())
             sage: C.action_endomorphism(T)
@@ -256,7 +256,7 @@ class DrinfeldModule(Parent):
 
         EXAMPLES::
 
-            sage: from drinfeld_modular_forms.all import *
+            sage: from drinfeld_modular_forms.drinfeld_modules import DrinfeldModule
             sage: A.<T> = GF(3)['T']
             sage: C = DrinfeldModule(A.one()); C
             Drinfeld Module of rank 1 over Finite Field of size 3 defined by:
@@ -287,7 +287,7 @@ class CarlitzModule(DrinfeldModule):
 
         TESTS::
 
-            sage: from drinfeld_modular_forms.carlitz_module import CarlitzModule
+            sage: from drinfeld_modular_forms.drinfeld_modules import CarlitzModule
             sage: A.<T> = GF(3)['T']
             sage: C = CarlitzModule(A)
             sage: C
