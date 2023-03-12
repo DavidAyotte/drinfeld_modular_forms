@@ -194,14 +194,14 @@ def compute_delta_rank_2(polynomial_ring, name='t'):
     Return the `t`-expansion of the normalized Drinfeld modular discriminant of
     rank 2.
 
-    Recall that for `z\in \Omega^2(\mathbb{C}\_{\infty})` the *Drinfeld modular
+    Recall that for `z\in \Omega^2(\mathbb{C}_{\infty})` the *Drinfeld modular
     discriminant* is the leading coefficient of the Drinfeld module
 
     .. MATH::
 
         \phi_{z} : T \mapsto T + g(z)\tau + \Delta(z)\tau^2
 
-    corresponding to the lattice `\Lambda\_z := zA + A`. The *normalized*
+    corresponding to the lattice `\Lambda_z := zA + A`. The *normalized*
     discriminant is the the form `\Delta_0(z)` such that its first nonzero
     coefficient is 1.
 
