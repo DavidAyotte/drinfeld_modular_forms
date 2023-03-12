@@ -46,7 +46,7 @@ class DrinfeldModularFormsRing(Parent):
 
         EXAMPLES::
 
-            sage: from drinfeld_modular_forms.all import *
+            sage: from drinfeld_modular_forms import DrinfeldModularFormsRing
             sage: A = GF(3)['T']; K = Frac(A); T = K.gen()
             sage: M = DrinfeldModularFormsRing(K, 2)
             sage: M.0
@@ -62,7 +62,7 @@ class DrinfeldModularFormsRing(Parent):
 
         EXAMPLES::
 
-            sage: from drinfeld_modular_forms.all import *
+            sage: from drinfeld_modular_forms import DrinfeldModularFormsRing
             sage: A = GF(3)['T']; K = Frac(A); T = K.gen()
             sage: M = DrinfeldModularFormsRing(K, 5)
             sage: M.gens()
@@ -78,7 +78,7 @@ class DrinfeldModularFormsRing(Parent):
 
         EXAMPLES::
 
-            sage: from drinfeld_modular_forms.all import *
+            sage: from drinfeld_modular_forms import DrinfeldModularFormsRing
             sage: A = GF(3)['T']; K = Frac(A); T = K.gen()
             sage: M = DrinfeldModularFormsRing(K, 5)
             sage: M.ngens()
@@ -101,7 +101,7 @@ class DrinfeldModularFormsRing(Parent):
 
         EXAMPLES::
 
-            sage: from drinfeld_modular_forms.all import *
+            sage: from drinfeld_modular_forms import DrinfeldModularFormsRing
             sage: A = GF(3)['T']; K = Frac(A); T = K.gen()
             sage: M = DrinfeldModularFormsRing(K, 2)
             sage: M.one()
@@ -119,7 +119,7 @@ class DrinfeldModularFormsRing(Parent):
 
         EXAMPLES::
 
-            sage: from drinfeld_modular_forms.all import *
+            sage: from drinfeld_modular_forms import DrinfeldModularFormsRing
             sage: A = GF(3)['T']; K = Frac(A); T = K.gen()
             sage: M = DrinfeldModularFormsRing(K, 2)
             sage: M.zero()
@@ -141,7 +141,7 @@ class DrinfeldModularFormsRing(Parent):
 
         EXAMPLES::
 
-            sage: from drinfeld_modular_forms.all import *
+            sage: from drinfeld_modular_forms import DrinfeldModularFormsRing
             sage: A = GF(3)['T']; K = Frac(A); T = K.gen()
             sage: M = DrinfeldModularFormsRing(K, 2)
             sage: M.weighted_eisenstein_serie(0)
