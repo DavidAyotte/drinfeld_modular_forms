@@ -62,9 +62,9 @@ def ta(a, name='t'):
 
     INPUT:
 
-    - `a` -- univariate polynomial over a finite field
-    - `prec` (Integer, default: 10) -- the precision for the power series ring
-    - `name` (Str, default: 't') -- the name of the power series ring generator
+    - ``a`` -- univariate polynomial over a finite field
+    - ``prec`` (Integer, default: 10) -- the precision for the power series ring
+    - ``name`` (Str, default: 't') -- the name of the power series ring generator
 
     EXAMPLES::
 

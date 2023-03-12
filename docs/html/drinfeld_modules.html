@@ -203,7 +203,7 @@
 <li><p>David Ayotte (2021): initial version</p></li>
 </ul>
 <p>NOTE: Drinfeld modules are currently being implemented in SageMath. See
-<a class="reference external" href="https://trac.sagemath.org/ticket/33713">https://trac.sagemath.org/ticket/33713</a></p>
+<a class="reference external" href="https://github.com/sagemath/sage/pull/35026">https://github.com/sagemath/sage/pull/35026</a>. Do not import from this file.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="drinfeld_modular_forms.drinfeld_modules.CarlitzModule">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">drinfeld_modular_forms.drinfeld_modules.</span></span><span class="sig-name descname"><span class="pre">CarlitzModule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">polynomial_base_ring</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'𝜏'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#drinfeld_modular_forms.drinfeld_modules.CarlitzModule" title="Permalink to this definition">#</a></dt>
@@ -224,7 +224,7 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">a</span></code> (Polynomial) – A polynomial living in the univariate polynomial ring of the base field.</p></li>
 </ul>
 <p>EXAMPLES:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sage</span><span class="p">:</span> <span class="kn">from</span> <span class="nn">drinfeld_modular_forms.all</span> <span class="kn">import</span> <span class="o">*</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sage</span><span class="p">:</span> <span class="kn">from</span> <span class="nn">drinfeld_modular_forms.drinfeld_modules</span> <span class="kn">import</span> <span class="n">DrinfeldModule</span>
 <span class="n">sage</span><span class="p">:</span> <span class="n">A</span><span class="o">.&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="n">GF</span><span class="p">(</span><span class="mi">3</span><span class="p">)[</span><span class="s1">&#39;T&#39;</span><span class="p">]</span>
 <span class="n">sage</span><span class="p">:</span> <span class="n">C</span> <span class="o">=</span> <span class="n">DrinfeldModule</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">one</span><span class="p">())</span>
 <span class="n">sage</span><span class="p">:</span> <span class="n">C</span><span class="o">.</span><span class="n">action_endomorphism</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
@@ -248,7 +248,7 @@
 <dd><p>Return the action endomorphism at a polynomial <span class="math notranslate nohighlight">\(a\)</span> but as a univariate
 polynomial in <code class="docutils literal notranslate"><span class="pre">name</span></code> (default: ‘X’).</p>
 <p>EXAMPLES:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sage</span><span class="p">:</span> <span class="kn">from</span> <span class="nn">drinfeld_modular_forms.all</span> <span class="kn">import</span> <span class="o">*</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sage</span><span class="p">:</span> <span class="kn">from</span> <span class="nn">drinfeld_modular_forms.drinfeld_modules</span> <span class="kn">import</span> <span class="n">DrinfeldModule</span>
 <span class="n">sage</span><span class="p">:</span> <span class="n">A</span><span class="o">.&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="n">GF</span><span class="p">(</span><span class="mi">3</span><span class="p">)[</span><span class="s1">&#39;T&#39;</span><span class="p">]</span>
 <span class="n">sage</span><span class="p">:</span> <span class="n">C</span> <span class="o">=</span> <span class="n">DrinfeldModule</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">one</span><span class="p">());</span> <span class="n">C</span>
 <span class="n">Drinfeld</span> <span class="n">Module</span> <span class="n">of</span> <span class="n">rank</span> <span class="mi">1</span> <span class="n">over</span> <span class="n">Finite</span> <span class="n">Field</span> <span class="n">of</span> <span class="n">size</span> <span class="mi">3</span> <span class="n">defined</span> <span class="n">by</span><span class="p">:</span>
@@ -266,7 +266,7 @@ polynomial in <code class="docutils literal notranslate"><span class="pre">name<
 <span class="sig-name descname"><span class="pre">base_field</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#drinfeld_modular_forms.drinfeld_modules.DrinfeldModule.base_field" title="Permalink to this definition">#</a></dt>
 <dd><p>Return the base field of the given Drinfeld module.</p>
 <p>EXAMPLES:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sage</span><span class="p">:</span> <span class="kn">from</span> <span class="nn">drinfeld_modular_forms.all</span> <span class="kn">import</span> <span class="o">*</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sage</span><span class="p">:</span> <span class="kn">from</span> <span class="nn">drinfeld_modular_forms.drinfeld_modules</span> <span class="kn">import</span> <span class="n">DrinfeldModule</span>
 <span class="n">sage</span><span class="p">:</span> <span class="n">A</span><span class="o">.&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="n">GF</span><span class="p">(</span><span class="mi">11</span> <span class="o">**</span> <span class="mi">3</span><span class="p">)[</span><span class="s1">&#39;T&#39;</span><span class="p">]</span>
 <span class="n">sage</span><span class="p">:</span> <span class="n">phi</span> <span class="o">=</span> <span class="n">DrinfeldModule</span><span class="p">(</span><span class="n">T</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">sage</span><span class="p">:</span> <span class="n">phi</span><span class="o">.</span><span class="n">base_field</span><span class="p">()</span>
@@ -280,7 +280,7 @@ polynomial in <code class="docutils literal notranslate"><span class="pre">name<
 <span class="sig-name descname"><span class="pre">base_polynomial_ring</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#drinfeld_modular_forms.drinfeld_modules.DrinfeldModule.base_polynomial_ring" title="Permalink to this definition">#</a></dt>
 <dd><p>Return the ring of regular functions outside infinity.</p>
 <p>EXAMPLES:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sage</span><span class="p">:</span> <span class="kn">from</span> <span class="nn">drinfeld_modular_forms.all</span> <span class="kn">import</span> <span class="o">*</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sage</span><span class="p">:</span> <span class="kn">from</span> <span class="nn">drinfeld_modular_forms.drinfeld_modules</span> <span class="kn">import</span> <span class="n">DrinfeldModule</span>
 <span class="n">sage</span><span class="p">:</span> <span class="n">A</span><span class="o">.&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="n">GF</span><span class="p">(</span><span class="mi">19</span><span class="p">)[</span><span class="s1">&#39;T&#39;</span><span class="p">]</span>
 <span class="n">sage</span><span class="p">:</span> <span class="n">C</span> <span class="o">=</span> <span class="n">DrinfeldModule</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">one</span><span class="p">())</span>
 <span class="n">sage</span><span class="p">:</span> <span class="n">C</span><span class="o">.</span><span class="n">base_polynomial_ring</span><span class="p">()</span>
@@ -301,7 +301,7 @@ polynomial in <code class="docutils literal notranslate"><span class="pre">name<
 <span class="sig-name descname"><span class="pre">field_of_constants</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#drinfeld_modular_forms.drinfeld_modules.DrinfeldModule.field_of_constants" title="Permalink to this definition">#</a></dt>
 <dd><p>Return the field of constants of the base function field.</p>
 <p>EXAMPLES:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sage</span><span class="p">:</span> <span class="kn">from</span> <span class="nn">drinfeld_modular_forms.all</span> <span class="kn">import</span> <span class="o">*</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sage</span><span class="p">:</span> <span class="kn">from</span> <span class="nn">drinfeld_modular_forms.drinfeld_modules</span> <span class="kn">import</span> <span class="n">DrinfeldModule</span>
 <span class="n">sage</span><span class="p">:</span> <span class="n">A</span><span class="o">.&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="n">GF</span><span class="p">(</span><span class="mi">7</span><span class="p">)[</span><span class="s1">&#39;T&#39;</span><span class="p">]</span>
 <span class="n">sage</span><span class="p">:</span> <span class="n">DrinfeldModule</span><span class="p">(</span><span class="n">T</span><span class="p">)</span><span class="o">.</span><span class="n">field_of_constants</span><span class="p">()</span>
 <span class="n">Finite</span> <span class="n">Field</span> <span class="n">of</span> <span class="n">size</span> <span class="mi">7</span>
@@ -314,7 +314,7 @@ polynomial in <code class="docutils literal notranslate"><span class="pre">name<
 <span class="sig-name descname"><span class="pre">operator_polynomial</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#drinfeld_modular_forms.drinfeld_modules.DrinfeldModule.operator_polynomial" title="Permalink to this definition">#</a></dt>
 <dd><p>Return the Ore polynomial corresponding to the action of <span class="math notranslate nohighlight">\(T\)</span></p>
 <p>EXAMPLES:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sage</span><span class="p">:</span> <span class="kn">from</span> <span class="nn">drinfeld_modular_forms.all</span> <span class="kn">import</span> <span class="o">*</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sage</span><span class="p">:</span> <span class="kn">from</span> <span class="nn">drinfeld_modular_forms.drinfeld_modules</span> <span class="kn">import</span> <span class="n">DrinfeldModule</span>
 <span class="n">sage</span><span class="p">:</span> <span class="n">A</span><span class="o">.&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="n">GF</span><span class="p">(</span><span class="mi">5</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)[</span><span class="s1">&#39;T&#39;</span><span class="p">]</span>
 <span class="n">sage</span><span class="p">:</span> <span class="n">phi_T</span> <span class="o">=</span> <span class="n">DrinfeldModule</span><span class="p">(</span><span class="n">T</span><span class="p">)</span><span class="o">.</span><span class="n">operator_polynomial</span><span class="p">();</span> <span class="n">phi_T</span>
 <span class="n">T</span><span class="o">*</span><span class="n">𝜏</span> <span class="o">+</span> <span class="n">T</span>
@@ -334,7 +334,7 @@ polynomial in <code class="docutils literal notranslate"><span class="pre">name<
 <span class="sig-name descname"><span class="pre">rank</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#drinfeld_modular_forms.drinfeld_modules.DrinfeldModule.rank" title="Permalink to this definition">#</a></dt>
 <dd><p>Return the rank of the given Drinfeld module.</p>
 <p>EXAMPLES:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sage</span><span class="p">:</span> <span class="kn">from</span> <span class="nn">drinfeld_modular_forms.all</span> <span class="kn">import</span> <span class="o">*</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sage</span><span class="p">:</span> <span class="kn">from</span> <span class="nn">drinfeld_modular_forms.drinfeld_modules</span> <span class="kn">import</span> <span class="n">DrinfeldModule</span>
 <span class="n">sage</span><span class="p">:</span> <span class="n">A</span><span class="o">.&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="n">GF</span><span class="p">(</span><span class="mi">5</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)[</span><span class="s1">&#39;T&#39;</span><span class="p">]</span>
 <span class="n">sage</span><span class="p">:</span> <span class="n">DrinfeldModule</span><span class="p">(</span><span class="n">T</span><span class="p">)</span><span class="o">.</span><span class="n">rank</span><span class="p">()</span>
 <span class="mi">1</span>
@@ -349,7 +349,7 @@ polynomial in <code class="docutils literal notranslate"><span class="pre">name<
 <span class="sig-name descname"><span class="pre">regular_functions_outside_infinity</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#drinfeld_modular_forms.drinfeld_modules.DrinfeldModule.regular_functions_outside_infinity" title="Permalink to this definition">#</a></dt>
 <dd><p>Return the ring of regular functions outside infinity.</p>
 <p>EXAMPLES:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sage</span><span class="p">:</span> <span class="kn">from</span> <span class="nn">drinfeld_modular_forms.all</span> <span class="kn">import</span> <span class="o">*</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sage</span><span class="p">:</span> <span class="kn">from</span> <span class="nn">drinfeld_modular_forms.drinfeld_modules</span> <span class="kn">import</span> <span class="n">DrinfeldModule</span>
 <span class="n">sage</span><span class="p">:</span> <span class="n">A</span><span class="o">.&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="n">GF</span><span class="p">(</span><span class="mi">19</span><span class="p">)[</span><span class="s1">&#39;T&#39;</span><span class="p">]</span>
 <span class="n">sage</span><span class="p">:</span> <span class="n">C</span> <span class="o">=</span> <span class="n">DrinfeldModule</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">one</span><span class="p">())</span>
 <span class="n">sage</span><span class="p">:</span> <span class="n">C</span><span class="o">.</span><span class="n">base_polynomial_ring</span><span class="p">()</span>
@@ -370,7 +370,7 @@ polynomial in <code class="docutils literal notranslate"><span class="pre">name<
 <span class="sig-name descname"><span class="pre">ring_of_constants</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#drinfeld_modular_forms.drinfeld_modules.DrinfeldModule.ring_of_constants" title="Permalink to this definition">#</a></dt>
 <dd><p>Return the field of constants of the base function field.</p>
 <p>EXAMPLES:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sage</span><span class="p">:</span> <span class="kn">from</span> <span class="nn">drinfeld_modular_forms.all</span> <span class="kn">import</span> <span class="o">*</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sage</span><span class="p">:</span> <span class="kn">from</span> <span class="nn">drinfeld_modular_forms.drinfeld_modules</span> <span class="kn">import</span> <span class="n">DrinfeldModule</span>
 <span class="n">sage</span><span class="p">:</span> <span class="n">A</span><span class="o">.&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="n">GF</span><span class="p">(</span><span class="mi">7</span><span class="p">)[</span><span class="s1">&#39;T&#39;</span><span class="p">]</span>
 <span class="n">sage</span><span class="p">:</span> <span class="n">DrinfeldModule</span><span class="p">(</span><span class="n">T</span><span class="p">)</span><span class="o">.</span><span class="n">field_of_constants</span><span class="p">()</span>
 <span class="n">Finite</span> <span class="n">Field</span> <span class="n">of</span> <span class="n">size</span> <span class="mi">7</span>
