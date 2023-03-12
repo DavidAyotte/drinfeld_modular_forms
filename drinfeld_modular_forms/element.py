@@ -202,7 +202,7 @@ class DrinfeldModularFormsRingElement(ModuleElement):
         """
         return not bool(self)
 
-    def t_expansion(self, max_deg=6, prec=6, name='t'):
+    def t_expansion(self, name='t'):
         r"""
         Return the `t`-expansion of the graded Drinfeld form.
 
@@ -226,7 +226,9 @@ class DrinfeldModularFormsRingElement(ModuleElement):
         g0, g1 = poly_ring.gens()
         sub_dict = {}
         if degs[0]:
-            sub_dict[g0] = compute_eisentein_serie_rank_2(A, max_deg, prec, name)
+            sub_dict[g0] = compute_eisentein_serie_rank_2(A, name)
+            sub_dict[g0][:]
         if degs[1]:
-            sub_dict[g1] = compute_delta_rank_2(A, max_deg, prec, name)
+            sub_dict[g1] = compute_delta_rank_2(A, name)
+            sub_dict[g1][:]
         return self.polynomial.subs(sub_dict)
