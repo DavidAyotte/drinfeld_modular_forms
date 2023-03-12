@@ -88,7 +88,38 @@ def ta(a, name='t'):
     return u**(q**d)*fpol.inverse_of_unit()
 
 def coefficient_A_expansion(k, n, i, polynomial_ring):
+    r"""
+    Return the `i`-th coefficient of the `t`-expansion for the form `f_{k, i}`.
 
+    We recall that the form `f_{k, n}` is defined by
+
+    .. MATH::
+
+        f_{k, i}(z) := \sum_{\substack{a\in \mathbb{F}_q[T] \\ a\text{ monic}}} a^{k - i}G_i(t(az))
+
+    where `G_i(X)` is the `i`-th Goss polynomial for the Carlitz module and
+    `t(az) = e(az)^{-1}` (`e` the exponential of the Carlitz module).
+
+    INPUT:
+
+    - ``k`` -- an integer representing the weight of the resulting form.
+    - ``n`` -- an integer. The type of the resulting form will be congruent to
+      this integer modulo `q-1`.
+    - ``i`` -- an integer representing the indices of the coefficient to compute.
+    - ``polynomial_ring`` -- a univariate polynomial ring over a finite field.
+
+    EXAMPLES::
+
+        sage: from drinfeld_modular_forms.expansions import coefficient_A_expansion
+        sage: coefficient_A_expansion(3+1, 1, 1, A)
+        1
+        sage: coefficient_A_expansion(3+1, 1, 0, A)
+        0
+        sage: coefficient_A_expansion(3+1, 1, 1, A)
+        1
+        sage: coefficient_A_expansion(3+1, 1, 7, A)
+        2*T^3 + T
+    """
     if i not in ZZ:
         raise TypeError("n must be an integer")
     i = ZZ(i)
@@ -121,17 +152,88 @@ def coefficient_A_expansion(k, n, i, polynomial_ring):
 
 @cache
 def compute_A_expansion(k, n, polynomial_ring, name='t'):
+    r"""
+    Return the `A`-expansion of the form `f_{k, n}` as a lazy power series.
+
+    In SageMath, a lazy power series is a power series such that its
+    coefficients are computed on demands. In particular, this means that we
+    don't need to input any precision.
+
+    INPUT:
+
+    - ``k`` -- an integer representing the weight of the resulting form.
+    - ``n`` -- an integer which will be congruent to the type modulo `q-1`.
+    - ``polynomial_ring`` -- a univariate polynomial ring over a finite field.
+    - ``name`` -- string (default: 't').
+
+    OUTPUT: A lazy power series over the fraction field of ``polynomial_ring``.
+
+    EXAMPLES::
+
+        sage: from drinfeld_modular_forms.expansions import compute_A_expansion
+        sage: A = GF(3)['T']
+        sage: D = compute_A_expansion(3+1, 1, A); D
+        t + t^5 + ((2*T^3+T)*t^7) + O(t^8)
+
+    To obtain more coefficient, one just need to take slices the series::
+
+        sage: D[0:10]  # output the coefficient from i=0...9
+        [0, 1, 0, 0, 0, 1, 0, 2*T^3 + T, 0, 1]
+        sage: D[39]  # print the 39-th coefficient
+        T^9 + 2*T^3
+        sage: D[59]  # 59-th coefficient
+        2*T^27 + T^9 + T^3 + 2*T
+    """
     f = lambda i: coefficient_A_expansion(k, n, i, polynomial_ring)
     R = LazyPowerSeriesRing(polynomial_ring.fraction_field(), name)
     return R(f, valuation=1)
 
 def compute_delta_rank_2(polynomial_ring, name='t'):
+    r"""
+    Return the `t`-expansion of the normalized Drinfeld modular discriminant of
+    rank 2.
+
+    Recall that for `z\in \Omega^2(\mathbb{C}\_{\infty})` the *Drinfeld modular
+    discriminant* is the leading coefficient of the Drinfeld module
+
+    .. MATH::
+
+        \phi_{z} : T \mapsto T + g(z)\tau + \Delta(z)\tau^2
+
+    corresponding to the lattice `\Lambda\_z := zA + A`. The *normalized*
+    discriminant is the the form `\Delta_0(z)` such that its first nonzero
+    coefficient is 1.
+    """
     q = polynomial_ring.base_ring().cardinality()
     return compute_A_expansion(q**2 - 1, q - 1, polynomial_ring, name)
 
 def compute_eisentein_serie_rank_2(polynomial_ring, name='t'):
+    r"""
+    Return the `t`-expansion fo the normalized Drinfeld Eisenstein series of
+    weight `q-1`.
+
+    Recall that this form is defined by:
+
+    .. MATH::
+
+        E_{q-1}(z) := \frac{T^q - T}{\tilde{\pi}^{q-1}} \sum_{(c, d)\in A^2\setminus 0} \frac{1}{(cz + d)^{q-1}}.
+
+    INPUT:
+
+    - ``polynomial_ring`` -- a univariate polynomial ring over a finite field.
+    - ``name`` -- string (default: 't').
+
+    EXAMPLES::
+
+        sage: from drinfeld_modular_forms.expansions import compute_eisentein_serie_rank_2
+        sage: A = GF(3)['T']
+        sage: E = compute_eisentein_serie_rank_2(A); E
+        1 + ((2*T^3+T)*t^2) + O(t^7)
+        sage: E[0:15]
+        [1, 0, 2*T^3 + T, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2*T^3 + T]
+    """
     T = polynomial_ring.gen()
     q = polynomial_ring.base_ring().cardinality()
     K = polynomial_ring.fraction_field()
     b = K(T**q - T)
-    return b.inverse_of_unit() - compute_A_expansion(q - 1, q - 1, polynomial_ring, name)
+    return K.one() - b*compute_A_expansion(q - 1, q - 1, polynomial_ring, name)
