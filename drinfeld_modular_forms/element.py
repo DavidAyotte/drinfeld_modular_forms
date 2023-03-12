@@ -116,7 +116,7 @@ class DrinfeldModularFormsRingElement(ModuleElement):
 
     def __bool__(self):
         r"""
-        Return True wether self is nonzero.
+        Return True whether self is nonzero.
 
         TESTS::
 
@@ -167,7 +167,7 @@ class DrinfeldModularFormsRingElement(ModuleElement):
 
     def is_one(self):
         r"""
-        Return ``True`` wether the given graded Drinfeld form is the
+        Return ``True`` whether the given graded Drinfeld form is the
         multiplicative identity.
 
         EXAMPLES::
