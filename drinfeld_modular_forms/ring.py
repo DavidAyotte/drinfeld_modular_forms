@@ -133,6 +133,33 @@ class DrinfeldModularFormsRing(Parent):
         """
         return self(self._poly_ring.zero())
 
+    def basis_of_weight(self, k):
+        r"""
+        Return a list of Drinfeld modular forms which forms a basis for the
+        subspace of weight `k`.
+
+        Note that if `k\not\equiv 0` modulo `q-1`, then the subspace is 0.
+
+        INPUT:
+
+        - ``k`` -- an integer.
+
+        EXAMPLES::
+
+            sage: from drinfeld_modular_forms import DrinfeldModularFormsRing
+            sage: q = 3; A = GF(q)['T']; K = Frac(A);
+            sage: M = DrinfeldModularFormsRing(K, 2)
+            sage: M.basis_of_weight(q - 1)
+            [g0]
+            sage: M.basis_of_weight(q^2 - 1)
+            [g1, g0^4]
+            sage: M.basis_of_weight(q^3 - 1)
+            [g0*g1^3, g0^5*g1^2, g0^9*g1, g0^13]
+            sage: B = M.basis_of_weight(19*(q-1))
+            [g0^3*g1^4, g0^7*g1^3, g0^11*g1^2, g0^15*g1, g0^19]
+        """
+        return [self(mon) for mon in self._poly_ring.monomials_of_degree(k)]
+
     def weighted_eisenstein_serie(self, k):
         r"""
         Return the Drinfeld Eisenstein serie of weight `q^k - 1`.
