@@ -77,8 +77,6 @@ def ta(a, name='t'):
         sage: ta(T^2)
         t^9 + (2*T^3 + 2*T)*t^15 + 2*T^2*t^17 + O(t^19)
     """
-    # TODO: add polynomial type verification
-    # TODO: fix default precision issue
     if not a:
         return ValueError("the polynomial must be non-zero")
     A = a.parent()
@@ -89,43 +87,43 @@ def ta(a, name='t'):
     u = R.gen()
     return u**(q**d)*fpol.inverse_of_unit()
 
-def coefficient_A_expansion(k, nu, n, polynomial_ring):
-    if n not in ZZ:
+def coefficient_A_expansion(k, n, i, polynomial_ring):
+
+    if i not in ZZ:
         raise TypeError("n must be an integer")
-    n = ZZ(n)
+    i = ZZ(i)
     Fq = polynomial_ring.base_ring()
     if not Fq.is_field() or not Fq.is_finite():
         raise ValueError("polynomials base ring must be a finite field")
     q = polynomial_ring.base_ring().cardinality()
 
-    Gnu = goss_polynomial(nu, polynomial_ring)
-    coeff_G = Gnu.coefficients()[0]
-
-    m, G_m = next(((d, c) for d, c in enumerate(Gnu.list()) if c))
+    n_th_goss_pol = goss_polynomial(n, polynomial_ring)
+    m, G_m = next(((d, c) for d, c in enumerate(n_th_goss_pol.list()) if c))
 
     # compute part 1
     part1 = polynomial_ring.zero()
-    if not n%m:
-        if ZZ(n/m).is_power_of(q):
-            d = ZZ(n/m).log(q)
-            part1 = sum(a**(k - nu)*G_m for a in polynomial_ring.monics(of_degree=d))
+    if not i%m:
+        if ZZ(i/m).is_power_of(q):
+            d = ZZ(i/m).log(q)
+            part1 = sum(a**(k - n)*G_m for a in polynomial_ring.monics(of_degree=d))
 
     # compute part 2
     part2 = polynomial_ring.zero()
-    for d in range(1, n+1, 1):
+    for d in range(1, i+1, 1):
         s = polynomial_ring.zero()
-        if n >= (q**d + 1)*m:
+        if i >= (q**d + 1)*m:
             for a in polynomial_ring.monics(of_degree=d):
-                G_ta = Gnu.subs({Gnu.parent().gen(): ta(a)})
-                dn = G_ta[n]
-                s += a**(k - nu)*dn
+                G_ta = n_th_goss_pol.subs({n_th_goss_pol.parent().gen(): ta(a)})
+                dn = G_ta[i]
+                s += a**(k - n)*dn
         part2 += s
     return part1 + part2
 
-def compute_A_expansion(k, nu, polynomial_ring, name='t'):
-    f = lambda n: coefficient_A_expansion(k, nu, n, polynomial_ring)
+@cache
+def compute_A_expansion(k, n, polynomial_ring, name='t'):
+    f = lambda i: coefficient_A_expansion(k, n, i, polynomial_ring)
     R = LazyPowerSeriesRing(polynomial_ring.fraction_field(), name)
-    return R(f)
+    return R(f, valuation=1)
 
 def compute_delta_rank_2(polynomial_ring, name='t'):
     q = polynomial_ring.base_ring().cardinality()

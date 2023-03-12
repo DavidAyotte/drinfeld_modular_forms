@@ -1,7 +1,11 @@
+from sage.misc.lazy_import import lazy_import
+
 from sage.structure.element import ModuleElement
 from sage.structure.richcmp import richcmp, op_NE, op_EQ
 
 from .expansions import compute_delta_rank_2, compute_eisentein_serie_rank_2
+
+lazy_import('sage.rings.lazy_series_ring', 'LazyPowerSeriesRing')
 
 class DrinfeldModularFormsRingElement(ModuleElement):
     r"""
@@ -222,13 +226,22 @@ class DrinfeldModularFormsRingElement(ModuleElement):
         """
         A = self.base_ring().base()
         degs = self.polynomial.degrees()
+        L = LazyPowerSeriesRing(self.base_ring(), name)
         poly_ring = self.parent()._poly_ring
         g0, g1 = poly_ring.gens()
         sub_dict = {}
-        if degs[0]:
-            sub_dict[g0] = compute_eisentein_serie_rank_2(A, name)
-            sub_dict[g0][:]
-        if degs[1]:
-            sub_dict[g1] = compute_delta_rank_2(A, name)
-            sub_dict[g1][:]
-        return self.polynomial.subs(sub_dict)
+        if not degs[0] and degs[1]:
+            D = compute_delta_rank_2(A, name)
+            E = D.parent().one()
+        elif degs[0] and not degs[1]:
+            E = compute_eisentein_serie_rank_2(A, name)
+            D = E.parent().one()
+        elif degs[0] and degs[1]:
+            E = compute_eisentein_serie_rank_2(A, name)
+            D = compute_delta_rank_2(A, name)
+        else:
+            return L(self.polynomial)
+        t_exp = L.zero()
+        for c, (n, m) in zip(self.polynomial.coefficients(), self.polynomial.exponents()):
+            t_exp += c*(E**n)*(D**m)
+        return t_exp
