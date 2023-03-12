@@ -140,6 +140,8 @@ class DrinfeldModularFormsRing(Parent):
 
         Note that if `k\not\equiv 0` modulo `q-1`, then the subspace is 0.
 
+        An alias of this method is ``basis``.
+
         INPUT:
 
         - ``k`` -- an integer.
@@ -159,6 +161,8 @@ class DrinfeldModularFormsRing(Parent):
             [g0^3*g1^4, g0^7*g1^3, g0^11*g1^2, g0^15*g1, g0^19]
         """
         return [self(mon) for mon in self._poly_ring.monomials_of_degree(k)]
+
+    basis = basis_of_weight  # alias
 
     def weighted_eisenstein_serie(self, k):
         r"""
