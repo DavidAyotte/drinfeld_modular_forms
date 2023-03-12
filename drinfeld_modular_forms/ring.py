@@ -157,7 +157,7 @@ class DrinfeldModularFormsRing(Parent):
             [g1, g0^4]
             sage: M.basis_of_weight(q^3 - 1)
             [g0*g1^3, g0^5*g1^2, g0^9*g1, g0^13]
-            sage: B = M.basis_of_weight(19*(q-1))
+            sage: M.basis_of_weight(19*(q-1))
             [g0^3*g1^4, g0^7*g1^3, g0^11*g1^2, g0^15*g1, g0^19]
         """
         return [self(mon) for mon in self._poly_ring.monomials_of_degree(k)]

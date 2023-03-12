@@ -206,6 +206,28 @@ class DrinfeldModularFormsRingElement(ModuleElement):
         """
         return not bool(self)
 
+    def is_drinfeld_modular_form(self):
+        r"""
+        Return whether ``self`` is a Drinfeld modular form.
+
+        We recall that elements of Drinfeld modular forms ring are not
+        necessarily modular forms as they may have mixed weight components.
+
+        EXAMPLES::
+
+            sage: from drinfeld_modular_forms import DrinfeldModularFormsRing
+            sage: A = GF(3)['T']; K = Frac(A)
+            sage: M = DrinfeldModularFormsRing(K, 2)
+            sage: g0, g1 = M.gens()
+            sage: f = g0^5*g1^2  # homogeneous polynomial
+            sage: f.is_drinfeld_modular_form()
+            True
+            sage: g = g0 + g1  # mixed weight components
+            sage: g.is_drinfeld_modular_form()
+            False
+        """
+        return self.polynomial.is_homogeneous()
+
     def t_expansion(self, name='t'):
         r"""
         Return the `t`-expansion of the graded Drinfeld form.
@@ -245,3 +267,33 @@ class DrinfeldModularFormsRingElement(ModuleElement):
         for c, (n, m) in zip(self.polynomial.coefficients(), self.polynomial.exponents()):
             t_exp += c*(E**n)*(D**m)
         return t_exp
+
+    def weight(self):
+        r"""
+        Return the weight of self.
+
+        EXAMPLES::
+
+            sage: from drinfeld_modular_forms import DrinfeldModularFormsRing
+            sage: A = GF(3)['T']; K = Frac(A)
+            sage: M = DrinfeldModularFormsRing(K, 2)
+            sage: g0, g1 = M.gens()
+            sage: g0.weight()
+            2
+            sage: g1.weight()
+            8
+            sage: f = g0^5*g1^2
+            sage: f.weight()
+            26
+
+        If the form is not modular, then the method returns an error::
+
+            sage: f = g0 + g1
+            sage: f.weight()
+            Traceback (most recent call last):
+            ...
+            ValueError: the given ring element is not a Drinfeld modular form
+        """
+        if not self.is_drinfeld_modular_form():
+            raise ValueError("the given ring element is not a Drinfeld modular form")
+        return self.polynomial.degree()
