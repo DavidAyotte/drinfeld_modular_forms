@@ -6,6 +6,7 @@ from sage.rings.function_field.function_field import FunctionField
 from sage.rings.polynomial.polynomial_ring_constructor import PolynomialRing
 from sage.rings.polynomial.term_order import TermOrder
 from sage.rings.integer import Integer
+from sage.rings.integer_ring import ZZ
 
 from .element import DrinfeldModularFormsRingElement
 
@@ -163,6 +164,34 @@ class DrinfeldModularFormsRing(Parent):
         return [self(mon) for mon in self._poly_ring.monomials_of_degree(k)]
 
     basis = basis_of_weight  # alias
+
+    def sturm_bound(self, k):
+        r"""
+        Return the Sturm bound of the subspace of weight `k`.
+
+        INPUT:
+
+        - ``k`` -- an integer
+
+        EXAMPLES::
+
+            sage: from drinfeld_modular_forms import DrinfeldModularFormsRing
+            sage: q = 3; A = GF(q)['T']; K = Frac(A);
+            sage: M = DrinfeldModularFormsRing(K, 2)
+            sage: M.sturm_bound(q - 1)
+            1
+            sage: M.sturm_bound(q^2 - 1)
+            3
+            sage: M.sturm_bound(3^9 - 1)
+            4921
+        """
+        if k not in ZZ:
+            raise TypeError("input must be an integer")
+        k = ZZ(k)
+        q = self._base_ring.base_ring().cardinality()
+        if k%(q-1):
+            return ZZ.zero()
+        return ZZ((k/(q + 1)).floor() + 1)
 
     def weighted_eisenstein_serie(self, k):
         r"""
