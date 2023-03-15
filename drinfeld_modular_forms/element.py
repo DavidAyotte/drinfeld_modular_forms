@@ -148,6 +148,31 @@ class DrinfeldModularFormsRingElement(ModuleElement):
             raise TypeError('invalid comparison between modular forms ring elements')
         return richcmp(self.polynomial, other.polynomial, op)
 
+    def __getitem__(self, n):
+        r"""
+        Return the `n`-coefficient of the Drinfeld modular form.
+
+        This method is only implemented when the rank is 2.
+
+        EXAMPLES::
+
+            sage: from drinfeld_modular_forms import DrinfeldModularFormsRing
+            sage: A = GF(3)['T']; K = Frac(A)
+            sage: M = DrinfeldModularFormsRing(K, 2)
+            sage: g0, g1 = M.gens()
+            sage: g0[2]
+            2*T^3 + T
+            sage: g0[0:16]
+            [1, 0, 2*T^3 + T, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2*T^3 + T, 0]
+            sage: g1[24]
+            T^9 + 2*T^3
+        """
+        if self.parent()._rank != 2:
+            raise NotImplementedError("expansion not implement for ranks different from 2")
+        return self.expansion()[n]
+
+    coefficient = __getitem__  # alias
+
     def rank(self):
         r"""
         Return the rank of graded Drinfeld modular form.
