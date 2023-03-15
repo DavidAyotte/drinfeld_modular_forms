@@ -8,8 +8,13 @@ from sage.rings.polynomial.polynomial_ring_constructor import PolynomialRing
 from sage.rings.polynomial.term_order import TermOrder
 from sage.rings.integer import Integer
 from sage.rings.integer_ring import ZZ
+from sage.structure.sequence import Sequence
+from sage.misc.lazy_import import lazy_import
 
 from .element import DrinfeldModularFormsRingElement
+
+lazy_import('sage.rings.lazy_series', 'LazyPowerSeries')
+lazy_import('sage.rings.power_series_ring_element', 'PowerSeries')
 
 class DrinfeldModularFormsRing(Parent):
     r"""
@@ -43,13 +48,59 @@ class DrinfeldModularFormsRing(Parent):
                 % (self._rank, self._base_ring))
 
     def from_expansion(self, expansion, k):
+        r"""
+        Return the Drinfeld modular form which correspond to the given
+        expansion.
+
+        INPUT:
+
+        - ``expansion`` -- a lazy power series, a power series, a list or a
+          tuple. The precision or the length must be at least the Sturm bound
+          of the weight `k` subspace.
+        - ``k`` -- an integer representing the weight of the Drinfeld modular
+          form.
+
+        EXAMPLES::
+
+            sage: from drinfeld_modular_forms import DrinfeldModularFormsRing
+            sage: A = GF(3)['T']
+            sage: M = DrinfeldModularFormsRing(Frac(A))
+            sage: M.0
+            g0
+            sage: f = (M.0).t_expansion()
+            sage: M.from_expansion(f, (M.0).weight())
+            g0
+        """
         if self._rank != 2:
             raise NotImplementedError
         basis = self.basis_of_weight(k)
         bound = self.sturm_bound(k)
-        v = Matrix([expansion[0:bound]])
+        if isinstance(expansion, (list, tuple)):
+            coefficients = Sequence(expansion)[0:bound]
+            if coefficients.universe() != self.base_ring():
+                raise ValueError("incorrect parent for the given list")
+        elif isinstance(expansion, PowerSeries):
+            if expansion.parent().base_ring() != self.base_ring():
+                raise ValueError("incorrect parent for given power series")
+            coefficients = expansion.coefficients()[0:bound]
+        elif isinstance(expansion, LazyPowerSeries):
+            if expansion.parent().base_ring() != self.base_ring():
+                raise ValueError("incorrect parent for given lazy power series")
+            coefficients = expansion[0:bound]
+        else:
+            raise TypeError("expansion must be a lazy power series, a power "
+                            "series, a list or a tuple")
+        if len(coefficients) < bound:
+            raise ValueError("not enough coefficients. Please provide"
+                                f"at least {bound} coefficients (up to the"
+                                "Sturm bound)")
+        v = Matrix([coefficients])
         coeff_basis = [b.t_expansion()[0:bound] for b in basis]
-        c = Matrix(coeff_basis).solve_left(v)
+        try:
+            c = Matrix(coeff_basis).solve_left(v)
+        except ValueError:
+            raise ValueError("the given expansion does not correspond to a"
+                             "form of the given weight")
         return sum(c[0][i]*b for i, b in enumerate(basis))
 
     def gen(self, n):
