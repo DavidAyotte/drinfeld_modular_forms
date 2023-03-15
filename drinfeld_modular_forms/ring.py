@@ -341,13 +341,13 @@ class DrinfeldModularFormsRing(Parent):
             sage: q = 3
             sage: A = GF(q)['T']; K = Frac(A); T = K.gen()
             sage: M = DrinfeldModularFormsRing(K, 2)
-            sage: M.eisenstein_serie(0)
+            sage: M.eisenstein_series(0)
             0
-            sage: M.eisenstein_serie(q - 1)
+            sage: M.eisenstein_series(q - 1)
             g0
-            sage: M.eisenstein_serie(q^2 - 1)
+            sage: M.eisenstein_series(q^2 - 1)
             g0^4
-            sage: M.eisenstein_serie(q^3 - 1)
+            sage: M.eisenstein_series(q^3 - 1)
             g0^13 + (-T^9 + T)*g0*g1^3
         """
         if self._rank != 2:
@@ -367,4 +367,4 @@ class DrinfeldModularFormsRing(Parent):
             return self.gen(0)
         T = self._base_ring.gen()
         sqb = T**(q**(k - 1)) - T
-        return -sqb*self.eisenstein_serie(q**(k - 2) - 1)*self.gen(1)**(q**(k - 2)) + self.eisenstein_serie(q**(k - 1) - 1)*self.gen(0)**(q**(k - 1))
+        return -sqb*self.eisenstein_series(q**(k - 2) - 1)*self.gen(1)**(q**(k - 2)) + self.eisenstein_series(q**(k - 1) - 1)*self.gen(0)**(q**(k - 1))
