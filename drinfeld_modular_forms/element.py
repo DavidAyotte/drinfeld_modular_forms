@@ -228,7 +228,7 @@ class DrinfeldModularFormsRingElement(ModuleElement):
         """
         return self.polynomial.is_homogeneous()
 
-    def t_expansion(self, name='t'):
+    def expansion(self, name='t'):
         r"""
         Return the `t`-expansion of the graded Drinfeld form.
 
@@ -238,12 +238,12 @@ class DrinfeldModularFormsRingElement(ModuleElement):
             sage: A = GF(3)['T']; K = Frac(A)
             sage: M = DrinfeldModularFormsRing(K, 2)
             sage: g0, g1 = M.gens()
-            sage: g0.t_expansion()
+            sage: g0.expansion()
             1 + ((2*T^3+T)*t^2) + O(t^7)
-            sage: g1.t_expansion()
+            sage: g1.expansion()
             t^2 + 2*t^6 + O(t^8)
             sage: F = (g0 + g1)*g0
-            sage: F.t_expansion()
+            sage: F.expansion()
             1 + ((T^3+2*T+1)*t^2) + ((T^6+T^4+2*T^3+T^2+T)*t^4) + 2*t^6 + O(t^7)
         """
         A = self.base_ring().base()

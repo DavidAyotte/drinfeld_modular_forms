@@ -67,7 +67,7 @@ class DrinfeldModularFormsRing(Parent):
             sage: M = DrinfeldModularFormsRing(Frac(A))
             sage: M.0
             g0
-            sage: f = (M.0).t_expansion()
+            sage: f = (M.0).expansion()
             sage: M.from_expansion(f, (M.0).weight())
             g0
         """
@@ -95,7 +95,7 @@ class DrinfeldModularFormsRing(Parent):
                                 f"at least {bound} coefficients (up to the"
                                 "Sturm bound)")
         v = Matrix([coefficients])
-        coeff_basis = [b.t_expansion()[0:bound] for b in basis]
+        coeff_basis = [b.expansion()[0:bound] for b in basis]
         try:
             c = Matrix(coeff_basis).solve_left(v)
         except ValueError:

@@ -36,11 +36,11 @@ Note that such elements are not necessarily modular forms as they can have mixed
 In the case of rank 2, one can compute the expansion at infinity of any graded form:
 
 ```
-    sage: g0.t_expansion()
+    sage: g0.expansion()
     1/(T^3 + 2*T) + t^2 + O(t^12)
-    sage: g1.t_exansion()
+    sage: g1.exansion()
     t^2 + 2*t^6 + (T^3 + 2*T)*t^8 + O(t^12)
-    sage: ((g0 + g1)*g0).t_expansion()
+    sage: ((g0 + g1)*g0).expansion()
     1/(T^6 + T^4 + T^2) + 2*t^4 + (2/(T^3 + 2*T))*t^6 + (T^3 + 2*T)*t^10 + O(t^12)
 ```
 This is achieved via the `A`-expansion theory developed by Petrov in \[3\].
