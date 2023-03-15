@@ -3,6 +3,7 @@ from sage.categories.graded_algebras import GradedAlgebras
 from sage.structure.parent import Parent
 
 from sage.rings.function_field.function_field import FunctionField
+from sage.matrix.constructor import Matrix
 from sage.rings.polynomial.polynomial_ring_constructor import PolynomialRing
 from sage.rings.polynomial.term_order import TermOrder
 from sage.rings.integer import Integer
@@ -40,6 +41,16 @@ class DrinfeldModularFormsRing(Parent):
         """
         return ("Ring of Drinfeld modular forms of rank %s over %s"
                 % (self._rank, self._base_ring))
+
+    def from_expansion(self, expansion, k):
+        if self._rank != 2:
+            raise NotImplementedError
+        basis = self.basis_of_weight(k)
+        bound = self.sturm_bound(k)
+        v = Matrix([expansion[0:bound]])
+        coeff_basis = [b.t_expansion()[0:bound] for b in basis]
+        c = Matrix(coeff_basis).solve_left(v)
+        return sum(c[0][i]*b for i, b in enumerate(basis))
 
     def gen(self, n):
         r"""
