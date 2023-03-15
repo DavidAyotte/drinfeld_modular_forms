@@ -309,37 +309,43 @@ class DrinfeldModularFormsRing(Parent):
             return ZZ.zero()
         return ZZ((k/(q + 1)).floor() + 1)
 
-    def weighted_eisenstein_serie(self, k):
+    def eisenstein_series(self, k):
         r"""
-        Return the Drinfeld Eisenstein serie of weight `q^k - 1`.
+        Return the Drinfeld Eisenstein series of weight `k`.
 
-        The method is currently only implemented for rank 2.
+        The method is currently only implemented for rank 2 and when `k` is of
+        of the form `q^v - 1`. If `k = 0`, the method returns 0.
 
         EXAMPLES::
 
             sage: from drinfeld_modular_forms import DrinfeldModularFormsRing
-            sage: A = GF(3)['T']; K = Frac(A); T = K.gen()
+            sage: q = 3
+            sage: A = GF(q)['T']; K = Frac(A); T = K.gen()
             sage: M = DrinfeldModularFormsRing(K, 2)
-            sage: M.weighted_eisenstein_serie(0)
+            sage: M.eisenstein_serie(0)
             0
-            sage: M.weighted_eisenstein_serie(1)
+            sage: M.eisenstein_serie(q - 1)
             g0
-            sage: M.weighted_eisenstein_serie(2)
+            sage: M.eisenstein_serie(q^2 - 1)
             g0^4
-            sage: M.weighted_eisenstein_serie(3)
+            sage: M.eisenstein_serie(q^3 - 1)
             g0^13 + (-T^9 + T)*g0*g1^3
         """
-        if not isinstance(k, (Integer, int)):
-            raise TypeError("k should be an integer")
-        if k < 0:
-            raise ValueError("the integer k (=%s) should be nonnegative" % (k))
         if self._rank != 2:
             raise NotImplementedError
+        if k not in ZZ:
+            raise TypeError("k must be an integer")
+        k = ZZ(k)
+        if k < 0:
+            raise ValueError("the integer k (=%s) should be nonnegative" % (k))
         q = self._base_ring.base_ring().cardinality()
         if k == 0:
             return self.zero()
+        if not (k + 1).is_power_of(q):
+            raise NotImplementedError("only implemented when k is of the form q^v - 1")
+        k = (k + 1).log(q)
         if k == 1:
             return self.gen(0)
         T = self._base_ring.gen()
-        sqb = T ** (q ** (k - 1)) - T
-        return -sqb * self.weighted_eisenstein_serie(k - 2) * self.gen(1) ** (q ** (k - 2)) + self.weighted_eisenstein_serie(k - 1) * self.gen(0) ** (q ** (k - 1))
+        sqb = T**(q**(k - 1)) - T
+        return -sqb*self.eisenstein_serie(q**(k - 2) - 1)*self.gen(1)**(q**(k - 2)) + self.eisenstein_serie(q**(k - 1) - 1)*self.gen(0)**(q**(k - 1))
