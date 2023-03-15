@@ -12,6 +12,7 @@ from sage.structure.sequence import Sequence
 from sage.misc.lazy_import import lazy_import
 
 from .element import DrinfeldModularFormsRingElement
+from .expansions import compute_A_expansion
 
 lazy_import('sage.rings.lazy_series', 'LazyPowerSeries')
 lazy_import('sage.rings.power_series_ring_element', 'PowerSeries')
@@ -226,6 +227,59 @@ class DrinfeldModularFormsRing(Parent):
         return [self(mon) for mon in self._poly_ring.monomials_of_degree(k)]
 
     basis = basis_of_weight  # alias
+
+    def petrov_expansion(self, k, n):
+        r"""
+        Return a Drinfeld modular form which admits the `A`-expansion
+        for `k` and `n` as defined by Petrov.
+
+        Recall that it is defined by:
+
+        .. MATH::
+
+            f_{k, i}(z) := \sum_{\substack{a\in \mathbb{F}_q[T] \\ a\text{ monic}}} a^{k - i}G_i(t(az))
+
+        where `k` and `n` are 2 integers which are divisible by `q - 1` and
+        `n \leq p^{v_{p}(k - n)}` (`p` is the characteristic).
+
+        INPUT:
+
+        - ``k`` -- an integer divisible by `q-1`.
+        - ``n`` -- an integer divisible by `q-1` which is stricly less than
+          `p^{v_{p}(k - n)}`.
+        - ``name`` -- string, the name of the parameter at infinity.
+
+        OUTPUT: a Drinfeld modular form of weight `k`.
+
+        EXAMPLES::
+
+            sage: from drinfeld_modular_forms import DrinfeldModularFormsRing
+            sage: q = 3
+            sage: A = GF(q)['T']; K = Frac(A)
+            sage: M = DrinfeldModularFormsRing(K, 2)
+            sage: M.petrov_expansion((q + 1)*(q - 1), q - 1)
+            g1
+            sage: M.petrov_expansion((q^2 + 1)*(q - 1), q - 1)
+            g0^6*g1
+            sage: M.petrov_expansion((q^3 + 1)*(q - 1), q - 1)
+            g0^24*g1 + (T^27 - T^9)*g0^12*g1^4 + (T^54 + T^36 + T^18)*g1^7
+        """
+        if k not in ZZ or n not in ZZ:
+            raise TypeError("k and n must be integers")
+        if k == n:
+            raise ValueError("k must be different from n")
+        q = self.base_ring().base_ring().cardinality()
+        if k%(q-1):
+            raise ValueError("k must be divisible by q - 1")
+        if n%(q-1):
+            raise ValueError("n must be divisible by q - 1")
+        k = ZZ(k)
+        n = ZZ(n)
+        p = self.base_ring().characteristic()
+        if n > p**(k-n).valuation(p):
+            raise ValueError("n must be less or equal to p^v_p(k-n)")
+        expansion = compute_A_expansion(k, n, self.base_ring().base())
+        return self.from_expansion(expansion, k)
 
     def sturm_bound(self, k):
         r"""
