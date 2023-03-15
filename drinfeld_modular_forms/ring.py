@@ -159,6 +159,23 @@ class DrinfeldModularFormsRing(Parent):
             raise ValueError("cannot convert the given polynomial")
         return self.element_class(self, polynomial)
 
+    def rank(self):
+        r"""
+        Return the rank of the ring of Drinfeld modular forms.
+
+        EXAMPLES::
+
+            sage: from drinfeld_modular_forms import DrinfeldModularFormsRing
+            sage: A = GF(3)['T']; K = Frac(A);
+            sage: DrinfeldModularFormsRing(K, 2).rank()
+            2
+            sage: DrinfeldModularFormsRing(K, 3).rank()
+            3
+            sage: DrinfeldModularFormsRing(K, 4).rank()
+            4
+        """
+        return self._rank
+
     def one(self):
         r"""
         Return the multiplicative identity of the ring.
@@ -264,6 +281,8 @@ class DrinfeldModularFormsRing(Parent):
             sage: M.petrov_expansion((q^3 + 1)*(q - 1), q - 1)
             g0^24*g1 + (T^27 - T^9)*g0^12*g1^4 + (T^54 + T^36 + T^18)*g1^7
         """
+        if self._rank != 2:
+            raise NotImplementedError("A-expansions are only known in rank 2 for the moment")
         if k not in ZZ or n not in ZZ:
             raise TypeError("k and n must be integers")
         if k == n:
