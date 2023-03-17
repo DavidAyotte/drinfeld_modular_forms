@@ -89,15 +89,16 @@ def ta(a, name='t'):
 
 def coefficient_A_expansion(k, n, i, polynomial_ring):
     r"""
-    Return the `i`-th coefficient of the `t`-expansion for the form `f_{k, i}`.
+    Return the `i`-th coefficient of the `t`-expansion for the form
+    `f_{k, n}`.
 
     We recall that the form `f_{k, n}` is defined by
 
     .. MATH::
 
-        f_{k, i}(z) := \sum_{\substack{a\in \mathbb{F}_q[T] \\ a\text{ monic}}} a^{k - i}G_i(t(az))
+        f_{k, n}(z) := \sum_{\substack{a\in \mathbb{F}_q[T] \\ a\text{ monic}}} a^{k - i}G_n(t(az))
 
-    where `G_i(X)` is the `i`-th Goss polynomial for the Carlitz module and
+    where `G_n(X)` is the `n`-th Goss polynomial for the Carlitz module and
     `t(az) = e(az)^{-1}` (`e` the exponential of the Carlitz module).
 
     INPUT:
@@ -105,7 +106,7 @@ def coefficient_A_expansion(k, n, i, polynomial_ring):
     - ``k`` -- an integer representing the weight of the resulting form.
     - ``n`` -- an integer. The type of the resulting form will be congruent to
       this integer modulo `q-1`.
-    - ``i`` -- an integer representing the indices of the coefficient to compute.
+    - ``i`` -- an integer representing the index of the coefficient to compute.
     - ``polynomial_ring`` -- a univariate polynomial ring over a finite field.
 
     EXAMPLES::
