@@ -16,6 +16,10 @@ To import a single functionality, for example the class `DrinfeldModularFormsRin
 
 `sage: from drinfeld_modular_forms import DrinfeldModularFormsRing`
 
+The documentation is hosted here:
+
+https://davidayotte.github.io/drinfeld_modular_forms/html/index.html
+
 ## Examples:
 
 One may create the ring of Drinfeld modular forms:
