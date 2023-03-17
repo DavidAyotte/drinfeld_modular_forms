@@ -205,20 +205,21 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="drinfeld_modular_forms.expansions.coefficient_A_expansion">
 <span class="sig-prename descclassname"><span class="pre">drinfeld_modular_forms.expansions.</span></span><span class="sig-name descname"><span class="pre">coefficient_A_expansion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">polynomial_ring</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#drinfeld_modular_forms.expansions.coefficient_A_expansion" title="Permalink to this definition">#</a></dt>
-<dd><p>Return the <span class="math notranslate nohighlight">\(i\)</span>-th coefficient of the <span class="math notranslate nohighlight">\(t\)</span>-expansion for the form <span class="math notranslate nohighlight">\(f_{k, i}\)</span>.</p>
+<dd><p>Return the <span class="math notranslate nohighlight">\(i\)</span>-th coefficient of the <span class="math notranslate nohighlight">\(t\)</span>-expansion for the form
+<span class="math notranslate nohighlight">\(f_{k, n}\)</span>.</p>
 <p>We recall that the form <span class="math notranslate nohighlight">\(f_{k, n}\)</span> is defined by</p>
 <div class="math-wrapper docutils container">
 <div class="math notranslate nohighlight">
-\[\begin{split}f_{k, i}(z) := \sum_{\substack{a\in \mathbb{F}_q[T] \\ a\text{ monic}}} a^{k - i}G_i(t(az))\end{split}\]</div>
+\[\begin{split}f_{k, n}(z) := \sum_{\substack{a\in \mathbb{F}_q[T] \\ a\text{ monic}}} a^{k - i}G_n(t(az))\end{split}\]</div>
 </div>
-<p>where <span class="math notranslate nohighlight">\(G_i(X)\)</span> is the <span class="math notranslate nohighlight">\(i\)</span>-th Goss polynomial for the Carlitz module and
+<p>where <span class="math notranslate nohighlight">\(G_n(X)\)</span> is the <span class="math notranslate nohighlight">\(n\)</span>-th Goss polynomial for the Carlitz module and
 <span class="math notranslate nohighlight">\(t(az) = e(az)^{-1}\)</span> (<span class="math notranslate nohighlight">\(e\)</span> the exponential of the Carlitz module).</p>
 <p>INPUT:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">k</span></code> – an integer representing the weight of the resulting form.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">n</span></code> – an integer. The type of the resulting form will be congruent to
 this integer modulo <span class="math notranslate nohighlight">\(q-1\)</span>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">i</span></code> – an integer representing the indices of the coefficient to compute.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">i</span></code> – an integer representing the index of the coefficient to compute.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">polynomial_ring</span></code> – a univariate polynomial ring over a finite field.</p></li>
 </ul>
 <p>EXAMPLES:</p>
