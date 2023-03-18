@@ -14,7 +14,7 @@
 
 # General information about the project.
 project = u"Drinfeld modular forms"
-copyright = u'2022, David Ayotte'
+copyright = u'2023, David Ayotte'
 package_name = 'drinfeld_modular_forms'
 package_folder = "../../drinfeld_modular_forms"
 authors = u"David Ayotte"

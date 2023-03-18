@@ -186,8 +186,8 @@ class DrinfeldModularFormsRing(Parent, UniqueRepresentation):
             names += n + str(rank)
         else:
             if len(names.split()) != rank:
-                raise ValueError("the rank does not corresponds to "
-                                    " the number of generators")
+                raise ValueError("the rank does not corresponds to"
+                                 " the number of generators")
         self._rank = rank
         self._base_ring = base_ring
         q = base_ring.base_ring().cardinality()
