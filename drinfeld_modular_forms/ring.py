@@ -25,56 +25,66 @@ EXAMPLES::
     sage: K.<T> = Frac(A)
     sage: M = DrinfeldModularFormsRing(K, 2)  # rank 2
     sage: M.gens()  # generators
-    [g0, g1]
-    sage: g0, g1 = M.gens()
-    sage: g0.weight()
-    2
+    [g1, g2]
+    sage: M.inject_variables()  # assign variables
+    Defining g1, g2
     sage: g1.weight()
+    2
+    sage: g2.weight()
     8
 
 ::
 
     sage: M = DrinfeldModularFormsRing(K, 3)  # rank 3
     sage: M.gens()
-    [g0, g1, g2]
+    [g1, g2, g3]
     sage: [g.weight() for g in M.gens()]  # list of the weights
     [2, 8, 26]
+    sage: M.inject_variables()
+    Defining g1, g2, g3
+    sage: g1.weight() == 3 - 1
+    True
+    sage: g2.weight() == 3^2 - 1
+    True
+    sage: g3.weight() == 3^3 - 1
+    True
 
 One can compute basis for any subspace of given weight::
 
     sage: M = DrinfeldModularFormsRing(K, 4)
     sage: M.basis_of_weight(q^4 - 1)
-    [g3,
-     g1^10,
-     g0*g2^3,
-     g0^2*g1^3*g2^2,
-     g0^3*g1^6*g2,
-     g0^4*g1^9,
-     g0^6*g1^2*g2^2,
-     g0^7*g1^5*g2,
-     g0^8*g1^8,
-     g0^10*g1*g2^2,
-     g0^11*g1^4*g2,
-     g0^12*g1^7,
-     g0^14*g2^2,
-     g0^15*g1^3*g2,
-     g0^16*g1^6,
-     g0^19*g1^2*g2,
-     g0^20*g1^5,
-     g0^23*g1*g2,
-     g0^24*g1^4,
-     g0^27*g2,
-     g0^28*g1^3,
-     g0^32*g1^2,
-     g0^36*g1,
-     g0^40]
+    [g4,
+     g2^10,
+     g1*g3^3,
+     g1^2*g2^3*g3^2,
+     g1^3*g2^6*g3,
+     g1^4*g2^9,
+     g1^6*g2^2*g3^2,
+     g1^7*g2^5*g3,
+     g1^8*g2^8,
+     g1^10*g2*g3^2,
+     g1^11*g2^4*g3,
+     g1^12*g2^7,
+     g1^14*g3^2,
+     g1^15*g2^3*g3,
+     g1^16*g2^6,
+     g1^19*g2^2*g3,
+     g1^20*g2^5,
+     g1^23*g2*g3,
+     g1^24*g2^4,
+     g1^27*g3,
+     g1^28*g2^3,
+     g1^32*g2^2,
+     g1^36*g2,
+     g1^40]
 
 We note that the elements of this ring may not be *modular forms* as
 as they may have mixed weight components::
 
     sage: M = DrinfeldModularFormsRing(K, 4)
-    sage: g0, g1, g2, g3 = M.gens()
-    sage: F = g0 + g1 + g2 + g3
+    sage: M.inject_variables()
+    Defining g1, g2, g3, g4
+    sage: F = g1 + g2 + g3 + g4
     sage: F.is_drinfeld_modular_form()
     False
 
@@ -92,22 +102,23 @@ EXAMPLES::
     sage: A = GF(q)['T']
     sage: K.<T> = Frac(A)
     sage: M = DrinfeldModularFormsRing(K, 2)  # rank 2
-    sage: g0, g1 = M.gens()
-    sage: g0.expansion()
-    1 + ((2*T^3+T)*t^2) + O(t^7)
+    sage: M.inject_variables()
+    Defining g1, g2
     sage: g1.expansion()
+    1 + ((2*T^3+T)*t^2) + O(t^7)
+    sage: g2.expansion()
     t^2 + 2*t^6 + O(t^8)
 
 The returned series is a lazy power series, meaning that it can compute
 any coefficient at any precision on demands::
 
-    sage: g1[6]
+    sage: g2[6]
     2
-    sage: g1[24]
+    sage: g2[24]
     T^9 + 2*T^3
-    sage: g1[36]
+    sage: g2[36]
     2*T^9 + T^3
-    sage: g1[702]  # long time
+    sage: g2[702]  # long time
     2*T^252 + T^246 + 2*T^90 + T^84 + 2*T^36 + T^30 + T^18 + T^12 + T^6
 
 AUTHORS:
@@ -136,6 +147,7 @@ from sage.rings.polynomial.term_order import TermOrder
 from sage.rings.integer import Integer
 from sage.rings.integer_ring import ZZ
 from sage.structure.sequence import Sequence
+from sage.structure.unique_representation import UniqueRepresentation
 from sage.misc.lazy_import import lazy_import
 
 from .element import DrinfeldModularFormsRingElement
@@ -144,7 +156,7 @@ from .expansions import compute_petrov_expansion
 lazy_import('sage.rings.lazy_series', 'LazyPowerSeries')
 lazy_import('sage.rings.power_series_ring_element', 'PowerSeries')
 
-class DrinfeldModularFormsRing(Parent):
+class DrinfeldModularFormsRing(Parent, UniqueRepresentation):
     r"""
     Base class for the graded Drinfeld modular forms ring.
     """
@@ -152,19 +164,27 @@ class DrinfeldModularFormsRing(Parent):
     Element = DrinfeldModularFormsRingElement
 
     def __init__(self, base_ring, rank=2, group=1, names='g'):
-
         if group != 1:
             raise NotImplementedError("the ring of Drinfeld modular forms is only implemented for the full group")
-
-        # if not isinstance(base_ring, PolynomialRing):
-        #     raise ValueError
-
+        if not isinstance(names, str):
+            raise TypeError("names must be a string")
+        if len(names) == 1:
+            n = names
+            names += "1, "
+            for i in range(2, rank, 1):
+                names += n + str(i) + ", "
+            names += n + str(rank)
+        else:
+            if len(names.split()) != rank:
+                raise ValueError("the rank does not corresponds to "
+                                    " the number of generators")
         self._rank = rank
         self._base_ring = base_ring
         q = base_ring.base_ring().cardinality()
         degs = [q ** i - 1 for i in range(1, rank + 1, 1)]
         self._poly_ring = PolynomialRing(base_ring, rank, names=names,
                                          order=TermOrder('wdeglex', degs))
+        self._assign_names(names)
 
         Parent.__init__(self, base=base_ring, category=GradedAlgebras(base_ring))
 
@@ -198,10 +218,10 @@ class DrinfeldModularFormsRing(Parent):
             sage: M.sturm_bound(q - 1)
             1
             sage: M.from_expansion([K.one()], q - 1)
-            g0
+            g1
             sage: f = (M.1).expansion()
             sage: M.from_expansion(f, (M.1).weight())
-            g1
+            g2
         """
         if self._rank != 2:
             raise NotImplementedError
@@ -244,9 +264,9 @@ class DrinfeldModularFormsRing(Parent):
             sage: A = GF(3)['T']; K = Frac(A); T = K.gen()
             sage: M = DrinfeldModularFormsRing(K, 2)
             sage: M.0
-            g0
-            sage: M.1
             g1
+            sage: M.1
+            g2
         """
         return self(self._poly_ring.gen(n))
 
@@ -260,7 +280,7 @@ class DrinfeldModularFormsRing(Parent):
             sage: A = GF(3)['T']; K = Frac(A); T = K.gen()
             sage: M = DrinfeldModularFormsRing(K, 5)
             sage: M.gens()
-            [g0, g1, g2, g3, g4]
+            [g1, g2, g3, g4, g5]
         """
         return [self(g) for g in self._poly_ring.gens()]
 
@@ -318,7 +338,7 @@ class DrinfeldModularFormsRing(Parent):
             sage: M.one()
             1
             sage: M.one() * M.0
-            g0
+            g1
             sage: M.one().is_one()
             True
         """
@@ -336,7 +356,7 @@ class DrinfeldModularFormsRing(Parent):
             sage: M.zero()
             0
             sage: M.zero() + M.1
-            g1
+            g2
             sage: M.zero() * M.1
             0
             sage: M.zero().is_zero()
@@ -363,13 +383,13 @@ class DrinfeldModularFormsRing(Parent):
             sage: q = 3; A = GF(q)['T']; K = Frac(A);
             sage: M = DrinfeldModularFormsRing(K, 2)
             sage: M.basis_of_weight(q - 1)
-            [g0]
+            [g1]
             sage: M.basis_of_weight(q^2 - 1)
-            [g1, g0^4]
+            [g2, g1^4]
             sage: M.basis_of_weight(q^3 - 1)
-            [g0*g1^3, g0^5*g1^2, g0^9*g1, g0^13]
+            [g1*g2^3, g1^5*g2^2, g1^9*g2, g1^13]
             sage: M.basis_of_weight(19*(q-1))
-            [g0^3*g1^4, g0^7*g1^3, g0^11*g1^2, g0^15*g1, g0^19]
+            [g1^3*g2^4, g1^7*g2^3, g1^11*g2^2, g1^15*g2, g1^19]
         """
         return [self(mon) for mon in self._poly_ring.monomials_of_degree(k)]
 
@@ -405,11 +425,11 @@ class DrinfeldModularFormsRing(Parent):
             sage: A = GF(q)['T']; K = Frac(A)
             sage: M = DrinfeldModularFormsRing(K, 2)
             sage: M.petrov_expansion((q + 1)*(q - 1), q - 1)
-            g1
+            g2
             sage: M.petrov_expansion((q^2 + 1)*(q - 1), q - 1)
-            g0^6*g1
+            g1^6*g2
             sage: M.petrov_expansion((q^3 + 1)*(q - 1), q - 1)
-            g0^24*g1 + (T^27 - T^9)*g0^12*g1^4 + (T^54 + T^36 + T^18)*g1^7
+            g1^24*g2 + (T^27 - T^9)*g1^12*g2^4 + (T^54 + T^36 + T^18)*g2^7
         """
         if self._rank != 2:
             raise NotImplementedError("A-expansions are only known in rank 2 for the moment")
@@ -463,7 +483,7 @@ class DrinfeldModularFormsRing(Parent):
         Return the Drinfeld Eisenstein series of weight `k`.
 
         The method is currently only implemented for rank 2 and when `k` is of
-        of the form `q^v - 1`. If `k = 0`, the method returns 0.
+        of the form `q^i - 1`. If `k = 0`, the method returns 0.
 
         EXAMPLES::
 
@@ -474,11 +494,11 @@ class DrinfeldModularFormsRing(Parent):
             sage: M.eisenstein_series(0)
             0
             sage: M.eisenstein_series(q - 1)
-            g0
+            g1
             sage: M.eisenstein_series(q^2 - 1)
-            g0^4
+            g1^4
             sage: M.eisenstein_series(q^3 - 1)
-            g0^13 + (-T^9 + T)*g0*g1^3
+            g1^13 + (-T^9 + T)*g1*g2^3
         """
         if self._rank != 2:
             raise NotImplementedError
@@ -491,7 +511,7 @@ class DrinfeldModularFormsRing(Parent):
         if k == 0:
             return self.zero()
         if not (k + 1).is_power_of(q):
-            raise NotImplementedError("only implemented when k is of the form q^v - 1")
+            raise NotImplementedError("only implemented when k is of the form q^i - 1")
         k = (k + 1).log(q)
         if k == 1:
             return self.gen(0)

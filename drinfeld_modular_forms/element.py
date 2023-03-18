@@ -9,8 +9,9 @@ EXAMPLES::
     sage: A = GF(q)['T']
     sage: K.<T> = Frac(A)
     sage: M = DrinfeldModularFormsRing(K, 2)  # rank 2
-    sage: g0, g1 = M.gens()
-    sage: g0.parent()
+    sage: M.inject_variables()
+    Defining g1, g2
+    sage: g1.parent()
     Ring of Drinfeld modular forms of rank 2 over Fraction Field of Univariate Polynomial Ring in T over Finite Field of size 3
 
 AUTHORS:
@@ -47,15 +48,13 @@ class DrinfeldModularFormsRingElement(ModuleElement):
         sage: from drinfeld_modular_forms import DrinfeldModularFormsRing
         sage: A = GF(3)['T']; K = Frac(A); T = K.gen()
         sage: M = DrinfeldModularFormsRing(K, 2)
-        sage: M.0
-        g0
-        sage: M.1
-        g1
-        sage: (T^2 + 1)*(M.0 + M.0 * M.1)
-        (T^2 + 1)*g0*g1 + (T^2 + 1)*g0
-        sage: (M.0).parent()
+        sage: M.inject_variables()
+        Defining g1, g2
+        sage: (T^2 + 1)*(g1 + g1*g2)
+        (T^2 + 1)*g1*g2 + (T^2 + 1)*g1
+        sage: (g1).parent()
         Ring of Drinfeld modular forms of rank 2 over Fraction Field of Univariate Polynomial Ring in T over Finite Field of size 3
-        sage: M.1 in M
+        sage: g2 in M
         True
     """
     def __init__(self, parent, polynomial):
@@ -74,9 +73,9 @@ class DrinfeldModularFormsRingElement(ModuleElement):
             sage: A = GF(3)['T']; K = Frac(A)
             sage: M = DrinfeldModularFormsRing(K, 2)
             sage: (M.0)._repr_()
-            'g0'
+            'g1'
             sage: M.0 + M.1
-            g1 + g0
+            g2 + g1
         """
         return str(self.polynomial)
 
@@ -90,7 +89,7 @@ class DrinfeldModularFormsRingElement(ModuleElement):
             sage: A = GF(3)['T']; K = Frac(A)
             sage: M = DrinfeldModularFormsRing(K, 2)
             sage: M.0 + M.1  # indirect doctest
-            g1 + g0
+            g2 + g1
         """
         return self.__class__(self.parent(), self.polynomial + other.polynomial)
 
@@ -104,11 +103,11 @@ class DrinfeldModularFormsRingElement(ModuleElement):
             sage: A = GF(3)['T']; K = Frac(A)
             sage: M = DrinfeldModularFormsRing(K, 2)
             sage: M.0*M.1  # indirect doctest
-            g0*g1
+            g1*g2
             sage: M.0*(M.0 + M.1)
-            g0*g1 + g0^2
+            g1*g2 + g1^2
             sage: (M.0 + M.1)*M.0
-            g0*g1 + g0^2
+            g1*g2 + g1^2
         """
         return self.__class__(self.parent(), self.polynomial * other.polynomial)
 
@@ -122,9 +121,9 @@ class DrinfeldModularFormsRingElement(ModuleElement):
             sage: A = GF(3)['T']; K = Frac(A); T = K.gen()
             sage: M = DrinfeldModularFormsRing(K, 2)
             sage: (T^2 + T + 2) * M.0  # indirect doctest
-            (T^2 + T - 1)*g0
+            (T^2 + T - 1)*g1
             sage: M.1 * (T^5 + T^2)
-            (T^5 + T^2)*g1
+            (T^5 + T^2)*g2
             sage: 0 * M.1
             0
             sage: M.0 * 0
@@ -142,7 +141,7 @@ class DrinfeldModularFormsRingElement(ModuleElement):
             sage: A = GF(3)['T']; K = Frac(A)
             sage: M = DrinfeldModularFormsRing(K, 2)
             sage: -M.0  # indirect doctest
-            -g0
+            -g1
         """
         return self.__class__(self.parent(), -self.polynomial)
 
@@ -191,12 +190,13 @@ class DrinfeldModularFormsRingElement(ModuleElement):
             sage: from drinfeld_modular_forms import DrinfeldModularFormsRing
             sage: A = GF(3)['T']; K = Frac(A)
             sage: M = DrinfeldModularFormsRing(K, 2)
-            sage: g0, g1 = M.gens()
-            sage: g0[2]
+            sage: M.inject_variables()
+            Defining g1, g2
+            sage: g1[2]
             2*T^3 + T
-            sage: g0[0:16]
+            sage: g1[0:16]
             [1, 0, 2*T^3 + T, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2*T^3 + T, 0]
-            sage: g1[24]
+            sage: g2[24]
             T^9 + 2*T^3
         """
         if self.parent()._rank != 2:
@@ -275,11 +275,12 @@ class DrinfeldModularFormsRingElement(ModuleElement):
             sage: from drinfeld_modular_forms import DrinfeldModularFormsRing
             sage: A = GF(3)['T']; K = Frac(A)
             sage: M = DrinfeldModularFormsRing(K, 2)
-            sage: g0, g1 = M.gens()
-            sage: f = g0^5*g1^2  # homogeneous polynomial
+            sage: M.inject_variables()
+            Defining g1, g2
+            sage: f = g1^5*g2^2  # homogeneous polynomial
             sage: f.is_drinfeld_modular_form()
             True
-            sage: g = g0 + g1  # mixed weight components
+            sage: g = g1 + g2  # mixed weight components
             sage: g.is_drinfeld_modular_form()
             False
         """
@@ -296,12 +297,13 @@ class DrinfeldModularFormsRingElement(ModuleElement):
             sage: from drinfeld_modular_forms import DrinfeldModularFormsRing
             sage: A = GF(3)['T']; K = Frac(A)
             sage: M = DrinfeldModularFormsRing(K, 2)
-            sage: g0, g1 = M.gens()
-            sage: g0.expansion()
-            1 + ((2*T^3+T)*t^2) + O(t^7)
+            sage: M.inject_variables()
+            Defining g1, g2
             sage: g1.expansion()
+            1 + ((2*T^3+T)*t^2) + O(t^7)
+            sage: g2.expansion()
             t^2 + 2*t^6 + O(t^8)
-            sage: F = (g0 + g1)*g0
+            sage: F = (g1 + g2)*g1
             sage: F.expansion()
             1 + ((T^3+2*T+1)*t^2) + ((T^6+T^4+2*T^3+T^2+T)*t^4) + 2*t^6 + O(t^7)
         """
@@ -336,18 +338,19 @@ class DrinfeldModularFormsRingElement(ModuleElement):
             sage: from drinfeld_modular_forms import DrinfeldModularFormsRing
             sage: A = GF(3)['T']; K = Frac(A)
             sage: M = DrinfeldModularFormsRing(K, 2)
-            sage: g0, g1 = M.gens()
-            sage: g0.weight()
-            2
+            sage: M.inject_variables()
+            Defining g1, g2
             sage: g1.weight()
+            2
+            sage: g2.weight()
             8
-            sage: f = g0^5*g1^2
+            sage: f = g1^5*g2^2
             sage: f.weight()
             26
 
         If the form is not modular, then the method returns an error::
 
-            sage: f = g0 + g1
+            sage: f = g1 + g2
             sage: f.weight()
             Traceback (most recent call last):
             ...
