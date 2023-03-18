@@ -210,6 +210,9 @@ class DrinfeldModularFormsRing(Parent, UniqueRepresentation):
 
         Parent.__init__(self, base=base_ring, category=GradedAlgebras(base_ring))
 
+    def _an_element_(self):
+        return self.element_class(self, self._poly_ring.an_element())
+
     def _repr_(self):
         r"""
         Return the string representation of self.
@@ -326,9 +329,6 @@ class DrinfeldModularFormsRing(Parent, UniqueRepresentation):
         r"""
         Return the element corresponding to the given polynomial.
         """
-        pol_ring = polynomial.parent()
-        if pol_ring != self._poly_ring:
-            raise ValueError("cannot convert the given polynomial")
         return self.element_class(self, polynomial)
 
     def rank(self):

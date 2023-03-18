@@ -66,6 +66,8 @@ from sage.misc.lazy_import import lazy_import
 from sage.structure.element import ModuleElement
 from sage.structure.richcmp import richcmp, op_NE, op_EQ
 
+from sage.rings.polynomial.multi_polynomial import MPolynomial
+
 from .expansions import compute_delta_rank_2, compute_eisentein_serie_rank_2
 
 lazy_import('sage.rings.lazy_series_ring', 'LazyPowerSeriesRing')
@@ -89,8 +91,13 @@ class DrinfeldModularFormsRingElement(ModuleElement):
         True
     """
     def __init__(self, parent, polynomial):
-        # TODO: add checks
-        self._polynomial = polynomial
+        if not isinstance(polynomial, MPolynomial):
+            raise TypeError("input must be a multivariate polynomial")
+        if not parent.base_ring().has_coerce_map_from(polynomial.base_ring()):
+            raise ValueError("unable to coerce base ring of the given "
+                             "polynomial into Drinfeld modular form ring")
+        poly = parent._poly_ring(polynomial)
+        self._polynomial = poly
 
         ModuleElement.__init__(self, parent)
 
