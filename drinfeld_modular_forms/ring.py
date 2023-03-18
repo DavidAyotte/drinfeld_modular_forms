@@ -167,6 +167,18 @@ class DrinfeldModularFormsRing(Parent, UniqueRepresentation):
     - ``names`` (string, default: ``'g'``) -- a single character or a
       comma seperated string of character representing the names of the
       generators
+
+    TESTS::
+
+        sage: from drinfeld_modular_forms import DrinfeldModularFormsRing
+        sage: K = Frac(GF(3)['T'])
+        sage: TestSuite(DrinfeldModularFormsRing(K)).run()
+        sage: TestSuite(DrinfeldModularFormsRing(K, 3)).run()
+        sage: TestSuite(DrinfeldModularFormsRing(K, 4)).run()
+        sage: K = Frac(GF(7)['T'])
+        sage: TestSuite(DrinfeldModularFormsRing(K)).run()
+        sage: TestSuite(DrinfeldModularFormsRing(K, 3)).run()
+        sage: TestSuite(DrinfeldModularFormsRing(K, 4)).run()
     """
 
     Element = DrinfeldModularFormsRingElement
@@ -177,7 +189,7 @@ class DrinfeldModularFormsRing(Parent, UniqueRepresentation):
                                       "forms is only implemented for "
                                       "the full group")
         if not isinstance(names, str):
-            raise TypeError("names must be a string")
+            raise TypeError("names must be string type")
         if len(names) == 1:
             n = names
             names += "1, "
