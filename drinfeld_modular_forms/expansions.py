@@ -82,7 +82,7 @@ def inverse_cyclotomic_polynomial(a, name='X'):
     Return the polynomial `f_a(X) = \rho_a(X^{-1}) X^{q^{\mathrm{deg}(a)}}`
     where `\rho_a` is the Carlitz module.
 
-    This function is used in :func:`.ta`
+    This function is used in :func:`.parameter_at_infinity`
 
     EXAMPLES::
 
@@ -107,28 +107,30 @@ def inverse_cyclotomic_polynomial(a, name='X'):
     N = q ** a.degree()
     return act.subs(X ** (-1)) * X ** N
 
-def ta(a, name='t'):
+def parameter_at_infinity(a, name='t'):
     r"""
     Return the function `t(aw)` as a power series in `t`.
 
     INPUT:
 
-    - ``a`` -- univariate polynomial over a finite field
-    - ``prec`` (Integer, default: 10) -- the precision for the power series ring
-    - ``name`` (Str, default: 't') -- the name of the power series ring generator
+    - ``a`` (polynomial or NoneType, default: ``None``) -- univariate
+      polynomial over a finite field. If this option is ``None`` then
+      returns the expansion
+    - ``name`` (Str, default: 't') -- the name of the lazy power series
+      ring generator
 
     EXAMPLES::
 
-        sage: from drinfeld_modular_forms import ta
+        sage: from drinfeld_modular_forms import parameter_at_infinity
         sage: A.<T> = GF(3)['T']
-        sage: ta(A.one())
+        sage: parameter_at_infinity(A.one())
         t
-        sage: ta(T)
+        sage: parameter_at_infinity(T)
         t^3 + 2*T*t^5 + T^2*t^7 + 2*T^3*t^9 + O(t^10)
-        sage: ta(T^2)
+        sage: parameter_at_infinity(T^2)
         t^9 + ((2*T^3+2*T)*t^15) + O(t^16)
     """
-    if not a:
+    if a.is_zero():
         return ValueError("the polynomial must be non-zero")
     A = a.parent()
     q = A.base_ring().cardinality()
@@ -188,7 +190,7 @@ def coefficient_petrov_expansion(k, n, i, polynomial_ring):
         s = polynomial_ring.zero()
         if i >= (q**d + 1)*m:
             for a in polynomial_ring.monics(of_degree=d):
-                G_ta = n_th_goss_pol.subs({n_th_goss_pol.parent().gen(): ta(a)})
+                G_ta = n_th_goss_pol.subs({n_th_goss_pol.parent().gen(): parameter_at_infinity(a)})
                 dn = G_ta[i]
                 s += a**(k - n)*dn
         part2 += s
