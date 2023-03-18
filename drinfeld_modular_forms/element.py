@@ -295,6 +295,29 @@ class DrinfeldModularFormsRingElement(ModuleElement):
         """
         return self._polynomial.is_homogeneous()
 
+    def homogeneous_components(self):
+        r"""
+        Return the homogeneous components of this graded Drinfeld
+        modular form.
+
+        EXAMPLES::
+
+            sage: from drinfeld_modular_forms import DrinfeldModularFormsRing
+            sage: A = GF(3)['T']; K = Frac(A)
+            sage: M = DrinfeldModularFormsRing(K, 2)
+            sage: M.inject_variables()
+            Defining g1, g2
+            sage: F = g1 + g1^2 + g1*g2^2 + g2^4
+            sage: D = F.homogeneous_components(); D
+            {2: g1, 4: g1^2, 18: g1*g2^2, 32: g2^4}
+            sage: D[32]
+            g2^4
+        """
+        elt_class = self.__class__
+        M = self.parent()
+        components = self._polynomial.homogeneous_components().items()
+        return {k: elt_class(M, p) for k, p in components}
+
     def expansion(self, name='t'):
         r"""
         Return the expansion at infinity of the graded Drinfeld form.
