@@ -68,7 +68,7 @@ from sage.structure.richcmp import richcmp, op_NE, op_EQ
 
 from sage.rings.polynomial.multi_polynomial import MPolynomial
 
-from .expansions import compute_delta_rank_2, compute_eisentein_serie_rank_2
+from .expansions import compute_delta_rank_2, compute_eisentein_series_rank_2
 
 lazy_import('sage.rings.lazy_series_ring', 'LazyPowerSeriesRing')
 
@@ -382,10 +382,10 @@ class DrinfeldModularFormsRingElement(ModuleElement):
             D = compute_delta_rank_2(A, name)
             E = D.parent().one()
         elif degs[0] and not degs[1]:
-            E = compute_eisentein_serie_rank_2(A, name)
+            E = compute_eisentein_series_rank_2(A, name)
             D = E.parent().one()
         elif degs[0] and degs[1]:
-            E = compute_eisentein_serie_rank_2(A, name)
+            E = compute_eisentein_series_rank_2(A, name)
             D = compute_delta_rank_2(A, name)
         else:
             return L(self._polynomial)
