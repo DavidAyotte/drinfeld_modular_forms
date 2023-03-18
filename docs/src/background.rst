@@ -136,7 +136,7 @@ expansion
     E_k(w) = \tilde{\pi}^k\delta_k
     - \tilde{\pi}^k \sum_{\substack{a\in A \\a\text{ monic}}} G_k(t(aw))
 
-where \tilde{\pi} is the Carlitz period (analogue of `\pi`) and `G_k` is
+where `\tilde{\pi}` is the Carlitz period (analogue of `\pi`) and `G_k` is
 the `k`-th Goss polynomial and `\delta_k \in K` is some constant
 depending on `k`. See section 6 of [Gek1988]_ for the proof of this
 fact. We will denote by

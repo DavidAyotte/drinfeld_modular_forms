@@ -13,10 +13,6 @@ The implementation is based on the following identification:
 
 where `g_i` the `i`-th coefficient form of weight `q^{i} - 1`.
 
-.. RUBRIC:: Examples of computations
-
-In this package, the generators of the ring are the coefficients forms:
-
 EXAMPLES::
 
     sage: from drinfeld_modular_forms import DrinfeldModularFormsRing
@@ -159,13 +155,27 @@ lazy_import('sage.rings.power_series_ring_element', 'PowerSeries')
 class DrinfeldModularFormsRing(Parent, UniqueRepresentation):
     r"""
     Base class for the graded Drinfeld modular forms ring.
+
+    INPUT:
+
+    - ``base_ring`` -- The fraction field of a univariate polynomial
+      ring over `\mathbb{F}_q`.
+    - ``rank`` (integer, default: 2) -- the rank of the ring
+    - ``group`` (NoneType) -- the group of self. The current
+      implementation only supports the full group
+      `\mathh{GL}_r(A)`.
+    - ``names`` (string, default: ``'g'``) -- a single character or a
+      comma seperated string of character representing the names of the
+      generators
     """
 
     Element = DrinfeldModularFormsRingElement
 
-    def __init__(self, base_ring, rank=2, group=1, names='g'):
-        if group != 1:
-            raise NotImplementedError("the ring of Drinfeld modular forms is only implemented for the full group")
+    def __init__(self, base_ring, rank=2, group=None, names='g'):
+        if group is not None:
+            raise NotImplementedError("the ring of Drinfeld modular "
+                                      "forms is only implemented for "
+                                      "the full group")
         if not isinstance(names, str):
             raise TypeError("names must be a string")
         if len(names) == 1:
