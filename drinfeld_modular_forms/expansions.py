@@ -1,5 +1,36 @@
-"""
-Function for computing the A-expansion as defined by Petrov
+r"""
+Functions for computing the Petrov expansion.
+
+The *Petrov expansion* or the `A`-*expansion* is defined by
+
+.. MATH::
+
+    f_{k, n}(z) :=
+    \sum_{\substack{a\in \mathbb{F}_q[T] \\ a\text{ monic}}}
+    a^{k - n}G_n(t(az))
+
+where `G_n(X)` is the `n`-th Goss polynomial for the Carlitz module and
+`t(az) = e(az)^{-1}` (`e` the exponential of the Carlitz module).
+Petrov showed that, given some conditions on `k` and `n`, then this
+expansion defines a Drinfeld modular form of rank `2` and weight `k`.
+This module implements functions that computes this expansion and some
+of its special cases.
+
+We note that the expansions that are computed here are *lazy* power
+series. In SageMath, a lazy power series is a power series such that its
+coefficients are computed on demands. In particular, this means that we
+don't need to input any precision.
+
+EXAMPLES::
+
+    sage: from drinfeld_modular_forms import compute_petrov_expansion
+    sage: A = GF(3)['T']
+    sage: D = compute_petrov_expansion(3+1, 1, A); D
+    t + t^5 + ((2*T^3+T)*t^7) + O(t^8)
+    sage: D[59]  # 59-th coefficient
+    2*T^27 + T^9 + T^3 + 2*T
+    sage: D[0:10]  # first 10 coefficients
+    [0, 1, 0, 0, 0, 1, 0, 2*T^3 + T, 0, 1]
 
 AUTHORS:
 
@@ -58,7 +89,7 @@ def inverse_cyclotomic_polynomial(a, name='X'):
 
 def ta(a, name='t'):
     r"""
-    Return the function `t(az)` as a power series in `t`.
+    Return the function `t(aw)` as a power series in `t`.
 
     INPUT:
 
@@ -87,19 +118,10 @@ def ta(a, name='t'):
     u = R.gen()
     return u**(q**d)*fpol.inverse_of_unit()
 
-def coefficient_A_expansion(k, n, i, polynomial_ring):
+def coefficient_petrov_expansion(k, n, i, polynomial_ring):
     r"""
-    Return the `i`-th coefficient of the `t`-expansion for the form
+    Return the `i`-th coefficient of the expansion for the form
     `f_{k, n}`.
-
-    We recall that the form `f_{k, n}` is defined by
-
-    .. MATH::
-
-        f_{k, n}(z) := \sum_{\substack{a\in \mathbb{F}_q[T] \\ a\text{ monic}}} a^{k - i}G_n(t(az))
-
-    where `G_n(X)` is the `n`-th Goss polynomial for the Carlitz module and
-    `t(az) = e(az)^{-1}` (`e` the exponential of the Carlitz module).
 
     INPUT:
 
@@ -111,15 +133,15 @@ def coefficient_A_expansion(k, n, i, polynomial_ring):
 
     EXAMPLES::
 
-        sage: from drinfeld_modular_forms import coefficient_A_expansion
+        sage: from drinfeld_modular_forms import coefficient_petrov_expansion
         sage: A = GF(3)['T']
-        sage: coefficient_A_expansion(3+1, 1, 1, A)
+        sage: coefficient_petrov_expansion(3+1, 1, 1, A)
         1
-        sage: coefficient_A_expansion(3+1, 1, 0, A)
+        sage: coefficient_petrov_expansion(3+1, 1, 0, A)
         0
-        sage: coefficient_A_expansion(3+1, 1, 1, A)
+        sage: coefficient_petrov_expansion(3+1, 1, 1, A)
         1
-        sage: coefficient_A_expansion(3+1, 1, 7, A)
+        sage: coefficient_petrov_expansion(3+1, 1, 7, A)
         2*T^3 + T
     """
     if i not in ZZ:
@@ -153,13 +175,9 @@ def coefficient_A_expansion(k, n, i, polynomial_ring):
     return part1 + part2
 
 @cache
-def compute_A_expansion(k, n, polynomial_ring, name='t'):
+def compute_petrov_expansion(k, n, polynomial_ring, name='t'):
     r"""
     Return the `A`-expansion of the form `f_{k, n}` as a lazy power series.
-
-    In SageMath, a lazy power series is a power series such that its
-    coefficients are computed on demands. In particular, this means that we
-    don't need to input any precision.
 
     INPUT:
 
@@ -172,9 +190,9 @@ def compute_A_expansion(k, n, polynomial_ring, name='t'):
 
     EXAMPLES::
 
-        sage: from drinfeld_modular_forms import compute_A_expansion
+        sage: from drinfeld_modular_forms import compute_petrov_expansion
         sage: A = GF(3)['T']
-        sage: D = compute_A_expansion(3+1, 1, A); D
+        sage: D = compute_petrov_expansion(3+1, 1, A); D
         t + t^5 + ((2*T^3+T)*t^7) + O(t^8)
 
     To obtain more coefficient, one just need to take slices the series::
@@ -186,25 +204,36 @@ def compute_A_expansion(k, n, polynomial_ring, name='t'):
         sage: D[59]  # 59-th coefficient
         2*T^27 + T^9 + T^3 + 2*T
     """
-    f = lambda i: coefficient_A_expansion(k, n, i, polynomial_ring)
+    f = lambda i: coefficient_petrov_expansion(k, n, i, polynomial_ring)
     R = LazyPowerSeriesRing(polynomial_ring.fraction_field(), name)
     return R(f, valuation=1)
 
 def compute_delta_rank_2(polynomial_ring, name='t'):
     r"""
-    Return the `t`-expansion of the normalized Drinfeld modular discriminant of
+    Return the expansion of the normalized Drinfeld modular discriminant of
     rank 2.
 
-    Recall that for `z\in \Omega^2(\mathbb{C}_{\infty})` the *Drinfeld modular
+    Recall that for `w\in \Omega^2(\mathbb{C}_{\infty})` the *Drinfeld modular
     discriminant* is the leading coefficient of the Drinfeld module
 
     .. MATH::
 
-        \phi_{z} : T \mapsto T + g(z)\tau + \Delta(z)\tau^2
+        \phi_{w} : T \mapsto T + g(z)\tau + \Delta(w)\tau^2
 
-    corresponding to the lattice `\Lambda_z := zA + A`. The *normalized*
-    discriminant is the the form `\Delta_0(z)` such that its first nonzero
+    corresponding to the lattice `\Lambda_w := wA + A`. The *normalized*
+    discriminant is the form `\Delta_0(w)` such that its first nonzero
     coefficient is 1.
+
+    INPUT:
+
+    - ``polynomial_ring`` -- a univariate polynomial ring over a finite field.
+    - ``name`` -- string (default: 't').
+
+    OUTPUT: a lazy power series over the base ring.
+
+    .. NOTE::
+
+        We have `\Delta_0(w) = f_{q^2 - 1, q - 1}`.
 
     EXAMPLES::
 
@@ -218,23 +247,31 @@ def compute_delta_rank_2(polynomial_ring, name='t'):
         2*T^27 + 2*T^3 + 2*T
     """
     q = polynomial_ring.base_ring().cardinality()
-    return compute_A_expansion(q**2 - 1, q - 1, polynomial_ring, name)
+    return compute_petrov_expansion(q**2 - 1, q - 1, polynomial_ring, name)
 
 def compute_eisentein_serie_rank_2(polynomial_ring, name='t'):
     r"""
-    Return the `t`-expansion fo the normalized Drinfeld Eisenstein series of
+    Return the expansion fo the normalized Drinfeld Eisenstein series of
     weight `q-1`.
 
     Recall that this form is defined by:
 
     .. MATH::
 
-        E_{q-1}(z) := \frac{T^q - T}{\tilde{\pi}^{q-1}} \sum_{(c, d)\in A^2\setminus 0} \frac{1}{(cz + d)^{q-1}}.
+        E_{q-1}(w) := \frac{T^q - T}{\tilde{\pi}^{q-1}} \sum_{(c, d)\in A^2\setminus 0} \frac{1}{(cw + d)^{q-1}}.
+
+    where `\tilde{\pi}` is the Carlitz period.
 
     INPUT:
 
     - ``polynomial_ring`` -- a univariate polynomial ring over a finite field.
     - ``name`` -- string (default: 't').
+
+    OUTPUT: a lazy power series over the base ring.
+
+    .. NOTE::
+
+        We have `E_{q-1} = 1 - (T^q - T)f_{q - 1, q - 1}`.
 
     EXAMPLES::
 
@@ -249,4 +286,4 @@ def compute_eisentein_serie_rank_2(polynomial_ring, name='t'):
     q = polynomial_ring.base_ring().cardinality()
     K = polynomial_ring.fraction_field()
     b = K(T**q - T)
-    return K.one() - b*compute_A_expansion(q - 1, q - 1, polynomial_ring, name)
+    return K.one() - b*compute_petrov_expansion(q - 1, q - 1, polynomial_ring, name)

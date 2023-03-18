@@ -1,3 +1,38 @@
+r"""
+Elements of Drinfeld modular forms rings
+
+The module defines the element of the class
+:class:`~drinfeld_modular_forms.ring.DrinfeldModularFormsRing` from the
+module :mod:`~drinfeld_modular_forms.ring`. See the aforementioned
+module for definitions.
+
+EXAMPLES::
+
+    sage: from drinfeld_modular_forms import DrinfeldModularFormsRing
+    sage: q = 3
+    sage: A = GF(q)['T']
+    sage: K.<T> = Frac(A)
+    sage: M = DrinfeldModularFormsRing(K, 2)  # rank 2
+    sage: g0, g1 = M.gens()
+    sage: g0.parent()
+    Ring of Drinfeld modular forms of rank 2 over Fraction Field of Univariate Polynomial Ring in T over Finite Field of size 3
+
+AUTHORS:
+
+- David Ayotte (2022): initial version
+"""
+
+# ****************************************************************************
+#       Copyright (C) 2022 DAVID AYOTTE <davidayotte94@outlook.com>
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#                  https://www.gnu.org/licenses/
+# ****************************************************************************
+
+
 from sage.misc.lazy_import import lazy_import
 
 from sage.structure.element import ModuleElement
@@ -28,6 +63,7 @@ class DrinfeldModularFormsRingElement(ModuleElement):
         True
     """
     def __init__(self, parent, polynomial):
+        # TODO: add checks
         self.polynomial = polynomial
 
         ModuleElement.__init__(self, parent)
@@ -168,7 +204,7 @@ class DrinfeldModularFormsRingElement(ModuleElement):
             T^9 + 2*T^3
         """
         if self.parent()._rank != 2:
-            raise NotImplementedError("expansion not implement for ranks different from 2")
+            raise NotImplementedError("expansion only implemented in rank 2")
         return self.expansion()[n]
 
     coefficient = __getitem__  # alias
@@ -255,7 +291,9 @@ class DrinfeldModularFormsRingElement(ModuleElement):
 
     def expansion(self, name='t'):
         r"""
-        Return the `t`-expansion of the graded Drinfeld form.
+        Return the expansion at infinity of the graded Drinfeld form.
+
+        OUTPUT: a lazy power series over the base ring.
 
         EXAMPLES::
 

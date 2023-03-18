@@ -1,12 +1,15 @@
 r"""
 Base class for Drinfeld modules over `\mathbb{F}_q[T]`
 
+Drinfeld modules are currently being implemented in SageMath. See the
+following Pull Request: https://github.com/sagemath/sage/pull/35026.
+
+You should not import from this module as it will be deprecated in the
+future.
+
 AUTHORS:
 
 - David Ayotte (2021): initial version
-
-NOTE: Drinfeld modules are currently being implemented in SageMath. See
-https://github.com/sagemath/sage/pull/35026. Do not import from this file.
 """
 
 # ****************************************************************************

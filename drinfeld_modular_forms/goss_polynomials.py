@@ -1,4 +1,4 @@
-"""
+r"""
 Goss polynomials for the Carlitz module
 
 AUTHORS:

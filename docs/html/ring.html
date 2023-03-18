@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Elements of Drinfeld modular forms rings" href="element.html" /><link rel="prev" title="Drinfeld Modular Forms" href="index.html" />
 
     <meta name="generator" content="sphinx-5.2.3, furo 2022.09.29"/>
-        <title>Ring of Drinfeld modular forms - Drinfeld modular forms 0.1 documentation</title>
+        <title>Ring of Drinfeld modular forms - Drinfeld modular forms 0.0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=d81277517bee4d6b0349d71bb2661d4890b5617c" />
     <link rel="stylesheet" type="text/css" href="_static/plot_directive.css" />
@@ -124,7 +124,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand">Drinfeld modular forms 0.1 documentation</div></a>
+      <a href="index.html"><div class="brand">Drinfeld modular forms 0.0.1 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -147,7 +147,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
   
   
-  <span class="sidebar-brand-text">Drinfeld modular forms 0.1 documentation</span>
+  <span class="sidebar-brand-text">Drinfeld modular forms 0.0.1 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="search.html" role="search">
   <input class="sidebar-search" placeholder=Search name="q" aria-label="Search">
@@ -197,6 +197,143 @@
         <article role="main">
           <section id="module-drinfeld_modular_forms.ring">
 <span id="ring-of-drinfeld-modular-forms"></span><h1>Ring of Drinfeld modular forms<a class="headerlink" href="#module-drinfeld_modular_forms.ring" title="Permalink to this heading">#</a></h1>
+<p>This module defines a class named <a class="reference internal" href="#drinfeld_modular_forms.ring.DrinfeldModularFormsRing" title="drinfeld_modular_forms.ring.DrinfeldModularFormsRing"><code class="xref py py-class docutils literal notranslate"><span class="pre">DrinfeldModularFormsRing</span></code></a>.</p>
+<p>Currently, the implementation only supports the full group modular group
+<span class="math notranslate nohighlight">\(\mathrm{GL}_r(A)\)</span> where <span class="math notranslate nohighlight">\(A = \mathbb{F}_q[T]\)</span>.</p>
+<p class="rubric">Background material</p>
+<p>We let <span class="math notranslate nohighlight">\(K := \mathbb{F}_q(T)\)</span> and <span class="math notranslate nohighlight">\(K_{\infty} := \mathbb{F}_q((1/T))\)</span>.
+We define <span class="math notranslate nohighlight">\(\mathbb{C}_{\infty}\)</span> to be the completion of an algebraic
+closure of <span class="math notranslate nohighlight">\(K_{\infty}\)</span>. The Drinfeld period domain of rank <span class="math notranslate nohighlight">\(r &gt; 1\)</span> is
+defined to be</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\Omega^r(\mathbb{C}_{\infty}) :=
+\mathbb{P}^{r-1}(\mathbb{C}_{\infty})
+\setminus \mathbb{P}^{r-1}(K_{\infty})\]</div>
+</div>
+<p>For any <span class="math notranslate nohighlight">\(w = (w_1:\ldots: w_{r-1}:w_r)^{\mathrm{T}}\)</span> in
+<span class="math notranslate nohighlight">\(\Omega^r(\mathbb{C}_{\infty})\)</span>, we consider the following <span class="math notranslate nohighlight">\(A\)</span>-lattice
+of rank <span class="math notranslate nohighlight">\(r\)</span>:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\Lambda_w := Aw_1 \oplus \cdots \oplus Aw_{r-1} \oplus Aw_r.\]</div>
+</div>
+<p>By analytic uniformization, there exists a corresponding Drinfeld module</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\phi_w : T \mapsto T + g_0(w)\tau + \cdots
++ g_{r-2}(w)\tau^{r-1} + g_{r-1}(w)\tau^{r}\]</div>
+</div>
+<p>where <span class="math notranslate nohighlight">\(g_{r-1}(w)\)</span> never vanishes. This Drinfeld module is the universal
+Drinfeld <span class="math notranslate nohighlight">\(\mathbb{F}_q[T]\)</span>-module over <span class="math notranslate nohighlight">\(\Omega^r(\mathbb{C}_{\infty})\)</span>.
+The coefficients
+<span class="math notranslate nohighlight">\(g_i : \Omega^r(\mathbb{C}_{\infty}) \rightarrow \mathbb{C}_{\infty}\)</span>
+are rigid analytic function which satisfies a modular invariance
+properties under some action of the group <span class="math notranslate nohighlight">\(\mathrm{GL}_r(A)\)</span>. They also
+satisfies an holomorphicity property at infinity, so that they are
+<em>Drinfeld modular forms of weight</em> <span class="math notranslate nohighlight">\(q^i - 1\)</span>.</p>
+<p>One may show that the ring of all Drinfeld modular forms for
+<span class="math notranslate nohighlight">\(\mathrm{GL}_r(A)\)</span> is generated by the forms <span class="math notranslate nohighlight">\(g_i\)</span>:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[M^r(\mathrm{GL}_r(A))
+= \mathbb{C}_{\infty}[g_0, \ldots, g_{r-2}, g_{r-1}].\]</div>
+</div>
+<p class="rubric">Examples of computations</p>
+<p>In this package, the generators of the ring are the coefficients forms:</p>
+<p>EXAMPLES:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sage</span><span class="p">:</span> <span class="kn">from</span> <span class="nn">drinfeld_modular_forms</span> <span class="kn">import</span> <span class="n">DrinfeldModularFormsRing</span>
+<span class="n">sage</span><span class="p">:</span> <span class="n">q</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">sage</span><span class="p">:</span> <span class="n">A</span> <span class="o">=</span> <span class="n">GF</span><span class="p">(</span><span class="n">q</span><span class="p">)[</span><span class="s1">&#39;T&#39;</span><span class="p">]</span>
+<span class="n">sage</span><span class="p">:</span> <span class="n">K</span><span class="o">.&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="n">Frac</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="n">sage</span><span class="p">:</span> <span class="n">M</span> <span class="o">=</span> <span class="n">DrinfeldModularFormsRing</span><span class="p">(</span><span class="n">K</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1"># rank 2</span>
+<span class="n">sage</span><span class="p">:</span> <span class="n">M</span><span class="o">.</span><span class="n">gens</span><span class="p">()</span>  <span class="c1"># generators</span>
+<span class="p">[</span><span class="n">g0</span><span class="p">,</span> <span class="n">g1</span><span class="p">]</span>
+<span class="n">sage</span><span class="p">:</span> <span class="n">g0</span><span class="p">,</span> <span class="n">g1</span> <span class="o">=</span> <span class="n">M</span><span class="o">.</span><span class="n">gens</span><span class="p">()</span>
+<span class="n">sage</span><span class="p">:</span> <span class="n">g0</span><span class="o">.</span><span class="n">weight</span><span class="p">()</span>
+<span class="mi">2</span>
+<span class="n">sage</span><span class="p">:</span> <span class="n">g1</span><span class="o">.</span><span class="n">weight</span><span class="p">()</span>
+<span class="mi">8</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sage</span><span class="p">:</span> <span class="n">M</span> <span class="o">=</span> <span class="n">DrinfeldModularFormsRing</span><span class="p">(</span><span class="n">K</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>  <span class="c1"># rank 3</span>
+<span class="n">sage</span><span class="p">:</span> <span class="n">M</span><span class="o">.</span><span class="n">gens</span><span class="p">()</span>
+<span class="p">[</span><span class="n">g0</span><span class="p">,</span> <span class="n">g1</span><span class="p">,</span> <span class="n">g2</span><span class="p">]</span>
+<span class="n">sage</span><span class="p">:</span> <span class="p">[</span><span class="n">g</span><span class="o">.</span><span class="n">weight</span><span class="p">()</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">M</span><span class="o">.</span><span class="n">gens</span><span class="p">()]</span>  <span class="c1"># list of the weights</span>
+<span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">26</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>One can compute basis for any subspace of given weight:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sage</span><span class="p">:</span> <span class="n">M</span> <span class="o">=</span> <span class="n">DrinfeldModularFormsRing</span><span class="p">(</span><span class="n">K</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">sage</span><span class="p">:</span> <span class="n">M</span><span class="o">.</span><span class="n">basis_of_weight</span><span class="p">(</span><span class="n">q</span><span class="o">^</span><span class="mi">4</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+<span class="p">[</span><span class="n">g3</span><span class="p">,</span>
+ <span class="n">g1</span><span class="o">^</span><span class="mi">10</span><span class="p">,</span>
+ <span class="n">g0</span><span class="o">*</span><span class="n">g2</span><span class="o">^</span><span class="mi">3</span><span class="p">,</span>
+ <span class="n">g0</span><span class="o">^</span><span class="mi">2</span><span class="o">*</span><span class="n">g1</span><span class="o">^</span><span class="mi">3</span><span class="o">*</span><span class="n">g2</span><span class="o">^</span><span class="mi">2</span><span class="p">,</span>
+ <span class="n">g0</span><span class="o">^</span><span class="mi">3</span><span class="o">*</span><span class="n">g1</span><span class="o">^</span><span class="mi">6</span><span class="o">*</span><span class="n">g2</span><span class="p">,</span>
+ <span class="n">g0</span><span class="o">^</span><span class="mi">4</span><span class="o">*</span><span class="n">g1</span><span class="o">^</span><span class="mi">9</span><span class="p">,</span>
+ <span class="n">g0</span><span class="o">^</span><span class="mi">6</span><span class="o">*</span><span class="n">g1</span><span class="o">^</span><span class="mi">2</span><span class="o">*</span><span class="n">g2</span><span class="o">^</span><span class="mi">2</span><span class="p">,</span>
+ <span class="n">g0</span><span class="o">^</span><span class="mi">7</span><span class="o">*</span><span class="n">g1</span><span class="o">^</span><span class="mi">5</span><span class="o">*</span><span class="n">g2</span><span class="p">,</span>
+ <span class="n">g0</span><span class="o">^</span><span class="mi">8</span><span class="o">*</span><span class="n">g1</span><span class="o">^</span><span class="mi">8</span><span class="p">,</span>
+ <span class="n">g0</span><span class="o">^</span><span class="mi">10</span><span class="o">*</span><span class="n">g1</span><span class="o">*</span><span class="n">g2</span><span class="o">^</span><span class="mi">2</span><span class="p">,</span>
+ <span class="n">g0</span><span class="o">^</span><span class="mi">11</span><span class="o">*</span><span class="n">g1</span><span class="o">^</span><span class="mi">4</span><span class="o">*</span><span class="n">g2</span><span class="p">,</span>
+ <span class="n">g0</span><span class="o">^</span><span class="mi">12</span><span class="o">*</span><span class="n">g1</span><span class="o">^</span><span class="mi">7</span><span class="p">,</span>
+ <span class="n">g0</span><span class="o">^</span><span class="mi">14</span><span class="o">*</span><span class="n">g2</span><span class="o">^</span><span class="mi">2</span><span class="p">,</span>
+ <span class="n">g0</span><span class="o">^</span><span class="mi">15</span><span class="o">*</span><span class="n">g1</span><span class="o">^</span><span class="mi">3</span><span class="o">*</span><span class="n">g2</span><span class="p">,</span>
+ <span class="n">g0</span><span class="o">^</span><span class="mi">16</span><span class="o">*</span><span class="n">g1</span><span class="o">^</span><span class="mi">6</span><span class="p">,</span>
+ <span class="n">g0</span><span class="o">^</span><span class="mi">19</span><span class="o">*</span><span class="n">g1</span><span class="o">^</span><span class="mi">2</span><span class="o">*</span><span class="n">g2</span><span class="p">,</span>
+ <span class="n">g0</span><span class="o">^</span><span class="mi">20</span><span class="o">*</span><span class="n">g1</span><span class="o">^</span><span class="mi">5</span><span class="p">,</span>
+ <span class="n">g0</span><span class="o">^</span><span class="mi">23</span><span class="o">*</span><span class="n">g1</span><span class="o">*</span><span class="n">g2</span><span class="p">,</span>
+ <span class="n">g0</span><span class="o">^</span><span class="mi">24</span><span class="o">*</span><span class="n">g1</span><span class="o">^</span><span class="mi">4</span><span class="p">,</span>
+ <span class="n">g0</span><span class="o">^</span><span class="mi">27</span><span class="o">*</span><span class="n">g2</span><span class="p">,</span>
+ <span class="n">g0</span><span class="o">^</span><span class="mi">28</span><span class="o">*</span><span class="n">g1</span><span class="o">^</span><span class="mi">3</span><span class="p">,</span>
+ <span class="n">g0</span><span class="o">^</span><span class="mi">32</span><span class="o">*</span><span class="n">g1</span><span class="o">^</span><span class="mi">2</span><span class="p">,</span>
+ <span class="n">g0</span><span class="o">^</span><span class="mi">36</span><span class="o">*</span><span class="n">g1</span><span class="p">,</span>
+ <span class="n">g0</span><span class="o">^</span><span class="mi">40</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>We note that the elements of this ring may not be <em>modular forms</em> as
+as they may have mixed weight components:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sage</span><span class="p">:</span> <span class="n">M</span> <span class="o">=</span> <span class="n">DrinfeldModularFormsRing</span><span class="p">(</span><span class="n">K</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">sage</span><span class="p">:</span> <span class="n">g0</span><span class="p">,</span> <span class="n">g1</span><span class="p">,</span> <span class="n">g2</span><span class="p">,</span> <span class="n">g3</span> <span class="o">=</span> <span class="n">M</span><span class="o">.</span><span class="n">gens</span><span class="p">()</span>
+<span class="n">sage</span><span class="p">:</span> <span class="n">F</span> <span class="o">=</span> <span class="n">g0</span> <span class="o">+</span> <span class="n">g1</span> <span class="o">+</span> <span class="n">g2</span> <span class="o">+</span> <span class="n">g3</span>
+<span class="n">sage</span><span class="p">:</span> <span class="n">F</span><span class="o">.</span><span class="n">is_drinfeld_modular_form</span><span class="p">()</span>
+<span class="kc">False</span>
+</pre></div>
+</div>
+<p>This is why we call these elements <em>graded Drinfeld modular forms</em>.</p>
+<p class="rubric">The rank 2 case</p>
+<p>In rank 2 case, one can also compute the expansion at infinity of Drinfeld
+modular forms.</p>
+<p>EXAMPLES:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sage</span><span class="p">:</span> <span class="kn">from</span> <span class="nn">drinfeld_modular_forms</span> <span class="kn">import</span> <span class="n">DrinfeldModularFormsRing</span>
+<span class="n">sage</span><span class="p">:</span> <span class="n">q</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">sage</span><span class="p">:</span> <span class="n">A</span> <span class="o">=</span> <span class="n">GF</span><span class="p">(</span><span class="n">q</span><span class="p">)[</span><span class="s1">&#39;T&#39;</span><span class="p">]</span>
+<span class="n">sage</span><span class="p">:</span> <span class="n">K</span><span class="o">.&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="n">Frac</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="n">sage</span><span class="p">:</span> <span class="n">M</span> <span class="o">=</span> <span class="n">DrinfeldModularFormsRing</span><span class="p">(</span><span class="n">K</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1"># rank 2</span>
+<span class="n">sage</span><span class="p">:</span> <span class="n">g0</span><span class="p">,</span> <span class="n">g1</span> <span class="o">=</span> <span class="n">M</span><span class="o">.</span><span class="n">gens</span><span class="p">()</span>
+<span class="n">sage</span><span class="p">:</span> <span class="n">g0</span><span class="o">.</span><span class="n">expansion</span><span class="p">()</span>
+<span class="mi">1</span> <span class="o">+</span> <span class="p">((</span><span class="mi">2</span><span class="o">*</span><span class="n">T</span><span class="o">^</span><span class="mi">3</span><span class="o">+</span><span class="n">T</span><span class="p">)</span><span class="o">*</span><span class="n">t</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">O</span><span class="p">(</span><span class="n">t</span><span class="o">^</span><span class="mi">7</span><span class="p">)</span>
+<span class="n">sage</span><span class="p">:</span> <span class="n">g1</span><span class="o">.</span><span class="n">expansion</span><span class="p">()</span>
+<span class="n">t</span><span class="o">^</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">t</span><span class="o">^</span><span class="mi">6</span> <span class="o">+</span> <span class="n">O</span><span class="p">(</span><span class="n">t</span><span class="o">^</span><span class="mi">8</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The returned series is a lazy power series, meaning that it can compute
+any coefficient at any precision on demands:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sage</span><span class="p">:</span> <span class="n">g1</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span>
+<span class="mi">2</span>
+<span class="n">sage</span><span class="p">:</span> <span class="n">g1</span><span class="p">[</span><span class="mi">24</span><span class="p">]</span>
+<span class="n">T</span><span class="o">^</span><span class="mi">9</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">T</span><span class="o">^</span><span class="mi">3</span>
+<span class="n">sage</span><span class="p">:</span> <span class="n">g1</span><span class="p">[</span><span class="mi">36</span><span class="p">]</span>
+<span class="mi">2</span><span class="o">*</span><span class="n">T</span><span class="o">^</span><span class="mi">9</span> <span class="o">+</span> <span class="n">T</span><span class="o">^</span><span class="mi">3</span>
+<span class="n">sage</span><span class="p">:</span> <span class="n">g1</span><span class="p">[</span><span class="mi">702</span><span class="p">]</span>  <span class="c1"># long time</span>
+<span class="mi">2</span><span class="o">*</span><span class="n">T</span><span class="o">^</span><span class="mi">252</span> <span class="o">+</span> <span class="n">T</span><span class="o">^</span><span class="mi">246</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">T</span><span class="o">^</span><span class="mi">90</span> <span class="o">+</span> <span class="n">T</span><span class="o">^</span><span class="mi">84</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">T</span><span class="o">^</span><span class="mi">36</span> <span class="o">+</span> <span class="n">T</span><span class="o">^</span><span class="mi">30</span> <span class="o">+</span> <span class="n">T</span><span class="o">^</span><span class="mi">18</span> <span class="o">+</span> <span class="n">T</span><span class="o">^</span><span class="mi">12</span> <span class="o">+</span> <span class="n">T</span><span class="o">^</span><span class="mi">6</span>
+</pre></div>
+</div>
+<p>AUTHORS:</p>
+<ul class="simple">
+<li><p>David Ayotte (2022): initial version</p></li>
+</ul>
 <dl class="py class">
 <dt class="sig sig-object py" id="drinfeld_modular_forms.ring.DrinfeldModularFormsRing">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">drinfeld_modular_forms.ring.</span></span><span class="sig-name descname"><span class="pre">DrinfeldModularFormsRing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base_ring</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rank</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'g'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#drinfeld_modular_forms.ring.DrinfeldModularFormsRing" title="Permalink to this definition">#</a></dt>
@@ -288,25 +425,29 @@ of the form <span class="math notranslate nohighlight">\(q^v - 1\)</span>. If <s
 <dl class="py method">
 <dt class="sig sig-object py" id="drinfeld_modular_forms.ring.DrinfeldModularFormsRing.from_expansion">
 <span class="sig-name descname"><span class="pre">from_expansion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expansion</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#drinfeld_modular_forms.ring.DrinfeldModularFormsRing.from_expansion" title="Permalink to this definition">#</a></dt>
-<dd><p>Return the Drinfeld modular form which correspond to the given
+<dd><p>Return the Drinfeld modular form which corresponds to the given
 expansion.</p>
 <p>INPUT:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">expansion</span></code> – a lazy power series, a power series, a list or a
 tuple. The precision or the length must be at least the Sturm bound
 of the weight <span class="math notranslate nohighlight">\(k\)</span> subspace.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">k</span></code> – an integer representing the weight of the Drinfeld modular
-form.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">k</span></code> – an integer representing the weight of the expected Drinfeld
+modular form.</p></li>
 </ul>
 <p>EXAMPLES:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sage</span><span class="p">:</span> <span class="kn">from</span> <span class="nn">drinfeld_modular_forms</span> <span class="kn">import</span> <span class="n">DrinfeldModularFormsRing</span>
-<span class="n">sage</span><span class="p">:</span> <span class="n">A</span> <span class="o">=</span> <span class="n">GF</span><span class="p">(</span><span class="mi">3</span><span class="p">)[</span><span class="s1">&#39;T&#39;</span><span class="p">]</span>
-<span class="n">sage</span><span class="p">:</span> <span class="n">M</span> <span class="o">=</span> <span class="n">DrinfeldModularFormsRing</span><span class="p">(</span><span class="n">Frac</span><span class="p">(</span><span class="n">A</span><span class="p">))</span>
-<span class="n">sage</span><span class="p">:</span> <span class="n">M</span><span class="mf">.0</span>
+<span class="n">sage</span><span class="p">:</span> <span class="n">q</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">sage</span><span class="p">:</span> <span class="n">A</span> <span class="o">=</span> <span class="n">GF</span><span class="p">(</span><span class="n">q</span><span class="p">)[</span><span class="s1">&#39;T&#39;</span><span class="p">]</span>
+<span class="n">sage</span><span class="p">:</span> <span class="n">K</span><span class="o">.&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="n">Frac</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="n">sage</span><span class="p">:</span> <span class="n">M</span> <span class="o">=</span> <span class="n">DrinfeldModularFormsRing</span><span class="p">(</span><span class="n">K</span><span class="p">)</span>
+<span class="n">sage</span><span class="p">:</span> <span class="n">M</span><span class="o">.</span><span class="n">sturm_bound</span><span class="p">(</span><span class="n">q</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+<span class="mi">1</span>
+<span class="n">sage</span><span class="p">:</span> <span class="n">M</span><span class="o">.</span><span class="n">from_expansion</span><span class="p">([</span><span class="n">K</span><span class="o">.</span><span class="n">one</span><span class="p">()],</span> <span class="n">q</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
 <span class="n">g0</span>
-<span class="n">sage</span><span class="p">:</span> <span class="n">f</span> <span class="o">=</span> <span class="p">(</span><span class="n">M</span><span class="mf">.0</span><span class="p">)</span><span class="o">.</span><span class="n">expansion</span><span class="p">()</span>
-<span class="n">sage</span><span class="p">:</span> <span class="n">M</span><span class="o">.</span><span class="n">from_expansion</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="p">(</span><span class="n">M</span><span class="mf">.0</span><span class="p">)</span><span class="o">.</span><span class="n">weight</span><span class="p">())</span>
-<span class="n">g0</span>
+<span class="n">sage</span><span class="p">:</span> <span class="n">f</span> <span class="o">=</span> <span class="p">(</span><span class="n">M</span><span class="mf">.1</span><span class="p">)</span><span class="o">.</span><span class="n">expansion</span><span class="p">()</span>
+<span class="n">sage</span><span class="p">:</span> <span class="n">M</span><span class="o">.</span><span class="n">from_expansion</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="p">(</span><span class="n">M</span><span class="mf">.1</span><span class="p">)</span><span class="o">.</span><span class="n">weight</span><span class="p">())</span>
+<span class="n">g1</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -442,7 +583,7 @@ for <span class="math notranslate nohighlight">\(k\)</span> and <span class="mat
 <span class="mi">1</span>
 <span class="n">sage</span><span class="p">:</span> <span class="n">M</span><span class="o">.</span><span class="n">sturm_bound</span><span class="p">(</span><span class="n">q</span><span class="o">^</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
 <span class="mi">3</span>
-<span class="n">sage</span><span class="p">:</span> <span class="n">M</span><span class="o">.</span><span class="n">sturm_bound</span><span class="p">(</span><span class="mi">3</span><span class="o">^</span><span class="mi">9</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">sage</span><span class="p">:</span> <span class="n">M</span><span class="o">.</span><span class="n">sturm_bound</span><span class="p">(</span><span class="n">q</span><span class="o">^</span><span class="mi">9</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
 <span class="mi">4921</span>
 </pre></div>
 </div>

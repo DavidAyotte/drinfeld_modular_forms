@@ -2,7 +2,7 @@ import setuptools
 
 setuptools.setup(
     name="drinfeld_modular_forms",
-    version="0.1",
+    version="0.0.1",
     author="David Ayotte",
     author_email="davidayotte94@outlook.com",
     description="SageMath implementation of Drinfeld modular forms",
