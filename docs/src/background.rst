@@ -19,7 +19,7 @@ denote by `\tau : x\mapsto x^q` the `q`-Frobenius.
 
 .. RUBRIC:: Drinfeld period domain and group action
 
-The Drinfeld period domain of rank `r > 1` is
+The *Drinfeld period domain of rank* `r > 1` is
 defined to be
 
 .. MATH::
@@ -84,7 +84,7 @@ module. Any rigid analytic function
 `f : \Omega^r(\mathbb{C}_{\infty}) \rightarrow \mathbb{C}_{\infty}`
 that satisfies the invariance property and the expansion at infinity
 is called a Drinfeld modular form of weight `k`. The forms `g_i` are
-called the coefficients forms.
+called the *coefficients forms*.
 
 This Drinfeld module is the universal
 Drinfeld `\mathbb{F}_q[T]`-module over `\Omega^r(\mathbb{C}_{\infty})`.
@@ -94,8 +94,8 @@ are rigid analytic function which satisfies a modular invariance
 properties under some action of the group `\mathrm{GL}_r(A)`. They also
 satisfies an holomorphicity property at infinity, so that they are
 *Drinfeld modular forms of weight* `q^i - 1`. The reader is refered to
-Part I of [BRP2018]_ for more about the analytic theory of Drinfeld
-modular form.
+part I of [BRP2018]_ for more information about the analytic theory of
+Drinfeld modular form.
 
 .. RUBRIC:: Ring of Drinfeld modular form
 
@@ -119,8 +119,8 @@ part III of [BRP2018]_, we have
 
 - Drinfeld Eisenstein series
 
-For `k \equiv 0` modulo `q - 1`. The Drinfeld Eisenstein series of
-weight `k` and rank 2 is defined by
+For `k \equiv 0` modulo `q - 1`. The *Drinfeld Eisenstein series of
+weight* `k` and rank 2 is defined by
 
 .. MATH::
 
@@ -145,12 +145,12 @@ fact. We will denote by
 
     g_k := \tilde{\pi}^{q^k - 1}\delta_{q^k - 1} E_{q^k - 1}
 
-the normalized Eisenstein series. For `k = 1,\ldots r-1`, these forms
+the *normalized* Eisenstein series. For `k = 1,\ldots r-1`, these forms
 corresponds to the coefficients forms defined above.
 
 - Modular discriminant
 
-The modular discriminant
+The *modular discriminant*
 `\Delta : \Omega^2(\mathbb{C}_{\infty}) \rightarrow \mathbb{C}` is the
 leading coefficient form of the rank 2 universal Drinfeld module over
 `\Omega^2(\mathbb{C}_{\infty})`:
@@ -179,9 +179,6 @@ and elements `c_{a}(f)\in \mathbb{C}_{\infty}` such that
     f =
     \sum_{\substack{a\in \mathbb{F}_q[T] \\ a\text{ monic}}}
     c_a(f)G_n(t(az)).
-
-where `G_n` is the `n`-th Goss polynomial of the Carlitz module
-(see section 3 of [Gek1988]_ for the definition).
 
 In [Pet2013]_, Petrov showed that
 
