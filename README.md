@@ -2,23 +2,19 @@
 
 This SageMath package provides an implementation for computing with Drinfeld modular forms for `GL_r(A)`.
 
-To install this package, first clone this repository and then run the following command (inside the project folder):
+To install this package, first clone this repository and then run the following command (inside the project's folder):
 
 `sage -pip install --upgrade --no-index -v .`
 
 If there is any changes to the current repo, you will then simply need to pull the changes and run the above command again.
 
-Next, to use its functionalities in your SageMath session you just need to type:
+Next, if you want to import everything in you session, just run:
 
-`sage: from drinfeld_modular_forms import *` (this will import everything).
+`sage: from drinfeld_modular_forms import *`
 
-To import a single functionality, for example the class `DrinfeldModularFormsRing`, type:
+The documentation is available at this address:
 
-`sage: from drinfeld_modular_forms import DrinfeldModularFormsRing`
-
-The documentation is hosted here:
-
-https://davidayotte.github.io/drinfeld_modular_forms/html/index.html
+https://davidayotte.github.io/drinfeld_modular_forms
 
 ## Examples:
 

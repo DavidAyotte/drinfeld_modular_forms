@@ -4,7 +4,8 @@ Background material and notations
 
 In this section, we define some notations and give some definitions.
 We will that assume the reader possesses some knowledge of Drinfeld
-modules and their analytic theory. A classical reference is [Gos1998]_.
+modules and their analytic theory. A classical reference is chapter 3
+and 4 of [Gos1998]_.
 
 .. RUBRIC:: Function field setting
 
@@ -15,10 +16,6 @@ ring is the polynomial ring `\mathbb{F}_q[T]`. We denote by
 `K_{\infty} := \mathbb{F}_q((1/T))`. We define `\mathbb{C}_{\infty}` to
 be the completion of an algebraic closure of `K_{\infty}`. Lastly, We
 denote by `\tau : x\mapsto x^q` the `q`-Frobenius.
-
-For the rest of the section, we assume the reader possesses some
-knowledge on Drinfeld modules and their analytic theory, see for example
-chapter 3 and 4 of [Gos1998]_.
 
 .. RUBRIC:: Drinfeld period domain and group action
 
