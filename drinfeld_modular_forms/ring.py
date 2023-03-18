@@ -502,6 +502,8 @@ class DrinfeldModularFormsRing(Parent, UniqueRepresentation):
         r"""
         Return the Sturm bound of the subspace of weight `k`.
 
+        Currently only implemented in rank 2.
+
         INPUT:
 
         - ``k`` -- an integer
@@ -518,6 +520,8 @@ class DrinfeldModularFormsRing(Parent, UniqueRepresentation):
             sage: M.sturm_bound(q^9 - 1)
             4921
         """
+        if self._rank != 2:
+            raise NotImplementedError
         if k not in ZZ:
             raise TypeError("input must be an integer")
         k = ZZ(k)

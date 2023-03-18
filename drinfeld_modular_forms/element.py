@@ -299,6 +299,8 @@ class DrinfeldModularFormsRingElement(ModuleElement):
         r"""
         Return the expansion at infinity of the graded Drinfeld form.
 
+        Currently only implemented in rank 2.
+
         OUTPUT: a lazy power series over the base ring.
 
         EXAMPLES::
@@ -316,6 +318,8 @@ class DrinfeldModularFormsRingElement(ModuleElement):
             sage: F.expansion()
             1 + ((T^3+2*T+1)*t^2) + ((T^6+T^4+2*T^3+T^2+T)*t^4) + 2*t^6 + O(t^7)
         """
+        if self.parent()._rank != 2:
+            raise NotImplementedError
         A = self.base_ring().base()
         degs = self._polynomial.degrees()
         L = LazyPowerSeriesRing(self.base_ring(), name)
