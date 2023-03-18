@@ -20,8 +20,30 @@ potentially different weights::
     sage: F = g1*g2 + g2
     sage: F.is_drinfeld_modular_form()
     False
+    sage: F.homogeneous_components()
+    {8: g2, 10: g1*g2}
+    sage: H = g1^4*g2^9 + T*g1^8*g2^8 + (T^2 - 1)*g1^28*g2^3
+    sage: H.is_drinfeld_modular_form()
+    True
+    sage: H.weight()
+    80
 
-To access the
+In the rank 2 case, on can compute the expansion at infinity of any
+graded Drinfeld modular form::
+
+    sage: g1.expansion()
+    1 + ((2*T^3+T)*t^2) + O(t^7)
+    sage: g2.expansion()
+    t^2 + 2*t^6 + O(t^8)
+    sage: F.expansion()
+    2*t^2 + ((2*T^3+T)*t^4) + t^6 + O(t^8)
+
+To access the `i`-th coefficient of the expansion::
+
+    sage: F[36]
+    T^9 + 2*T
+    sage: F[0:15]  # i = 0...14
+    [0, 0, 2, 0, 2*T^3 + T, 0, 1, 0, 0, 0, 2*T^6 + 2*T^4 + 2*T^2, 0, 0, 0, 2]
 
 AUTHORS:
 
