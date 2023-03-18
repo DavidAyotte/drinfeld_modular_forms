@@ -1,5 +1,5 @@
 r"""
-This module defines the element of the class
+This module defines the elements of the class
 :class:`~drinfeld_modular_forms.ring.DrinfeldModularFormsRing`.
 
 EXAMPLES::
@@ -13,6 +13,15 @@ EXAMPLES::
     Defining g1, g2
     sage: g1.parent()
     Ring of Drinfeld modular forms of rank 2 over Fraction Field of Univariate Polynomial Ring in T over Finite Field of size 3
+
+A *graded Drinfeld modular form* is a sum of modular forms having
+potentially different weights::
+
+    sage: F = g1*g2 + g2
+    sage: F.is_drinfeld_modular_form()
+    False
+
+To access the
 
 AUTHORS:
 
@@ -59,7 +68,7 @@ class DrinfeldModularFormsRingElement(ModuleElement):
     """
     def __init__(self, parent, polynomial):
         # TODO: add checks
-        self.polynomial = polynomial
+        self._polynomial = polynomial
 
         ModuleElement.__init__(self, parent)
 
@@ -77,7 +86,7 @@ class DrinfeldModularFormsRingElement(ModuleElement):
             sage: M.0 + M.1
             g2 + g1
         """
-        return str(self.polynomial)
+        return str(self._polynomial)
 
     def _add_(self, other):
         r"""
@@ -91,7 +100,7 @@ class DrinfeldModularFormsRingElement(ModuleElement):
             sage: M.0 + M.1  # indirect doctest
             g2 + g1
         """
-        return self.__class__(self.parent(), self.polynomial + other.polynomial)
+        return self.__class__(self.parent(), self._polynomial + other._polynomial)
 
     def _mul_(self, other):
         r"""
@@ -109,7 +118,7 @@ class DrinfeldModularFormsRingElement(ModuleElement):
             sage: (M.0 + M.1)*M.0
             g1*g2 + g1^2
         """
-        return self.__class__(self.parent(), self.polynomial * other.polynomial)
+        return self.__class__(self.parent(), self._polynomial * other._polynomial)
 
     def _lmul_(self, c):
         r"""
@@ -129,7 +138,7 @@ class DrinfeldModularFormsRingElement(ModuleElement):
             sage: M.0 * 0
             0
         """
-        return self.__class__(self.parent(), c * self.polynomial)
+        return self.__class__(self.parent(), c * self._polynomial)
 
     def __neg__(self):
         r"""
@@ -143,7 +152,7 @@ class DrinfeldModularFormsRingElement(ModuleElement):
             sage: -M.0  # indirect doctest
             -g1
         """
-        return self.__class__(self.parent(), -self.polynomial)
+        return self.__class__(self.parent(), -self._polynomial)
 
     def __bool__(self):
         r"""
@@ -157,7 +166,7 @@ class DrinfeldModularFormsRingElement(ModuleElement):
             sage: bool(M.0)
             True
         """
-        return bool(self.polynomial)
+        return bool(self._polynomial)
 
     def _richcmp_(self, other, op):
         r"""
@@ -177,7 +186,7 @@ class DrinfeldModularFormsRingElement(ModuleElement):
         """
         if op != op_EQ and op != op_NE:
             raise TypeError('invalid comparison between modular forms ring elements')
-        return richcmp(self.polynomial, other.polynomial, op)
+        return richcmp(self._polynomial, other._polynomial, op)
 
     def __getitem__(self, n):
         r"""
@@ -238,7 +247,7 @@ class DrinfeldModularFormsRingElement(ModuleElement):
             sage: (M.0).is_one()
             False
         """
-        return self.polynomial.is_one()
+        return self._polynomial.is_one()
 
     def is_zero(self):
         r"""
@@ -284,7 +293,7 @@ class DrinfeldModularFormsRingElement(ModuleElement):
             sage: g.is_drinfeld_modular_form()
             False
         """
-        return self.polynomial.is_homogeneous()
+        return self._polynomial.is_homogeneous()
 
     def expansion(self, name='t'):
         r"""
@@ -308,7 +317,7 @@ class DrinfeldModularFormsRingElement(ModuleElement):
             1 + ((T^3+2*T+1)*t^2) + ((T^6+T^4+2*T^3+T^2+T)*t^4) + 2*t^6 + O(t^7)
         """
         A = self.base_ring().base()
-        degs = self.polynomial.degrees()
+        degs = self._polynomial.degrees()
         L = LazyPowerSeriesRing(self.base_ring(), name)
         poly_ring = self.parent()._poly_ring
         g0, g1 = poly_ring.gens()
@@ -323,11 +332,44 @@ class DrinfeldModularFormsRingElement(ModuleElement):
             E = compute_eisentein_serie_rank_2(A, name)
             D = compute_delta_rank_2(A, name)
         else:
-            return L(self.polynomial)
+            return L(self._polynomial)
         t_exp = L.zero()
-        for c, (n, m) in zip(self.polynomial.coefficients(), self.polynomial.exponents()):
+        for c, (n, m) in zip(self._polynomial.coefficients(), self._polynomial.exponents()):
             t_exp += c*(E**n)*(D**m)
         return t_exp
+
+    def polynomial(self):
+        r"""
+        Return self as a multivariate polynomial over the generators of
+        the ring.
+
+        OUTPUT:
+
+        A multivariate polynomial over the base ring.
+
+        EXAMPLES::
+
+            sage: from drinfeld_modular_forms import DrinfeldModularFormsRing
+            sage: A = GF(3)['T']; K = Frac(A)
+            sage: M = DrinfeldModularFormsRing(K, 2)
+            sage: M.inject_variables()
+            Defining g1, g2
+            sage: P1 = g1.polynomial();
+            sage: P2 = g2.polynomial();
+            sage: P2^2 + P1^2 + P1
+            g2^2 + g1^2 + g1
+            sage: P1.parent()
+            Multivariate Polynomial Ring in g1, g2 over Fraction Field of Univariate Polynomial Ring in T over Finite Field of size 3
+
+        The degree of each variables corresponds to the weight of the
+        generator::
+
+            sage: P1.degree()
+            2
+            sage: P2.degree()
+            8
+        """
+        return self._polynomial
 
     def weight(self):
         r"""
@@ -358,4 +400,4 @@ class DrinfeldModularFormsRingElement(ModuleElement):
         """
         if not self.is_drinfeld_modular_form():
             raise ValueError("the given ring element is not a Drinfeld modular form")
-        return self.polynomial.degree()
+        return self._polynomial.degree()

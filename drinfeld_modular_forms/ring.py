@@ -405,6 +405,32 @@ class DrinfeldModularFormsRing(Parent, UniqueRepresentation):
 
     basis = basis_of_weight  # alias
 
+    def polynomial_ring(self):
+        r"""
+        Return the multivariate polynomial ring over the base ring where
+        each variable corresponds to a generator of a ring.
+
+        EXAMPLES::
+
+            sage: from drinfeld_modular_forms import DrinfeldModularFormsRing
+            sage: q = 3; A = GF(q)['T']; K = Frac(A);
+            sage: M = DrinfeldModularFormsRing(K, 2)
+            sage: P = M.polynomial_ring()
+            sage: P
+            Multivariate Polynomial Ring in g1, g2 over Fraction Field of Univariate Polynomial Ring in T over Finite Field of size 3
+
+        The degree of the variables corresponds to the weight of the
+        associated generator::
+
+            sage: P.inject_variables()
+            Defining g1, g2
+            sage: g1.degree()
+            2
+            sage: g2.degree()
+            8
+        """
+        return self._poly_ring
+
     def petrov_expansion(self, k, n):
         r"""
         Return a Drinfeld modular form which admits the `A`-expansion
