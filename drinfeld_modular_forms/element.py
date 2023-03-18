@@ -1,10 +1,6 @@
 r"""
-Elements of Drinfeld modular forms rings
-
-The module defines the element of the class
-:class:`~drinfeld_modular_forms.ring.DrinfeldModularFormsRing` from the
-module :mod:`~drinfeld_modular_forms.ring`. See the aforementioned
-module for definitions.
+This module defines the element of the class
+:class:`~drinfeld_modular_forms.ring.DrinfeldModularFormsRing`.
 
 EXAMPLES::
 

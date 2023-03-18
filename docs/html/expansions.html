@@ -156,6 +156,7 @@
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="background.html">Background material and notations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ring.html">Ring of Drinfeld modular forms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="element.html">Elements of Drinfeld modular forms rings</a></li>
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Expansion at infinity for rank 2</a></li>
@@ -197,30 +198,47 @@
         <article role="main">
           <section id="module-drinfeld_modular_forms.expansions">
 <span id="expansion-at-infinity-for-rank-2"></span><h1>Expansion at infinity for rank 2<a class="headerlink" href="#module-drinfeld_modular_forms.expansions" title="Permalink to this heading">#</a></h1>
-<p>Functions for computing the Petrov expansion.</p>
-<p>The <em>Petrov expansion</em> or the <span class="math notranslate nohighlight">\(A\)</span>-<em>expansion</em> is defined by</p>
+<p>In analogy with the classical theory, any Drinfeld modular form
+<span class="math notranslate nohighlight">\(f:\Omega^2(\mathbb{C}_{\infty}) \rightarrow \mathbb{C}_{\infty}\)</span> admits
+an <em>expansion at infinity</em> of the form:</p>
 <div class="math-wrapper docutils container">
 <div class="math notranslate nohighlight">
-\[\begin{split}f_{k, n}(z) :=
+\[f(w) = \sum_{i = 0}^{\infty} a_i(f) t(w)^i\]</div>
+</div>
+<p>where <span class="math notranslate nohighlight">\(t(w) := 1/e(w)\)</span> and <span class="math notranslate nohighlight">\(e(w)\)</span> is the exponential of the Carlitz
+module <span class="math notranslate nohighlight">\(T\mapsto T + \tau\)</span>.</p>
+<p>We say that a Drinfeld modular forms of weight <span class="math notranslate nohighlight">\(k\)</span> admits a
+<em>Petrov expansion</em> or an <span class="math notranslate nohighlight">\(A\)</span>-<em>expansion</em> if there exists an integer <span class="math notranslate nohighlight">\(n\)</span>
+and coefficients <span class="math notranslate nohighlight">\(c_{a}(f)\)</span> such that</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}f =
+\sum_{\substack{a\in \mathbb{F}_q[T] \\ a\text{ monic}}}
+c_a(f)G_n(t(az))\end{split}\]</div>
+</div>
+<p>where <span class="math notranslate nohighlight">\(G_n(X)\)</span> is the <span class="math notranslate nohighlight">\(n\)</span>-th Goss polynomial of the Carlitz module.</p>
+<p>Petrov showed that there exists an infinite family of Drinfeld modular
+forms with <span class="math notranslate nohighlight">\(A\)</span>-expansion:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}f_{k, n} =
 \sum_{\substack{a\in \mathbb{F}_q[T] \\ a\text{ monic}}}
 a^{k - n}G_n(t(az))\end{split}\]</div>
 </div>
-<p>where <span class="math notranslate nohighlight">\(G_n(X)\)</span> is the <span class="math notranslate nohighlight">\(n\)</span>-th Goss polynomial for the Carlitz module and
-<span class="math notranslate nohighlight">\(t(az) = e(az)^{-1}\)</span> (<span class="math notranslate nohighlight">\(e\)</span> the exponential of the Carlitz module).
-Petrov showed that, given some conditions on <span class="math notranslate nohighlight">\(k\)</span> and <span class="math notranslate nohighlight">\(n\)</span>, then this
-expansion defines a Drinfeld modular form of rank <span class="math notranslate nohighlight">\(2\)</span> and weight <span class="math notranslate nohighlight">\(k\)</span>.
-This module implements functions that computes this expansion and some
-of its special cases.</p>
-<p>We note that the expansions that are computed here are <em>lazy</em> power
-series. In SageMath, a lazy power series is a power series such that its
-coefficients are computed on demands. In particular, this means that we
-don’t need to input any precision.</p>
+<p>provided that <span class="math notranslate nohighlight">\(k\)</span> and <span class="math notranslate nohighlight">\(n\)</span> are integers such that <span class="math notranslate nohighlight">\(k - 2n \equiv 0\)</span>
+modulo <span class="math notranslate nohighlight">\(q - 1\)</span> and <span class="math notranslate nohighlight">\(n \leq p^{v_p(k - n)}\)</span>.</p>
+<p>This module defines functions that compute the expansion at infinity of
+the forms <span class="math notranslate nohighlight">\(f_{k, n}\)</span>.</p>
 <p>EXAMPLES:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sage</span><span class="p">:</span> <span class="kn">from</span> <span class="nn">drinfeld_modular_forms</span> <span class="kn">import</span> <span class="n">compute_petrov_expansion</span>
 <span class="n">sage</span><span class="p">:</span> <span class="n">A</span> <span class="o">=</span> <span class="n">GF</span><span class="p">(</span><span class="mi">3</span><span class="p">)[</span><span class="s1">&#39;T&#39;</span><span class="p">]</span>
 <span class="n">sage</span><span class="p">:</span> <span class="n">D</span> <span class="o">=</span> <span class="n">compute_petrov_expansion</span><span class="p">(</span><span class="mi">3</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">A</span><span class="p">);</span> <span class="n">D</span>
 <span class="n">t</span> <span class="o">+</span> <span class="n">t</span><span class="o">^</span><span class="mi">5</span> <span class="o">+</span> <span class="p">((</span><span class="mi">2</span><span class="o">*</span><span class="n">T</span><span class="o">^</span><span class="mi">3</span><span class="o">+</span><span class="n">T</span><span class="p">)</span><span class="o">*</span><span class="n">t</span><span class="o">^</span><span class="mi">7</span><span class="p">)</span> <span class="o">+</span> <span class="n">O</span><span class="p">(</span><span class="n">t</span><span class="o">^</span><span class="mi">8</span><span class="p">)</span>
-<span class="n">sage</span><span class="p">:</span> <span class="n">D</span><span class="p">[</span><span class="mi">59</span><span class="p">]</span>  <span class="c1"># 59-th coefficient</span>
+</pre></div>
+</div>
+<p>It is possible to compute on demands any coefficients of the above
+series:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sage</span><span class="p">:</span> <span class="n">D</span><span class="p">[</span><span class="mi">59</span><span class="p">]</span>  <span class="c1"># 59-th coefficient</span>
 <span class="mi">2</span><span class="o">*</span><span class="n">T</span><span class="o">^</span><span class="mi">27</span> <span class="o">+</span> <span class="n">T</span><span class="o">^</span><span class="mi">9</span> <span class="o">+</span> <span class="n">T</span><span class="o">^</span><span class="mi">3</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">T</span>
 <span class="n">sage</span><span class="p">:</span> <span class="n">D</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">10</span><span class="p">]</span>  <span class="c1"># first 10 coefficients</span>
 <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">T</span><span class="o">^</span><span class="mi">3</span> <span class="o">+</span> <span class="n">T</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>

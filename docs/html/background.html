@@ -1,0 +1,471 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Ring of Drinfeld modular forms" href="ring.html" /><link rel="prev" title="Drinfeld Modular Forms" href="index.html" />
+
+    <meta name="generator" content="sphinx-5.2.3, furo 2022.09.29"/>
+        <title>Background material and notations - Drinfeld modular forms 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=d81277517bee4d6b0349d71bb2661d4890b5617c" />
+    <link rel="stylesheet" type="text/css" href="_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #eeffcc;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand">Drinfeld modular forms 0.0.1 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+  
+  
+  <span class="sidebar-brand-text">Drinfeld modular forms 0.0.1 documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder=Search name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Background material and notations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ring.html">Ring of Drinfeld modular forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="element.html">Elements of Drinfeld modular forms rings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="expansions.html">Expansion at infinity for rank 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="goss_polynomials.html">Goss polynomials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="drinfeld_modules.html">Drinfeld modules</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="background-material-and-notations">
+<h1>Background material and notations<a class="headerlink" href="#background-material-and-notations" title="Permalink to this heading">#</a></h1>
+<p>In this section, we define some notations and give some definitions.
+We will that assume the reader possesses some knowledge of Drinfeld
+modules and their analytic theory. A classical reference is <a class="reference internal" href="#gos1998" id="id1"><span>[Gos1998]</span></a>.</p>
+<p class="rubric">Function field setting</p>
+<p>Let <span class="math notranslate nohighlight">\(q\)</span> be a prime power and let <span class="math notranslate nohighlight">\(A\)</span> be the ring of functions of
+<span class="math notranslate nohighlight">\(\mathbb{P}^1/\mathbb{F}_q\)</span> which are regular outside <span class="math notranslate nohighlight">\(\infty\)</span>. This
+ring is the polynomial ring <span class="math notranslate nohighlight">\(\mathbb{F}_q[T]\)</span>. We denote by
+<span class="math notranslate nohighlight">\(K := \mathbb{F}_q(T)\)</span> its fraction field and let
+<span class="math notranslate nohighlight">\(K_{\infty} := \mathbb{F}_q((1/T))\)</span>. We define <span class="math notranslate nohighlight">\(\mathbb{C}_{\infty}\)</span> to
+be the completion of an algebraic closure of <span class="math notranslate nohighlight">\(K_{\infty}\)</span>. Lastly, We
+denote by <span class="math notranslate nohighlight">\(\tau : x\mapsto x^q\)</span> the <span class="math notranslate nohighlight">\(q\)</span>-Frobenius.</p>
+<p>For the rest of the section, we assume the reader possesses some
+knowledge on Drinfeld modules and their analytic theory, see for example
+chapter 3 and 4 of <a class="reference internal" href="#gos1998" id="id2"><span>[Gos1998]</span></a>.</p>
+<p class="rubric">Drinfeld period domain and group action</p>
+<p>The Drinfeld period domain of rank <span class="math notranslate nohighlight">\(r &gt; 1\)</span> is
+defined to be</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\Omega^r(\mathbb{C}_{\infty}) :=
+\mathbb{P}^{r-1}(\mathbb{C}_{\infty})
+\setminus \mathbb{P}^{r-1}(K_{\infty})\]</div>
+</div>
+<p>For any <span class="math notranslate nohighlight">\(w = (w_1:\ldots: w_{r-1}:w_r)^{\mathrm{T}}\)</span> in
+<span class="math notranslate nohighlight">\(\Omega^r(\mathbb{C}_{\infty})\)</span>. This space is a rigid analytic space
+and plays the role of complex upper half plane. We identify the elements
+of <span class="math notranslate nohighlight">\(\Omega^r(\mathbb{C}_{\infty})\)</span> with the set of column vectors
+<span class="math notranslate nohighlight">\((w_1,\ldots, w_{r-1}, w_{r})^{\mathrm{T}}\)</span> in <span class="math notranslate nohighlight">\(\mathbb{C}_{\infty}^r\)</span>
+such that the <span class="math notranslate nohighlight">\(w_i\)</span> are <span class="math notranslate nohighlight">\(K_{\infty}\)</span>-linearly independant and
+<span class="math notranslate nohighlight">\(w_r = \xi\)</span> a nonzero constant in <span class="math notranslate nohighlight">\(\mathbb{C}_{\infty}\)</span>.</p>
+<p>We define a left action of <span class="math notranslate nohighlight">\(\mathrm{GL}_r(K_{\infty})\)</span> on
+<span class="math notranslate nohighlight">\(\Omega^r(\mathbb{C}_{\infty})\)</span> by setting</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\gamma(w) := j(\gamma, w)^{-1}\gamma w\]</div>
+</div>
+<p>where <span class="math notranslate nohighlight">\(j(\gamma, w) := \xi^{-1} \cdot (\text{last entry of }\gamma w)\)</span>.</p>
+<p class="rubric">Universal Drinfeld module over <span class="math notranslate nohighlight">\(\Omega^r(\mathbb{C}_{\infty})\)</span></p>
+<p>For any <span class="math notranslate nohighlight">\(w = (w_1, \ldots, w_{r-1}, \xi)\)</span> in
+<span class="math notranslate nohighlight">\(\Omega^r(\mathbb{C}_{\infty})\)</span> we have a corresponding free <span class="math notranslate nohighlight">\(A\)</span>-lattice
+of rank <span class="math notranslate nohighlight">\(r\)</span>:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\Lambda_w := Aw_1 \oplus \cdots \oplus Aw_{r-1} \oplus A\xi.\]</div>
+</div>
+<p>By analytic uniformization, there exists a corresponding Drinfeld module</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\phi_w : T \mapsto T + g_1(w)\tau + \cdots
++ g_{r - 1}(w)\tau^{r-1} + g_{r}(w)\tau^{r}\]</div>
+</div>
+<p>where the coefficients
+<span class="math notranslate nohighlight">\(g_i : \Omega^r(\mathbb{C}_{\infty}) \rightarrow \mathbb{C}_{\infty}\)</span>
+are rigid analytic functions satisfying the invariance property:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[g_i(\gamma(w)) = j(\gamma, w)^{1 - q^i} g_i(w),
+~\forall \gamma\in \mathrm{GL}_r(A)\]</div>
+</div>
+<p>where <span class="math notranslate nohighlight">\(g_{r}(w)\)</span> never vanishes. Moreover, these coefficients <span class="math notranslate nohighlight">\(g_i\)</span>
+admits an expansion at infinity, analogous to the classical theory. In
+the rank two case, this expansion at infinity is of the form</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[g_i(w) = \sum_{i = 0}^{\infty} a_n(g_i)t(w)^i\]</div>
+</div>
+<p>where <span class="math notranslate nohighlight">\(t(w) := e(w)^{-1}\)</span> and <span class="math notranslate nohighlight">\(e\)</span> is the exponential of the Carlitz
+module. Any rigid analytic function
+<span class="math notranslate nohighlight">\(f : \Omega^r(\mathbb{C}_{\infty}) \rightarrow \mathbb{C}_{\infty}\)</span>
+that satisfies the invariance property and the expansion at infinity
+is called a Drinfeld modular form of weight <span class="math notranslate nohighlight">\(k\)</span>. The forms <span class="math notranslate nohighlight">\(g_i\)</span> are
+called the coefficients forms.</p>
+<p>This Drinfeld module is the universal
+Drinfeld <span class="math notranslate nohighlight">\(\mathbb{F}_q[T]\)</span>-module over <span class="math notranslate nohighlight">\(\Omega^r(\mathbb{C}_{\infty})\)</span>.
+The coefficients
+<span class="math notranslate nohighlight">\(g_i : \Omega^r(\mathbb{C}_{\infty}) \rightarrow \mathbb{C}_{\infty}\)</span>
+are rigid analytic function which satisfies a modular invariance
+properties under some action of the group <span class="math notranslate nohighlight">\(\mathrm{GL}_r(A)\)</span>. They also
+satisfies an holomorphicity property at infinity, so that they are
+<em>Drinfeld modular forms of weight</em> <span class="math notranslate nohighlight">\(q^i - 1\)</span>. The reader is refered to
+Part I of <a class="reference internal" href="#brp2018" id="id3"><span>[BRP2018]</span></a> for more about the analytic theory of Drinfeld
+modular form.</p>
+<p class="rubric">Ring of Drinfeld modular form</p>
+<p>Letting <span class="math notranslate nohighlight">\(M_k^r(\mathrm{GL}_r(A))\)</span> denote the space of weight <span class="math notranslate nohighlight">\(k\)</span> and
+rank <span class="math notranslate nohighlight">\(r\)</span> Drinfeld modular forms, we define</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[M^r(\mathrm{GL}_r(A)) :=
+\bigoplus_{k\in \mathbb{Z}} M_k^r(\mathrm{GL}_r(A))\]</div>
+</div>
+<p>to be the graded ring of all Drinfeld modular forms. By theorem 17.5 in
+part III of <a class="reference internal" href="#brp2018" id="id4"><span>[BRP2018]</span></a>, we have</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[M^r(\mathrm{GL}_r(A))
+= \mathbb{C}_{\infty}[g_1,\ldots, g_{r-1}, g_{r}].\]</div>
+</div>
+<p class="rubric">Rank two examples</p>
+<ul class="simple">
+<li><p>Drinfeld Eisenstein series</p></li>
+</ul>
+<p>For <span class="math notranslate nohighlight">\(k \equiv 0\)</span> modulo <span class="math notranslate nohighlight">\(q - 1\)</span>. The Drinfeld Eisenstein series of
+weight <span class="math notranslate nohighlight">\(k\)</span> and rank 2 is defined by</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}E_{k}(w) :=
+\sum_{\substack{ (c, c)\in A^{2} \\ (c, c) \neq (0, 0) }}
+\frac{1}{(cw + d)^k}.\end{split}\]</div>
+</div>
+<p>This series is absolutely and uniformly convergent and admits the
+expansion</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}E_k(w) = \tilde{\pi}^k\delta_k
+- \tilde{\pi}^k \sum_{\substack{a\in A \\a\text{ monic}}} G_k(t(aw))\end{split}\]</div>
+</div>
+<p>where tilde{pi} is the Carlitz period (analogue of <span class="math notranslate nohighlight">\(\pi\)</span>) and <span class="math notranslate nohighlight">\(G_k\)</span> is
+the <span class="math notranslate nohighlight">\(k\)</span>-th Goss polynomial and <span class="math notranslate nohighlight">\(\delta_k \in K\)</span> is some constant
+depending on <span class="math notranslate nohighlight">\(k\)</span>. See section 6 of <a class="reference internal" href="#gek1988" id="id5"><span>[Gek1988]</span></a> for the proof of this
+fact. We will denote by</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[g_k := \tilde{\pi}^{q^k - 1}\delta_{q^k - 1} E_{q^k - 1}\]</div>
+</div>
+<p>the normalized Eisenstein series. For <span class="math notranslate nohighlight">\(k = 1,\ldots r-1\)</span>, these forms
+corresponds to the coefficients forms defined above.</p>
+<ul class="simple">
+<li><p>Modular discriminant</p></li>
+</ul>
+<p>The modular discriminant
+<span class="math notranslate nohighlight">\(\Delta : \Omega^2(\mathbb{C}_{\infty}) \rightarrow \mathbb{C}\)</span> is the
+leading coefficient form of the rank 2 universal Drinfeld module over
+<span class="math notranslate nohighlight">\(\Omega^2(\mathbb{C}_{\infty})\)</span>:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\phi^w : T \mapsto T + g_1(w)\tau + \Delta(w)\tau^2.\]</div>
+</div>
+<p>By the work of López in <a class="reference internal" href="#lop2010" id="id6"><span>[Lop2010]</span></a>, the discriminant function admits an
+expansion of the form</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}-\tilde{\pi}^{1 - q^2}\Delta(w)
+= \sum_{\substack{a\in A\\a \text{ monic}}}
+a^{q(q-1)} t(aw)^{q-1}.\end{split}\]</div>
+</div>
+<ul class="simple">
+<li><p>Petrov <span class="math notranslate nohighlight">\(A\)</span>-expansions</p></li>
+</ul>
+<p>We say that a Drinfeld modular forms of weight <span class="math notranslate nohighlight">\(k\)</span> admits a
+<em>Petrov expansion</em> or an <span class="math notranslate nohighlight">\(A\)</span>-<em>expansion</em> if there exists an integer <span class="math notranslate nohighlight">\(n\)</span>
+and elements <span class="math notranslate nohighlight">\(c_{a}(f)\in \mathbb{C}_{\infty}\)</span> such that</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}f =
+\sum_{\substack{a\in \mathbb{F}_q[T] \\ a\text{ monic}}}
+c_a(f)G_n(t(az)).\end{split}\]</div>
+</div>
+<p>where <span class="math notranslate nohighlight">\(G_n\)</span> is the <span class="math notranslate nohighlight">\(n\)</span>-th Goss polynomial of the Carlitz module
+(see section 3 of <a class="reference internal" href="#gek1988" id="id7"><span>[Gek1988]</span></a> for the definition).</p>
+<p>In <a class="reference internal" href="#pet2013" id="id8"><span>[Pet2013]</span></a>, Petrov showed that</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}f_{k, n} :=
+\sum_{\substack{a\in \mathbb{F}_q[T] \\ a\text{ monic}}}
+a^{k - n}G_n(t(az))\end{split}\]</div>
+</div>
+<p>defines an infinite family of Drinfeld modular forms of weight <span class="math notranslate nohighlight">\(k\)</span>
+provided that <span class="math notranslate nohighlight">\(k - 2n \equiv 0\)</span> modulo <span class="math notranslate nohighlight">\(q - 1\)</span> and
+<span class="math notranslate nohighlight">\(n \leq p^{v_p(k - n)}\)</span>. See theorem 1.3 of loc. cit. for more details.</p>
+<p class="rubric">References</p>
+<div role="list" class="citation-list">
+<div class="citation" id="brp2018" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>BRP2018<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id3">1</a>,<a role="doc-backlink" href="#id4">2</a>)</span>
+<p>Basson D., Breuer F., Pink R., Drinfeld modular forms of
+arbitrary rank:
+Part I: <a class="reference external" href="https://arxiv.org/abs/1805.12335">arxiv:1805.12335</a>,
+Part II: <a class="reference external" href="https://arxiv.org/abs/1805.12337">arxiv:1805.12337</a>,
+Part III: <a class="reference external" href="https://arxiv.org/abs/1805.12339">arxiv:1805.12339</a>,
+2018.</p>
+</div>
+<div class="citation" id="gek1988" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Gek1988<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id5">1</a>,<a role="doc-backlink" href="#id7">2</a>)</span>
+<p>Gekeler, EU. On the coefficients of Drinfeld modular forms.
+Invent Math 93, 667-700 (1988).
+<a class="reference external" href="https://doi.org/10.1007/BF01410204">doi.org/10.1007/BF01410204</a></p>
+</div>
+<div class="citation" id="gos1998" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Gos1998<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id1">1</a>,<a role="doc-backlink" href="#id2">2</a>)</span>
+<p>Goss D. Basic structures of function field arithmetic.
+Springer, 1998.
+<a class="reference external" href="https://doi.org/10.1007/978-3-642-61480-4">doi.org/10.1007/978-3-642-61480-4</a></p>
+</div>
+<div class="citation" id="lop2010" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id6">Lop2010</a><span class="fn-bracket">]</span></span>
+<p>López, B. A non-standard Fourier expansion for the Drinfeld
+discriminant function. Arch. Math. 95, 143-150 (2010).
+<a class="reference external" href="https://doi.org/10.1007/s00013-010-0148-7">doi.org/10.1007/s00013-010-0148-7</a></p>
+</div>
+<div class="citation" id="pet2013" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id8">Pet2013</a><span class="fn-bracket">]</span></span>
+<p>Petrov A., A-expansions of Drinfeld modular forms,
+Journal of Number Theory, Volume 133, Issue 7, 2013,
+<a class="reference external" href="https://doi.org/10.1016/j.jnt.2012.12.012">doi.org/10.1016/j.jnt.2012.12.012</a></p>
+</div>
+</div>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="ring.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Ring of Drinfeld modular forms</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="index.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Home</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2022, David Ayotte
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            <div class="icons">
+              
+            </div>
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer no-toc">
+      
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/scripts/furo.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    </body>
+</html>

@@ -1,25 +1,41 @@
 r"""
-Functions for computing the Petrov expansion.
-
-The *Petrov expansion* or the `A`-*expansion* is defined by
+In analogy with the classical theory, any Drinfeld modular form
+`f:\Omega^2(\mathbb{C}_{\infty}) \rightarrow \mathbb{C}_{\infty}` admits
+an *expansion at infinity* of the form:
 
 .. MATH::
 
-    f_{k, n}(z) :=
+    f(w) = \sum_{i = 0}^{\infty} a_i(f) t(w)^i
+
+where `t(w) := 1/e(w)` and `e(w)` is the exponential of the Carlitz
+module `T\mapsto T + \tau`.
+
+We say that a Drinfeld modular forms of weight `k` admits a
+*Petrov expansion* or an `A`-*expansion* if there exists an integer `n`
+and coefficients `c_{a}(f)` such that
+
+.. MATH::
+
+    f =
+    \sum_{\substack{a\in \mathbb{F}_q[T] \\ a\text{ monic}}}
+    c_a(f)G_n(t(az))
+
+where `G_n(X)` is the `n`-th Goss polynomial of the Carlitz module.
+
+Petrov showed that there exists an infinite family of Drinfeld modular
+forms with `A`-expansion:
+
+.. MATH::
+
+    f_{k, n} =
     \sum_{\substack{a\in \mathbb{F}_q[T] \\ a\text{ monic}}}
     a^{k - n}G_n(t(az))
 
-where `G_n(X)` is the `n`-th Goss polynomial for the Carlitz module and
-`t(az) = e(az)^{-1}` (`e` the exponential of the Carlitz module).
-Petrov showed that, given some conditions on `k` and `n`, then this
-expansion defines a Drinfeld modular form of rank `2` and weight `k`.
-This module implements functions that computes this expansion and some
-of its special cases.
+provided that `k` and `n` are integers such that `k - 2n \equiv 0`
+modulo `q - 1` and `n \leq p^{v_p(k - n)}`.
 
-We note that the expansions that are computed here are *lazy* power
-series. In SageMath, a lazy power series is a power series such that its
-coefficients are computed on demands. In particular, this means that we
-don't need to input any precision.
+This module defines functions that compute the expansion at infinity of
+the forms `f_{k, n}`.
 
 EXAMPLES::
 
@@ -27,6 +43,10 @@ EXAMPLES::
     sage: A = GF(3)['T']
     sage: D = compute_petrov_expansion(3+1, 1, A); D
     t + t^5 + ((2*T^3+T)*t^7) + O(t^8)
+
+It is possible to compute on demands any coefficients of the above
+series::
+
     sage: D[59]  # 59-th coefficient
     2*T^27 + T^9 + T^3 + 2*T
     sage: D[0:10]  # first 10 coefficients
