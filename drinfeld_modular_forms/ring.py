@@ -183,27 +183,35 @@ class DrinfeldModularFormsRing(Parent, UniqueRepresentation):
 
     Element = DrinfeldModularFormsRingElement
 
-    def __init__(self, base_ring, rank=2, group=None, names='g'):
+    def __init__(self, base_ring, rank=2, group=None, has_type=False, names='g'):
         if group is not None:
             raise NotImplementedError("the ring of Drinfeld modular "
                                       "forms is only implemented for "
                                       "the full group")
         if not isinstance(names, str):
             raise TypeError("names must be string type")
-        if len(names) == 1:
-            n = names
-            names += "1, "
-            for i in range(2, rank, 1):
-                names += n + str(i) + ", "
-            names += n + str(rank)
+        q = base_ring.base_ring().cardinality()
+        if has_type:
+            if rank != 2:
+                raise NotImplementedError
+            if len(names) == 1:
+                names += "1, h"
+            degs = [q - 1, q + 1]
         else:
-            if len(names.split()) != rank:
-                raise ValueError("the rank does not corresponds to"
-                                 " the number of generators")
+            if len(names) == 1:
+                n = names
+                names += "1, "
+                for i in range(2, rank, 1):
+                    names += n + str(i) + ", "
+                names += n + str(rank)
+            else:
+                if len(names.split()) != rank:
+                    raise ValueError("the rank does not corresponds to"
+                                    " the number of generators")
+            degs = [q ** i - 1 for i in range(1, rank + 1, 1)]
+        self._has_type = has_type
         self._rank = rank
         self._base_ring = base_ring
-        q = base_ring.base_ring().cardinality()
-        degs = [q ** i - 1 for i in range(1, rank + 1, 1)]
         self._poly_ring = PolynomialRing(base_ring, rank, names=names,
                                          order=TermOrder('wdeglex', degs))
         self._assign_names(names)
@@ -278,6 +286,19 @@ class DrinfeldModularFormsRing(Parent, UniqueRepresentation):
             raise ValueError("the given expansion does not correspond to a"
                              "form of the given weight")
         return sum(c[0][i]*b for i, b in enumerate(basis))
+
+    def coefficient_form(self, i):
+        if i not in ZZ:
+            raise TypeError("i must be an integer")
+        i = ZZ(i)
+        if i < 1:
+            raise ValueError("i must be >= 1")
+        if i == 1:
+            return self.gen(0)
+        if self._has_type and i == 2:
+            q = self._base_ring.base_ring().cardinality()
+            return self.gen(1)**(q - 1)
+        return self.gen(i - 1)
 
     def gen(self, n):
         r"""
@@ -566,7 +587,7 @@ class DrinfeldModularFormsRing(Parent, UniqueRepresentation):
             raise NotImplementedError("only implemented when k is of the form q^i - 1")
         k = (k + 1).log(q)
         if k == 1:
-            return self.gen(0)
+            return self.coefficient_form(1)
         T = self._base_ring.gen()
         sqb = T**(q**(k - 1)) - T
-        return -sqb*self.eisenstein_series(q**(k - 2) - 1)*self.gen(1)**(q**(k - 2)) + self.eisenstein_series(q**(k - 1) - 1)*self.gen(0)**(q**(k - 1))
+        return -sqb*self.eisenstein_series(q**(k - 2) - 1)*self.coefficient_form(2)**(q**(k - 2)) + self.eisenstein_series(q**(k - 1) - 1)*self.coefficient_form(1)**(q**(k - 1))

@@ -307,3 +307,7 @@ def compute_eisentein_serie_rank_2(polynomial_ring, name='t'):
     K = polynomial_ring.fraction_field()
     b = K(T**q - T)
     return K.one() - b*compute_petrov_expansion(q - 1, q - 1, polynomial_ring, name)
+
+def compute_h_rank_2(polynomial_ring, name='t'):
+    q = polynomial_ring.base_ring().cardinality()
+    return compute_petrov_expansion(q + 1, 1, polynomial_ring, name)
