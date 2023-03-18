@@ -163,7 +163,7 @@ class DrinfeldModularFormsRing(Parent, UniqueRepresentation):
     - ``rank`` (integer, default: 2) -- the rank of the ring
     - ``group`` (NoneType) -- the group of self. The current
       implementation only supports the full group
-      `\mathh{GL}_r(A)`.
+      `\mathbb{GL}_r(A)`.
     - ``names`` (string, default: ``'g'``) -- a single character or a
       comma seperated string of character representing the names of the
       generators
