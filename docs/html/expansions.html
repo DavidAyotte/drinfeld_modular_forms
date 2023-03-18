@@ -380,7 +380,7 @@ weight <span class="math notranslate nohighlight">\(q-1\)</span>.</p>
 <span class="sig-prename descclassname"><span class="pre">drinfeld_modular_forms.expansions.</span></span><span class="sig-name descname"><span class="pre">inverse_cyclotomic_polynomial</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'X'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#drinfeld_modular_forms.expansions.inverse_cyclotomic_polynomial" title="Permalink to this definition">#</a></dt>
 <dd><p>Return the polynomial <span class="math notranslate nohighlight">\(f_a(X) = \rho_a(X^{-1}) X^{q^{\mathrm{deg}(a)}}\)</span>
 where <span class="math notranslate nohighlight">\(\rho_a\)</span> is the Carlitz module.</p>
-<p>This function is used in <a class="reference internal" href="#drinfeld_modular_forms.expansions.ta" title="drinfeld_modular_forms.expansions.ta"><code class="xref py py-func docutils literal notranslate"><span class="pre">ta()</span></code></a></p>
+<p>This function is used in <a class="reference internal" href="#drinfeld_modular_forms.expansions.parameter_at_infinity" title="drinfeld_modular_forms.expansions.parameter_at_infinity"><code class="xref py py-func docutils literal notranslate"><span class="pre">parameter_at_infinity()</span></code></a></p>
 <p>EXAMPLES:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sage</span><span class="p">:</span> <span class="kn">from</span> <span class="nn">drinfeld_modular_forms.expansions</span> <span class="kn">import</span> <span class="n">inverse_cyclotomic_polynomial</span>
 <span class="n">sage</span><span class="p">:</span> <span class="n">A</span><span class="o">.&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="n">GF</span><span class="p">(</span><span class="mi">3</span><span class="p">)[</span><span class="s1">&#39;T&#39;</span><span class="p">]</span>
@@ -397,23 +397,23 @@ where <span class="math notranslate nohighlight">\(\rho_a\)</span> is the Carlit
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="drinfeld_modular_forms.expansions.ta">
-<span class="sig-prename descclassname"><span class="pre">drinfeld_modular_forms.expansions.</span></span><span class="sig-name descname"><span class="pre">ta</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'t'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#drinfeld_modular_forms.expansions.ta" title="Permalink to this definition">#</a></dt>
+<dt class="sig sig-object py" id="drinfeld_modular_forms.expansions.parameter_at_infinity">
+<span class="sig-prename descclassname"><span class="pre">drinfeld_modular_forms.expansions.</span></span><span class="sig-name descname"><span class="pre">parameter_at_infinity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'t'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#drinfeld_modular_forms.expansions.parameter_at_infinity" title="Permalink to this definition">#</a></dt>
 <dd><p>Return the function <span class="math notranslate nohighlight">\(t(aw)\)</span> as a power series in <span class="math notranslate nohighlight">\(t\)</span>.</p>
 <p>INPUT:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">a</span></code> – univariate polynomial over a finite field</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">prec</span></code> (Integer, default: 10) – the precision for the power series ring</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">name</span></code> (Str, default: ‘t’) – the name of the power series ring generator</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">a</span></code> (polynomial) – univariate polynomial over a finite field.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">name</span></code> (Str, default: ‘t’) – the name of the lazy power series
+ring generator</p></li>
 </ul>
 <p>EXAMPLES:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sage</span><span class="p">:</span> <span class="kn">from</span> <span class="nn">drinfeld_modular_forms</span> <span class="kn">import</span> <span class="n">ta</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sage</span><span class="p">:</span> <span class="kn">from</span> <span class="nn">drinfeld_modular_forms</span> <span class="kn">import</span> <span class="n">parameter_at_infinity</span>
 <span class="n">sage</span><span class="p">:</span> <span class="n">A</span><span class="o">.&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="n">GF</span><span class="p">(</span><span class="mi">3</span><span class="p">)[</span><span class="s1">&#39;T&#39;</span><span class="p">]</span>
-<span class="n">sage</span><span class="p">:</span> <span class="n">ta</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">one</span><span class="p">())</span>
+<span class="n">sage</span><span class="p">:</span> <span class="n">parameter_at_infinity</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">one</span><span class="p">())</span>
 <span class="n">t</span>
-<span class="n">sage</span><span class="p">:</span> <span class="n">ta</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+<span class="n">sage</span><span class="p">:</span> <span class="n">parameter_at_infinity</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
 <span class="n">t</span><span class="o">^</span><span class="mi">3</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">T</span><span class="o">*</span><span class="n">t</span><span class="o">^</span><span class="mi">5</span> <span class="o">+</span> <span class="n">T</span><span class="o">^</span><span class="mi">2</span><span class="o">*</span><span class="n">t</span><span class="o">^</span><span class="mi">7</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">T</span><span class="o">^</span><span class="mi">3</span><span class="o">*</span><span class="n">t</span><span class="o">^</span><span class="mi">9</span> <span class="o">+</span> <span class="n">O</span><span class="p">(</span><span class="n">t</span><span class="o">^</span><span class="mi">10</span><span class="p">)</span>
-<span class="n">sage</span><span class="p">:</span> <span class="n">ta</span><span class="p">(</span><span class="n">T</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">sage</span><span class="p">:</span> <span class="n">parameter_at_infinity</span><span class="p">(</span><span class="n">T</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">t</span><span class="o">^</span><span class="mi">9</span> <span class="o">+</span> <span class="p">((</span><span class="mi">2</span><span class="o">*</span><span class="n">T</span><span class="o">^</span><span class="mi">3</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">T</span><span class="p">)</span><span class="o">*</span><span class="n">t</span><span class="o">^</span><span class="mi">15</span><span class="p">)</span> <span class="o">+</span> <span class="n">O</span><span class="p">(</span><span class="n">t</span><span class="o">^</span><span class="mi">16</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -450,7 +450,7 @@ where <span class="math notranslate nohighlight">\(\rho_a\)</span> is the Carlit
         <div class="bottom-of-page">
           <div class="left-details">
             <div class="copyright">
-                Copyright &#169; 2022, David Ayotte
+                Copyright &#169; 2023, David Ayotte
             </div>
             Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
             
@@ -484,7 +484,7 @@ where <span class="math notranslate nohighlight">\(\rho_a\)</span> is the Carlit
 <li><a class="reference internal" href="#drinfeld_modular_forms.expansions.compute_eisentein_serie_rank_2"><code class="docutils literal notranslate"><span class="pre">compute_eisentein_serie_rank_2()</span></code></a></li>
 <li><a class="reference internal" href="#drinfeld_modular_forms.expansions.compute_petrov_expansion"><code class="docutils literal notranslate"><span class="pre">compute_petrov_expansion()</span></code></a></li>
 <li><a class="reference internal" href="#drinfeld_modular_forms.expansions.inverse_cyclotomic_polynomial"><code class="docutils literal notranslate"><span class="pre">inverse_cyclotomic_polynomial()</span></code></a></li>
-<li><a class="reference internal" href="#drinfeld_modular_forms.expansions.ta"><code class="docutils literal notranslate"><span class="pre">ta()</span></code></a></li>
+<li><a class="reference internal" href="#drinfeld_modular_forms.expansions.parameter_at_infinity"><code class="docutils literal notranslate"><span class="pre">parameter_at_infinity()</span></code></a></li>
 </ul>
 </li>
 </ul>

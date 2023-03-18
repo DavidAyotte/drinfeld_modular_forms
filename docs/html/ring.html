@@ -208,8 +208,6 @@
 = \mathbb{C}_{\infty}[g_1, \ldots, g_{r-1}, g_{r}].\]</div>
 </div>
 <p>where <span class="math notranslate nohighlight">\(g_i\)</span> the <span class="math notranslate nohighlight">\(i\)</span>-th coefficient form of weight <span class="math notranslate nohighlight">\(q^{i} - 1\)</span>.</p>
-<p class="rubric">Examples of computations</p>
-<p>In this package, the generators of the ring are the coefficients forms:</p>
 <p>EXAMPLES:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sage</span><span class="p">:</span> <span class="kn">from</span> <span class="nn">drinfeld_modular_forms</span> <span class="kn">import</span> <span class="n">DrinfeldModularFormsRing</span>
 <span class="n">sage</span><span class="p">:</span> <span class="n">q</span> <span class="o">=</span> <span class="mi">3</span>
@@ -316,9 +314,21 @@ any coefficient at any precision on demands:</p>
 </ul>
 <dl class="py class">
 <dt class="sig sig-object py" id="drinfeld_modular_forms.ring.DrinfeldModularFormsRing">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">drinfeld_modular_forms.ring.</span></span><span class="sig-name descname"><span class="pre">DrinfeldModularFormsRing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base_ring</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rank</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'g'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#drinfeld_modular_forms.ring.DrinfeldModularFormsRing" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">drinfeld_modular_forms.ring.</span></span><span class="sig-name descname"><span class="pre">DrinfeldModularFormsRing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base_ring</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rank</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'g'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#drinfeld_modular_forms.ring.DrinfeldModularFormsRing" title="Permalink to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Parent</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">UniqueRepresentation</span></code></p>
 <p>Base class for the graded Drinfeld modular forms ring.</p>
+<p>INPUT:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">base_ring</span></code> – The fraction field of a univariate polynomial
+ring over <span class="math notranslate nohighlight">\(\mathbb{F}_q\)</span>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">rank</span></code> (integer, default: 2) – the rank of the ring</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">group</span></code> (NoneType) – the group of self. The current
+implementation only supports the full group
+<span class="math notranslate nohighlight">\(\mathh{GL}_r(A)\)</span>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">names</span></code> (string, default: <code class="docutils literal notranslate"><span class="pre">'g'</span></code>) – a single character or a
+comma seperated string of character representing the names of the
+generators</p></li>
+</ul>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="drinfeld_modular_forms.ring.DrinfeldModularFormsRing.Element">
 <span class="sig-name descname"><span class="pre">Element</span></span><a class="headerlink" href="#drinfeld_modular_forms.ring.DrinfeldModularFormsRing.Element" title="Permalink to this definition">#</a></dt>
@@ -622,7 +632,7 @@ for <span class="math notranslate nohighlight">\(k\)</span> and <span class="mat
         <div class="bottom-of-page">
           <div class="left-details">
             <div class="copyright">
-                Copyright &#169; 2022, David Ayotte
+                Copyright &#169; 2023, David Ayotte
             </div>
             Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
             
