@@ -113,9 +113,7 @@ def parameter_at_infinity(a, name='t'):
 
     INPUT:
 
-    - ``a`` (polynomial or NoneType, default: ``None``) -- univariate
-      polynomial over a finite field. If this option is ``None`` then
-      returns the expansion
+    - ``a`` (polynomial) -- univariate polynomial over a finite field.
     - ``name`` (Str, default: 't') -- the name of the lazy power series
       ring generator
 
