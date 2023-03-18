@@ -10,15 +10,15 @@ This work is licensed under a `GNU General Public License <https://www.gnu.org/l
 Installation
 ============
 
-To install this package, you should first clone the source code from the
+To install this package, you should first obtain the source code from the
 `Github repo <https://github.com/DavidAyotte/drinfeld_modular_forms>`_.
 
-Then, you must run following command (inside the project's folder)::
+Next, you have to run following command inside the project's folder::
 
    sage -pip install --upgrade --no-index -v .
 
-If any changes are made, then you have to pull them from the repo and
-run the above command again.
+If any updates are made to the package, then you have to pull them from
+the repo and run the above command again.
 
 The package has been tested on SageMath version 9.8 and higher. It is
 not guaranteed to work on previous versions.
