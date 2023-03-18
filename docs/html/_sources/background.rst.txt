@@ -45,7 +45,7 @@ We define a left action of `\mathrm{GL}_r(K_{\infty})` on
 
 where `j(\gamma, w) := \xi^{-1} \cdot (\text{last entry of }\gamma w)`.
 
-.. RUBRIC:: Universal Drinfeld module over `\Omega^r(\mathbb{C}_{\infty})`
+.. RUBRIC:: Universal Drinfeld module over `\Omega^r(\mathbb{C}_{\infty})` and modular forms
 
 For any `w = (w_1, \ldots, w_{r-1}, \xi)` in
 `\Omega^r(\mathbb{C}_{\infty})` we have a corresponding free `A`-lattice
