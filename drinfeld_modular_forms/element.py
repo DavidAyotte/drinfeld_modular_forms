@@ -28,6 +28,8 @@ potentially different weights::
     sage: H.weight()
     80
 
+.. RUBRIC:: Rank 2 two case
+
 In the rank 2 case, on can compute the expansion at infinity of any
 graded Drinfeld modular form::
 
@@ -44,6 +46,26 @@ To access the `i`-th coefficient of the expansion::
     T^9 + 2*T
     sage: F[0:15]  # i = 0...14
     [0, 0, 2, 0, 2*T^3 + T, 0, 1, 0, 0, 0, 2*T^6 + 2*T^4 + 2*T^2, 0, 0, 0, 2]
+
+It is also possible to create the ring of Drinfeld modular forms with
+arbitrary type using the option ``has_type=True``::
+
+    sage: q = 3
+    sage: A = GF(q)['T']
+    sage: K.<T> = Frac(A)
+    sage: M = DrinfeldModularFormsRing(K, 2, has_type=True)
+    sage: M.gens()
+    [g1, h]
+    sage: M.inject_variables()
+    Defining g1, h
+    sage: h.weight()
+    4
+    sage: h.expansion()
+    t + t^5 + ((2*T^3+T)*t^7) + O(t^8)
+    sage: M.coefficient_form(1)
+    g1
+    sage: M.coefficient_form(2)
+    h^2
 
 AUTHORS:
 
