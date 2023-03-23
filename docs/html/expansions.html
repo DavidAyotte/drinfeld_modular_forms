@@ -314,8 +314,8 @@ coefficient is 1.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="drinfeld_modular_forms.expansions.compute_eisentein_serie_rank_2">
-<span class="sig-prename descclassname"><span class="pre">drinfeld_modular_forms.expansions.</span></span><span class="sig-name descname"><span class="pre">compute_eisentein_serie_rank_2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">polynomial_ring</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'t'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#drinfeld_modular_forms.expansions.compute_eisentein_serie_rank_2" title="Permalink to this definition">#</a></dt>
+<dt class="sig sig-object py" id="drinfeld_modular_forms.expansions.compute_eisentein_series_rank_2">
+<span class="sig-prename descclassname"><span class="pre">drinfeld_modular_forms.expansions.</span></span><span class="sig-name descname"><span class="pre">compute_eisentein_series_rank_2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">polynomial_ring</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'t'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#drinfeld_modular_forms.expansions.compute_eisentein_series_rank_2" title="Permalink to this definition">#</a></dt>
 <dd><p>Return the expansion fo the normalized Drinfeld Eisenstein series of
 weight <span class="math notranslate nohighlight">\(q-1\)</span>.</p>
 <p>Recall that this form is defined by:</p>
@@ -335,9 +335,9 @@ weight <span class="math notranslate nohighlight">\(q-1\)</span>.</p>
 <p>We have <span class="math notranslate nohighlight">\(E_{q-1} = 1 - (T^q - T)f_{q - 1, q - 1}\)</span>.</p>
 </div>
 <p>EXAMPLES:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sage</span><span class="p">:</span> <span class="kn">from</span> <span class="nn">drinfeld_modular_forms</span> <span class="kn">import</span> <span class="n">compute_eisentein_serie_rank_2</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sage</span><span class="p">:</span> <span class="kn">from</span> <span class="nn">drinfeld_modular_forms</span> <span class="kn">import</span> <span class="n">compute_eisentein_series_rank_2</span>
 <span class="n">sage</span><span class="p">:</span> <span class="n">A</span> <span class="o">=</span> <span class="n">GF</span><span class="p">(</span><span class="mi">3</span><span class="p">)[</span><span class="s1">&#39;T&#39;</span><span class="p">]</span>
-<span class="n">sage</span><span class="p">:</span> <span class="n">E</span> <span class="o">=</span> <span class="n">compute_eisentein_serie_rank_2</span><span class="p">(</span><span class="n">A</span><span class="p">);</span> <span class="n">E</span>
+<span class="n">sage</span><span class="p">:</span> <span class="n">E</span> <span class="o">=</span> <span class="n">compute_eisentein_series_rank_2</span><span class="p">(</span><span class="n">A</span><span class="p">);</span> <span class="n">E</span>
 <span class="mi">1</span> <span class="o">+</span> <span class="p">((</span><span class="mi">2</span><span class="o">*</span><span class="n">T</span><span class="o">^</span><span class="mi">3</span><span class="o">+</span><span class="n">T</span><span class="p">)</span><span class="o">*</span><span class="n">t</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">O</span><span class="p">(</span><span class="n">t</span><span class="o">^</span><span class="mi">7</span><span class="p">)</span>
 <span class="n">sage</span><span class="p">:</span> <span class="n">E</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">15</span><span class="p">]</span>
 <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">T</span><span class="o">^</span><span class="mi">3</span> <span class="o">+</span> <span class="n">T</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">T</span><span class="o">^</span><span class="mi">3</span> <span class="o">+</span> <span class="n">T</span><span class="p">]</span>
@@ -486,8 +486,12 @@ ring generator</p></li>
 <li><a class="reference internal" href="#">Expansion at infinity for rank 2</a><ul>
 <li><a class="reference internal" href="#drinfeld_modular_forms.expansions.coefficient_petrov_expansion"><code class="docutils literal notranslate"><span class="pre">coefficient_petrov_expansion()</span></code></a></li>
 <li><a class="reference internal" href="#drinfeld_modular_forms.expansions.compute_delta_rank_2"><code class="docutils literal notranslate"><span class="pre">compute_delta_rank_2()</span></code></a></li>
+<<<<<<< HEAD
 <li><a class="reference internal" href="#drinfeld_modular_forms.expansions.compute_eisentein_serie_rank_2"><code class="docutils literal notranslate"><span class="pre">compute_eisentein_serie_rank_2()</span></code></a></li>
 <li><a class="reference internal" href="#drinfeld_modular_forms.expansions.compute_h_rank_2"><code class="docutils literal notranslate"><span class="pre">compute_h_rank_2()</span></code></a></li>
+=======
+<li><a class="reference internal" href="#drinfeld_modular_forms.expansions.compute_eisentein_series_rank_2"><code class="docutils literal notranslate"><span class="pre">compute_eisentein_series_rank_2()</span></code></a></li>
+>>>>>>> develop
 <li><a class="reference internal" href="#drinfeld_modular_forms.expansions.compute_petrov_expansion"><code class="docutils literal notranslate"><span class="pre">compute_petrov_expansion()</span></code></a></li>
 <li><a class="reference internal" href="#drinfeld_modular_forms.expansions.inverse_cyclotomic_polynomial"><code class="docutils literal notranslate"><span class="pre">inverse_cyclotomic_polynomial()</span></code></a></li>
 <li><a class="reference internal" href="#drinfeld_modular_forms.expansions.parameter_at_infinity"><code class="docutils literal notranslate"><span class="pre">parameter_at_infinity()</span></code></a></li>

@@ -269,7 +269,7 @@ def compute_delta_rank_2(polynomial_ring, name='t'):
     q = polynomial_ring.base_ring().cardinality()
     return compute_petrov_expansion(q**2 - 1, q - 1, polynomial_ring, name)
 
-def compute_eisentein_serie_rank_2(polynomial_ring, name='t'):
+def compute_eisentein_series_rank_2(polynomial_ring, name='t'):
     r"""
     Return the expansion fo the normalized Drinfeld Eisenstein series of
     weight `q-1`.
@@ -295,9 +295,9 @@ def compute_eisentein_serie_rank_2(polynomial_ring, name='t'):
 
     EXAMPLES::
 
-        sage: from drinfeld_modular_forms import compute_eisentein_serie_rank_2
+        sage: from drinfeld_modular_forms import compute_eisentein_series_rank_2
         sage: A = GF(3)['T']
-        sage: E = compute_eisentein_serie_rank_2(A); E
+        sage: E = compute_eisentein_series_rank_2(A); E
         1 + ((2*T^3+T)*t^2) + O(t^7)
         sage: E[0:15]
         [1, 0, 2*T^3 + T, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2*T^3 + T]
