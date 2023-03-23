@@ -164,9 +164,12 @@ class DrinfeldModularFormsRing(Parent, UniqueRepresentation):
     - ``group`` (NoneType) -- the group of self. The current
       implementation only supports the full group
       `\mathbb{GL}_r(A)`.
+    - ``has_type`` (bool, default: ``False``) -- if set to True, returns
+      the graded ring of arbitrary type. Currently only implemented in
+      rank two.
     - ``names`` (string, default: ``'g'``) -- a single character or a
       comma seperated string of character representing the names of the
-      generators
+      generators.
 
     TESTS::
 
@@ -193,7 +196,8 @@ class DrinfeldModularFormsRing(Parent, UniqueRepresentation):
         q = base_ring.base_ring().cardinality()
         if has_type:
             if rank != 2:
-                raise NotImplementedError
+                raise NotImplementedError("ring with type are not "
+                                          "implemented in rank =/= 2")
             if len(names) == 1:
                 names += "1, h"
             degs = [q - 1, q + 1]
