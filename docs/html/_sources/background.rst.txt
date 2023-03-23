@@ -20,21 +20,20 @@ denote by `\tau : x\mapsto x^q` the `q`-Frobenius.
 .. RUBRIC:: Drinfeld period domain and group action
 
 The *Drinfeld period domain of rank* `r > 1` is
-defined to be
+defined by
 
 .. MATH::
 
     \Omega^r(\mathbb{C}_{\infty}) :=
     \mathbb{P}^{r-1}(\mathbb{C}_{\infty})
-    \setminus \mathbb{P}^{r-1}(K_{\infty})
+    \setminus \mathbb{P}^{r-1}(K_{\infty}).
 
-For any `w = (w_1:\ldots: w_{r-1}:w_r)^{\mathrm{T}}` in
-`\Omega^r(\mathbb{C}_{\infty})`. This space is a rigid analytic space
-and plays the role of complex upper half plane. We identify the elements
+This space is a rigid analytic space
+and plays the role of the complex upper half plane. We identify the elements
 of `\Omega^r(\mathbb{C}_{\infty})` with the set of column vectors
 `(w_1,\ldots, w_{r-1}, w_{r})^{\mathrm{T}}` in `\mathbb{C}_{\infty}^r`
 such that the `w_i` are `K_{\infty}`-linearly independant and
-`w_r = \xi` a nonzero constant in `\mathbb{C}_{\infty}`.
+`w_r = \xi`, a nonzero constant in `\mathbb{C}_{\infty}`.
 
 We define a left action of `\mathrm{GL}_r(K_{\infty})` on
 `\Omega^r(\mathbb{C}_{\infty})` by setting
