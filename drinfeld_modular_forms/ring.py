@@ -223,6 +223,19 @@ class DrinfeldModularFormsRing(Parent, UniqueRepresentation):
         Parent.__init__(self, base=base_ring, category=GradedAlgebras(base_ring))
 
     def _an_element_(self):
+        r"""
+        Return an element of self.
+
+        EXAMPLES::
+
+            sage: from drinfeld_modular_forms import DrinfeldModularFormsRing
+            sage: q = 3
+            sage: A = GF(q)['T']
+            sage: K.<T> = Frac(A)
+            sage: M = DrinfeldModularFormsRing(K)
+            sage: M.an_element()
+            g1
+        """
         return self.element_class(self, self._poly_ring.an_element())
 
     def _repr_(self):
@@ -292,6 +305,32 @@ class DrinfeldModularFormsRing(Parent, UniqueRepresentation):
         return sum(c[0][i]*b for i, b in enumerate(basis))
 
     def coefficient_form(self, i):
+        r"""
+        Return the `i`-th coefficient form of the universal Drinfeld
+        module over `\Omega^r(\mathbb{C}_{\infty})`.
+
+        EXAMPLES::
+
+            sage: from drinfeld_modular_forms import DrinfeldModularFormsRing
+            sage: q = 3
+            sage: A = GF(q)['T']
+            sage: K.<T> = Frac(A)
+            sage: M = DrinfeldModularFormsRing(K, 3)
+            sage: M.coefficient_form(1)
+            g1
+            sage: M.coefficient_form(2)
+            g2
+            sage: M.coefficient_form(3)
+            g3
+
+        ::
+
+            sage: M = DrinfeldModularFormsRing(K, 2, has_type=True)
+            sage: M.coefficient_form(1)
+            g1
+            sage: M.coefficient_form(2)
+            h^2
+        """
         if i not in ZZ:
             raise TypeError("i must be an integer")
         i = ZZ(i)
