@@ -10,6 +10,7 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://github.com/DavidAyotte/drinfeld_modular_forms",
     packages=["drinfeld_modular_forms"],
+    package_dir={'':'src'},
     extras_require={"doc": "sphinx>=2"},
     classifiers=[
         "Topic :: Scientific/Engineering :: Mathematics",
