@@ -91,7 +91,7 @@ The coefficients
 `g_i : \Omega^r(\mathbb{C}_{\infty}) \rightarrow \mathbb{C}_{\infty}`
 are rigid analytic function which satisfies a modular invariance
 properties under the action of the group `\mathrm{GL}_r(A)`. These
-function are examples of *modular forms*
+function are examples of *modular forms*.
 
 **Definition.**
 
@@ -108,12 +108,9 @@ such that
 
 The second condition is similar to the classical case. In the rank two
 situation, this expansion is simply given by
+`f = \sum_{n\geq 0} a_n(f) t^n` where `a_n(f)\in \mathbb{C}_{\infty}`.
 
-.. MATH::
-
-    f = \sum_{n\geq 0} a_n(f) t^n.
-
-where `a_n(f)\in \mathbb{C}_{\infty}`. The reader is refered to
+The reader is refered to
 part I of [BRP2018]_ for more information about the analytic theory of
 Drinfeld modular form of arbitrary rank.
 
