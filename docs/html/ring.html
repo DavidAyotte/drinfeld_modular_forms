@@ -314,7 +314,7 @@ any coefficient at any precision on demands:</p>
 </ul>
 <dl class="py class">
 <dt class="sig sig-object py" id="drinfeld_modular_forms.ring.DrinfeldModularFormsRing">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">drinfeld_modular_forms.ring.</span></span><span class="sig-name descname"><span class="pre">DrinfeldModularFormsRing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base_ring</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rank</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'g'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#drinfeld_modular_forms.ring.DrinfeldModularFormsRing" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">drinfeld_modular_forms.ring.</span></span><span class="sig-name descname"><span class="pre">DrinfeldModularFormsRing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base_ring</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rank</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">has_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'g'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#drinfeld_modular_forms.ring.DrinfeldModularFormsRing" title="Permalink to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Parent</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">UniqueRepresentation</span></code></p>
 <p>Base class for the graded Drinfeld modular forms ring.</p>
 <p>INPUT:</p>
@@ -325,9 +325,12 @@ ring over <span class="math notranslate nohighlight">\(\mathbb{F}_q\)</span>.</p
 <li><p><code class="docutils literal notranslate"><span class="pre">group</span></code> (NoneType) – the group of self. The current
 implementation only supports the full group
 <span class="math notranslate nohighlight">\(\mathbb{GL}_r(A)\)</span>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">has_type</span></code> (bool, default: <code class="docutils literal notranslate"><span class="pre">False</span></code>) – if set to True, returns
+the graded ring of arbitrary type. Currently only implemented in
+rank two.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">names</span></code> (string, default: <code class="docutils literal notranslate"><span class="pre">'g'</span></code>) – a single character or a
 comma seperated string of character representing the names of the
-generators</p></li>
+generators.</p></li>
 </ul>
 <p>TESTS:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sage</span><span class="p">:</span> <span class="kn">from</span> <span class="nn">drinfeld_modular_forms</span> <span class="kn">import</span> <span class="n">DrinfeldModularFormsRing</span>
@@ -397,6 +400,34 @@ subspace of weight <span class="math notranslate nohighlight">\(k\)</span>.</p>
 <span class="p">[</span><span class="n">g1</span><span class="o">*</span><span class="n">g2</span><span class="o">^</span><span class="mi">3</span><span class="p">,</span> <span class="n">g1</span><span class="o">^</span><span class="mi">5</span><span class="o">*</span><span class="n">g2</span><span class="o">^</span><span class="mi">2</span><span class="p">,</span> <span class="n">g1</span><span class="o">^</span><span class="mi">9</span><span class="o">*</span><span class="n">g2</span><span class="p">,</span> <span class="n">g1</span><span class="o">^</span><span class="mi">13</span><span class="p">]</span>
 <span class="n">sage</span><span class="p">:</span> <span class="n">M</span><span class="o">.</span><span class="n">basis_of_weight</span><span class="p">(</span><span class="mi">19</span><span class="o">*</span><span class="p">(</span><span class="n">q</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
 <span class="p">[</span><span class="n">g1</span><span class="o">^</span><span class="mi">3</span><span class="o">*</span><span class="n">g2</span><span class="o">^</span><span class="mi">4</span><span class="p">,</span> <span class="n">g1</span><span class="o">^</span><span class="mi">7</span><span class="o">*</span><span class="n">g2</span><span class="o">^</span><span class="mi">3</span><span class="p">,</span> <span class="n">g1</span><span class="o">^</span><span class="mi">11</span><span class="o">*</span><span class="n">g2</span><span class="o">^</span><span class="mi">2</span><span class="p">,</span> <span class="n">g1</span><span class="o">^</span><span class="mi">15</span><span class="o">*</span><span class="n">g2</span><span class="p">,</span> <span class="n">g1</span><span class="o">^</span><span class="mi">19</span><span class="p">]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="drinfeld_modular_forms.ring.DrinfeldModularFormsRing.coefficient_form">
+<span class="sig-name descname"><span class="pre">coefficient_form</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#drinfeld_modular_forms.ring.DrinfeldModularFormsRing.coefficient_form" title="Permalink to this definition">#</a></dt>
+<dd><p>Return the <span class="math notranslate nohighlight">\(i\)</span>-th coefficient form of the universal Drinfeld
+module over <span class="math notranslate nohighlight">\(\Omega^r(\mathbb{C}_{\infty})\)</span>.</p>
+<p>EXAMPLES:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sage</span><span class="p">:</span> <span class="kn">from</span> <span class="nn">drinfeld_modular_forms</span> <span class="kn">import</span> <span class="n">DrinfeldModularFormsRing</span>
+<span class="n">sage</span><span class="p">:</span> <span class="n">q</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">sage</span><span class="p">:</span> <span class="n">A</span> <span class="o">=</span> <span class="n">GF</span><span class="p">(</span><span class="n">q</span><span class="p">)[</span><span class="s1">&#39;T&#39;</span><span class="p">]</span>
+<span class="n">sage</span><span class="p">:</span> <span class="n">K</span><span class="o">.&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="n">Frac</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="n">sage</span><span class="p">:</span> <span class="n">M</span> <span class="o">=</span> <span class="n">DrinfeldModularFormsRing</span><span class="p">(</span><span class="n">K</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">sage</span><span class="p">:</span> <span class="n">M</span><span class="o">.</span><span class="n">coefficient_form</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">g1</span>
+<span class="n">sage</span><span class="p">:</span> <span class="n">M</span><span class="o">.</span><span class="n">coefficient_form</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">g2</span>
+<span class="n">sage</span><span class="p">:</span> <span class="n">M</span><span class="o">.</span><span class="n">coefficient_form</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">g3</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sage</span><span class="p">:</span> <span class="n">M</span> <span class="o">=</span> <span class="n">DrinfeldModularFormsRing</span><span class="p">(</span><span class="n">K</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">has_type</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">sage</span><span class="p">:</span> <span class="n">M</span><span class="o">.</span><span class="n">coefficient_form</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">g1</span>
+<span class="n">sage</span><span class="p">:</span> <span class="n">M</span><span class="o">.</span><span class="n">coefficient_form</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">h</span><span class="o">^</span><span class="mi">2</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -704,6 +735,7 @@ associated generator:</p>
 <li><a class="reference internal" href="#drinfeld_modular_forms.ring.DrinfeldModularFormsRing.Element"><code class="docutils literal notranslate"><span class="pre">DrinfeldModularFormsRing.Element</span></code></a></li>
 <li><a class="reference internal" href="#drinfeld_modular_forms.ring.DrinfeldModularFormsRing.basis"><code class="docutils literal notranslate"><span class="pre">DrinfeldModularFormsRing.basis()</span></code></a></li>
 <li><a class="reference internal" href="#drinfeld_modular_forms.ring.DrinfeldModularFormsRing.basis_of_weight"><code class="docutils literal notranslate"><span class="pre">DrinfeldModularFormsRing.basis_of_weight()</span></code></a></li>
+<li><a class="reference internal" href="#drinfeld_modular_forms.ring.DrinfeldModularFormsRing.coefficient_form"><code class="docutils literal notranslate"><span class="pre">DrinfeldModularFormsRing.coefficient_form()</span></code></a></li>
 <li><a class="reference internal" href="#drinfeld_modular_forms.ring.DrinfeldModularFormsRing.eisenstein_series"><code class="docutils literal notranslate"><span class="pre">DrinfeldModularFormsRing.eisenstein_series()</span></code></a></li>
 <li><a class="reference internal" href="#drinfeld_modular_forms.ring.DrinfeldModularFormsRing.from_expansion"><code class="docutils literal notranslate"><span class="pre">DrinfeldModularFormsRing.from_expansion()</span></code></a></li>
 <li><a class="reference internal" href="#drinfeld_modular_forms.ring.DrinfeldModularFormsRing.gen"><code class="docutils literal notranslate"><span class="pre">DrinfeldModularFormsRing.gen()</span></code></a></li>

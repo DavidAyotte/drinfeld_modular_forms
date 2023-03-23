@@ -91,29 +91,62 @@ Drinfeld `\mathbb{F}_q[T]`-module over `\Omega^r(\mathbb{C}_{\infty})`.
 The coefficients
 `g_i : \Omega^r(\mathbb{C}_{\infty}) \rightarrow \mathbb{C}_{\infty}`
 are rigid analytic function which satisfies a modular invariance
-properties under some action of the group `\mathrm{GL}_r(A)`. They also
-satisfies an holomorphicity property at infinity, so that they are
-*Drinfeld modular forms of weight* `q^i - 1`. The reader is refered to
-part I of [BRP2018]_ for more information about the analytic theory of
-Drinfeld modular form.
+properties under the action of the group `\mathrm{GL}_r(A)`. These
+function are examples of *modular forms*
 
-.. RUBRIC:: Ring of Drinfeld modular form
+**Definition.**
 
-Letting `M_k^r(\mathrm{GL}_r(A))` denote the space of weight `k` and
-rank `r` Drinfeld modular forms, we define
+A *Drinfeld modular form* of rank `r`, weight `k`, type `m` for
+`\mathrm{GL}_r(A)` is a rigid analytic function
+`f:\Omega^r(\mathbb{C}_{\infty}) \rightarrow \mathbb{C}_{\infty}`
+such that
+
+* `f(\gamma(w)) = \mathrm{det}(\gamma)^m j(\gamma, w)^k f(w)` for all
+  `\gamma` in `\mathrm{GL}_r(A)` and
+  `w\in \Omega^r(\mathbb{C}_{\infty})`;
+
+* `f` is holomorphic at infinity.
+
+The second condition is similar to the classical case. In the rank two
+situation, this expansion is simply given by
 
 .. MATH::
 
-    M^r(\mathrm{GL}_r(A)) :=
-    \bigoplus_{k\in \mathbb{Z}} M_k^r(\mathrm{GL}_r(A))
+    f = \sum_{n\geq 0} a_n(f) t^n.
+
+where `a_n(f)\in \mathbb{C}_{\infty}`. The reader is refered to
+part I of [BRP2018]_ for more information about the analytic theory of
+Drinfeld modular form of arbitrary rank.
+
+.. RUBRIC:: Ring of Drinfeld modular form
+
+Letting `M_k^{r, m}(\mathrm{GL}_r(A))` denote the space of rank `r`,
+weight `k` and type `m` (`k\geq 0` and `m\in (q - 1)\mathbb{Z}`)
+Drinfeld modular forms, we define
+
+.. MATH::
+
+    M^{r, 0}(\mathrm{GL}_r(A)) :=
+    \bigoplus_{k\in ZZ} M_k^{r}(\mathrm{GL}_r(A))
 
 to be the graded ring of all Drinfeld modular forms. By theorem 17.5 in
 part III of [BRP2018]_, we have
 
 .. MATH::
 
-    M^r(\mathrm{GL}_r(A))
+    M^{r, 0}(\mathrm{GL}_r(A))
     = \mathbb{C}_{\infty}[g_1,\ldots, g_{r-1}, g_{r}].
+
+Furthermore, in the rank two case, we also have
+
+.. MATH::
+
+    M^r(\mathrm{GL}_r(A)) :=
+    \bigoplus_{k, m} M_k^{r, m}(\mathrm{GL}_r(A))
+    = \mathbb{C}_{\infty}[g_1, h]
+
+where `h` is a modular form of weight `q+1`, type 1 with expansion
+`t + O(t^2)` (see (5.13) of [Gek1988]_).
 
 .. RUBRIC:: Rank two examples
 

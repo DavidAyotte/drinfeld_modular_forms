@@ -273,26 +273,53 @@ Drinfeld <span class="math notranslate nohighlight">\(\mathbb{F}_q[T]\)</span>-m
 The coefficients
 <span class="math notranslate nohighlight">\(g_i : \Omega^r(\mathbb{C}_{\infty}) \rightarrow \mathbb{C}_{\infty}\)</span>
 are rigid analytic function which satisfies a modular invariance
-properties under some action of the group <span class="math notranslate nohighlight">\(\mathrm{GL}_r(A)\)</span>. They also
-satisfies an holomorphicity property at infinity, so that they are
-<em>Drinfeld modular forms of weight</em> <span class="math notranslate nohighlight">\(q^i - 1\)</span>. The reader is refered to
-part I of <a class="reference internal" href="#brp2018" id="id2"><span>[BRP2018]</span></a> for more information about the analytic theory of
-Drinfeld modular form.</p>
-<p class="rubric">Ring of Drinfeld modular form</p>
-<p>Letting <span class="math notranslate nohighlight">\(M_k^r(\mathrm{GL}_r(A))\)</span> denote the space of weight <span class="math notranslate nohighlight">\(k\)</span> and
-rank <span class="math notranslate nohighlight">\(r\)</span> Drinfeld modular forms, we define</p>
+properties under the action of the group <span class="math notranslate nohighlight">\(\mathrm{GL}_r(A)\)</span>. These
+function are examples of <em>modular forms</em></p>
+<p><strong>Definition.</strong></p>
+<p>A <em>Drinfeld modular form</em> of rank <span class="math notranslate nohighlight">\(r\)</span>, weight <span class="math notranslate nohighlight">\(k\)</span>, type <span class="math notranslate nohighlight">\(m\)</span> for
+<span class="math notranslate nohighlight">\(\mathrm{GL}_r(A)\)</span> is a rigid analytic function
+<span class="math notranslate nohighlight">\(f:\Omega^r(\mathbb{C}_{\infty}) \rightarrow \mathbb{C}_{\infty}\)</span>
+such that</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(f(\gamma(w)) = \mathrm{det}(\gamma)^m j(\gamma, w)^k f(w)\)</span> for all
+<span class="math notranslate nohighlight">\(\gamma\)</span> in <span class="math notranslate nohighlight">\(\mathrm{GL}_r(A)\)</span> and
+<span class="math notranslate nohighlight">\(w\in \Omega^r(\mathbb{C}_{\infty})\)</span>;</p></li>
+<li><p><span class="math notranslate nohighlight">\(f\)</span> is holomorphic at infinity.</p></li>
+</ul>
+<p>The second condition is similar to the classical case. In the rank two
+situation, this expansion is simply given by</p>
 <div class="math-wrapper docutils container">
 <div class="math notranslate nohighlight">
-\[M^r(\mathrm{GL}_r(A)) :=
-\bigoplus_{k\in \mathbb{Z}} M_k^r(\mathrm{GL}_r(A))\]</div>
+\[f = \sum_{n\geq 0} a_n(f) t^n.\]</div>
+</div>
+<p>where <span class="math notranslate nohighlight">\(a_n(f)\in \mathbb{C}_{\infty}\)</span>. The reader is refered to
+part I of <a class="reference internal" href="#brp2018" id="id2"><span>[BRP2018]</span></a> for more information about the analytic theory of
+Drinfeld modular form of arbitrary rank.</p>
+<p class="rubric">Ring of Drinfeld modular form</p>
+<p>Letting <span class="math notranslate nohighlight">\(M_k^{r, m}(\mathrm{GL}_r(A))\)</span> denote the space of rank <span class="math notranslate nohighlight">\(r\)</span>,
+weight <span class="math notranslate nohighlight">\(k\)</span> and type <span class="math notranslate nohighlight">\(m\)</span> (<span class="math notranslate nohighlight">\(k\geq 0\)</span> and <span class="math notranslate nohighlight">\(m\in (q - 1)\mathbb{Z}\)</span>)
+Drinfeld modular forms, we define</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[M^{r, 0}(\mathrm{GL}_r(A)) :=
+\bigoplus_{k\in ZZ} M_k^{r}(\mathrm{GL}_r(A))\]</div>
 </div>
 <p>to be the graded ring of all Drinfeld modular forms. By theorem 17.5 in
 part III of <a class="reference internal" href="#brp2018" id="id3"><span>[BRP2018]</span></a>, we have</p>
 <div class="math-wrapper docutils container">
 <div class="math notranslate nohighlight">
-\[M^r(\mathrm{GL}_r(A))
+\[M^{r, 0}(\mathrm{GL}_r(A))
 = \mathbb{C}_{\infty}[g_1,\ldots, g_{r-1}, g_{r}].\]</div>
 </div>
+<p>Furthermore, in the rank two case, we also have</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[M^r(\mathrm{GL}_r(A)) :=
+\bigoplus_{k, m} M_k^{r, m}(\mathrm{GL}_r(A))
+= \mathbb{C}_{\infty}[g_1, h]\]</div>
+</div>
+<p>where <span class="math notranslate nohighlight">\(h\)</span> is a modular form of weight <span class="math notranslate nohighlight">\(q+1\)</span>, type 1 with expansion
+<span class="math notranslate nohighlight">\(t + O(t^2)\)</span> (see (5.13) of <a class="reference internal" href="#gek1988" id="id4"><span>[Gek1988]</span></a>).</p>
 <p class="rubric">Rank two examples</p>
 <ul class="simple">
 <li><p>Drinfeld Eisenstein series</p></li>
@@ -314,7 +341,7 @@ expansion</p>
 </div>
 <p>where <span class="math notranslate nohighlight">\(\tilde{\pi}\)</span> is the Carlitz period (analogue of <span class="math notranslate nohighlight">\(\pi\)</span>) and <span class="math notranslate nohighlight">\(G_k\)</span> is
 the <span class="math notranslate nohighlight">\(k\)</span>-th Goss polynomial and <span class="math notranslate nohighlight">\(\delta_k \in K\)</span> is some constant
-depending on <span class="math notranslate nohighlight">\(k\)</span>. See section 6 of <a class="reference internal" href="#gek1988" id="id4"><span>[Gek1988]</span></a> for the proof of this
+depending on <span class="math notranslate nohighlight">\(k\)</span>. See section 6 of <a class="reference internal" href="#gek1988" id="id5"><span>[Gek1988]</span></a> for the proof of this
 fact. We will denote by</p>
 <div class="math-wrapper docutils container">
 <div class="math notranslate nohighlight">
@@ -333,7 +360,7 @@ leading coefficient form of the rank 2 universal Drinfeld module over
 <div class="math notranslate nohighlight">
 \[\phi^w : T \mapsto T + g_1(w)\tau + \Delta(w)\tau^2.\]</div>
 </div>
-<p>By the work of López in <a class="reference internal" href="#lop2010" id="id5"><span>[Lop2010]</span></a>, the discriminant function admits an
+<p>By the work of López in <a class="reference internal" href="#lop2010" id="id6"><span>[Lop2010]</span></a>, the discriminant function admits an
 expansion of the form</p>
 <div class="math-wrapper docutils container">
 <div class="math notranslate nohighlight">
@@ -353,7 +380,7 @@ and elements <span class="math notranslate nohighlight">\(c_{a}(f)\in \mathbb{C}
 \sum_{\substack{a\in \mathbb{F}_q[T] \\ a\text{ monic}}}
 c_a(f)G_n(t(az)).\end{split}\]</div>
 </div>
-<p>In <a class="reference internal" href="#pet2013" id="id6"><span>[Pet2013]</span></a>, Petrov showed that</p>
+<p>In <a class="reference internal" href="#pet2013" id="id7"><span>[Pet2013]</span></a>, Petrov showed that</p>
 <div class="math-wrapper docutils container">
 <div class="math notranslate nohighlight">
 \[\begin{split}f_{k, n} :=
@@ -376,7 +403,8 @@ Part III: <a class="reference external" href="https://arxiv.org/abs/1805.12339">
 2018.</p>
 </div>
 <div class="citation" id="gek1988" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id4">Gek1988</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span>Gek1988<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id4">1</a>,<a role="doc-backlink" href="#id5">2</a>)</span>
 <p>Gekeler, EU. On the coefficients of Drinfeld modular forms.
 Invent Math 93, 667-700 (1988).
 <a class="reference external" href="https://doi.org/10.1007/BF01410204">doi.org/10.1007/BF01410204</a></p>
@@ -388,13 +416,13 @@ Springer, 1998.
 <a class="reference external" href="https://doi.org/10.1007/978-3-642-61480-4">doi.org/10.1007/978-3-642-61480-4</a></p>
 </div>
 <div class="citation" id="lop2010" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id5">Lop2010</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id6">Lop2010</a><span class="fn-bracket">]</span></span>
 <p>López, B. A non-standard Fourier expansion for the Drinfeld
 discriminant function. Arch. Math. 95, 143-150 (2010).
 <a class="reference external" href="https://doi.org/10.1007/s00013-010-0148-7">doi.org/10.1007/s00013-010-0148-7</a></p>
 </div>
 <div class="citation" id="pet2013" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id6">Pet2013</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id7">Pet2013</a><span class="fn-bracket">]</span></span>
 <p>Petrov A., A-expansions of Drinfeld modular forms,
 Journal of Number Theory, Volume 133, Issue 7, 2013,
 <a class="reference external" href="https://doi.org/10.1016/j.jnt.2012.12.012">doi.org/10.1016/j.jnt.2012.12.012</a></p>
