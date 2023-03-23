@@ -241,7 +241,7 @@ class DrinfeldModularFormsRingElement(ModuleElement):
 
     def __getitem__(self, n):
         r"""
-        Return the `n`-coefficient of the Drinfeld modular form.
+        Return the `n`-coefficient of the graded Drinfeld form.
 
         This method is only implemented when the rank is 2.
 
@@ -267,7 +267,7 @@ class DrinfeldModularFormsRingElement(ModuleElement):
 
     def rank(self):
         r"""
-        Return the rank of graded Drinfeld modular form.
+        Return the rank of the graded Drinfeld form.
 
         EXAMPLES::
 
@@ -452,6 +452,43 @@ class DrinfeldModularFormsRingElement(ModuleElement):
             8
         """
         return self._polynomial
+
+    def type_m(self):  # Find a better name
+        r"""
+        Return the type of the graded Drinfeld form.
+
+        Recall that the *type* is the integer `m` such that
+
+        .. MATH::
+
+            f(\gamma(w)) = \mathrm{det}(\gamma)^m j(\gamma, w)^k f(w).
+
+        This method is only implemented when the rank is two.
+
+        EXAMPLES::
+
+            sage: from drinfeld_modular_forms import DrinfeldModularFormsRing
+            sage: A = GF(11)['T']; K = Frac(A)
+            sage: M = DrinfeldModularFormsRing(K, 2, has_type=True)
+            sage: M.inject_variables()
+            Defining g1, h
+            sage: F = g1*h^9
+            sage: F.type_m()
+            9
+            sage: (h^11).type_m()
+            1
+            sage: g1.type_m()
+            0
+        """
+        if self.parent()._rank != 2:
+            raise NotImplementedError("type not implemented when "
+                                      "rank is not two")
+        if not self.is_drinfeld_modular_form():
+            raise ValueError("self should be a Drinfeld modular form")
+        if not self.parent()._has_type:
+            return ZZ(0)
+        q = self.base_ring().base_ring().cardinality()
+        return self.polynomial().degrees()[1]%(q-1)
 
     def weight(self):
         r"""
