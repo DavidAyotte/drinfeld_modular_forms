@@ -146,7 +146,7 @@ Furthermore, in the rank two case, we also have
     = \mathbb{C}_{\infty}[g_1, h]
 
 where `h` is a modular form of weight `q+1`, type 1 with expansion
-`t + t^5 + O(t^7)` (see (5.13) of [Gek1988]_).
+`t + O(t^2)` (see (5.13) of [Gek1988]_).
 
 .. RUBRIC:: Rank two examples
 
