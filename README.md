@@ -1,22 +1,41 @@
 # Drinfeld Modular Forms
 
-This SageMath package provides an implementation for computing with Drinfeld modular forms for `GL_r(A)`.
+This SageMath package provides an implementation for computing with Drinfeld modular forms for the full modular group.
 
-To install this package, first clone this repository and then run the following command (inside the project's folder):
+## Installation
+
+This package has been tested on SageMath version 9.8 and higher. It is
+not guaranteed to work on previous versions.
+
+### Install from PyPI
+
+The easiest way to install this package is via PyPI. You simply have to run SageMath first and then type the following command
+
+`sage: pip install drinfeld-modular-forms`
+
+### Install from source code
+
+You can also install this package by cloning the source code from the [Github repo](https://github.com/DavidAyotte/drinfeld_modular_forms).
+
+Next, you have to run `make install` inside the project's folder. You can also run the following command:
 
 `sage -pip install --upgrade --no-index -v .`
 
 If there is any changes to the current repo, you will then simply need to pull the changes and run the above command again.
 
-Next, if you want to import everything in your session, just run:
+## Usage
+
+After running SageMath, you can import the functionalities of this package by typing the following command:
 
 `sage: from drinfeld_modular_forms import *`
+
+## Documentation
 
 The documentation is available at this address:
 
 https://davidayotte.github.io/drinfeld_modular_forms
 
-## Examples:
+## Examples
 
 One may create the ring of Drinfeld modular forms:
 
@@ -64,22 +83,18 @@ In rank 2, it is also possible to compute the normalized Eisenstein series of we
     g1^13 + (-T^9 + T)*g1*g2^3
 ```
 
-## Note:
+## Notes
+
+This package is based on the intial implementation of Alex Petrov.
 
 Drinfeld modules are currently being implemented in SageMath. See https://github.com/sagemath/sage/pull/350263. As of March 2023, this PR is merged in the current latest development version of SageMath.
 
-
-This package is still in development and some parts of the code is
-based on the initial implementation of Alex Petrov located here:
-
-`petrov/AlexPetrov-original-code-drinfeld-modular-forms.sage`.
-
-## Further Developments:
+## Further Developments
 
 * Add Hecke operators computations.
-* enhance Goss polynomials
+* Add general Goss polynomials
 
-## References:
+## References
 
 * \[1\] Basson D., Breuer F., Pink R., Drinfeld modular forms of arbitrary rank, Part III: Examples, https://arxiv.org/abs/1805.12339
 * \[2\] Gekeler, E.-U., On the coefficients of Drinfelʹd modular forms. Invent. Math. 93 (1988), no. 3, 667–700
