@@ -163,7 +163,7 @@ class DrinfeldModularFormsRing(Parent, UniqueRepresentation):
     - ``rank`` (integer, default: 2) -- the rank of the ring
     - ``group`` (NoneType) -- the group of self. The current
       implementation only supports the full group
-      `\mathbb{GL}_r(A)`.
+      `\mathrm{GL}_r(A)`.
     - ``has_type`` (bool, default: ``False``) -- if set to True, returns
       the graded ring of arbitrary type. Currently only implemented in
       rank two.
