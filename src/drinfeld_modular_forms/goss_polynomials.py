@@ -1,5 +1,5 @@
 r"""
-Goss polynomials for the Carlitz module
+General Goss polynomials
 
 AUTHORS:
 
