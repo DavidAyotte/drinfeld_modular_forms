@@ -15,8 +15,9 @@ not guaranteed to work on previous versions.
 
 * Install from PyPI
 
-The easiest way to install this package is via PyPI. You simply have to
-run SageMath first and then type the following command::
+The easiest way to install this package is via the Python package index.
+You simply have to run SageMath first and then type the following
+command::
 
    sage: pip install drinfeld-modular-forms
 
@@ -26,7 +27,7 @@ You can also install this package by cloning the source code from the
 `Github repo <https://github.com/DavidAyotte/drinfeld_modular_forms>`_.
 
 Next, you have to run ``make install`` inside the project's folder. You
-can also run the following command:::
+can also run the following command::
 
    sage -pip install --upgrade --no-index -v .
 
