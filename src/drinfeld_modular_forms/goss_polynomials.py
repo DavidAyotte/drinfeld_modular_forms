@@ -181,11 +181,8 @@ def drinfeld_logarithm(coeffs, name='z'):
         sage: coeffs = [T, T^5 + T^2 + 2, 1/T, T^3]
         sage: drinfeld_logarithm(coeffs)
         z + (((2*T^5+2*T^2+1)/(T^3+2*T))*z^3) + O(z^8)
-
-    .. TODO::
-
-        Add validity checks to the list ``coeffs``.
     """
+    # Add validity checks to the list ``coeffs``.
     if isinstance(coeffs, list):
         if len(coeffs) < 1:
             raise ValueError("input must be of length >= 1")
@@ -271,11 +268,8 @@ def drinfeld_exponential(coeffs, name='z'):
         sage: coeffs = [T, T^5 + T^2 + 2, 1/T, T^3]
         sage: drinfeld_exponential(coeffs)
         z + (((T^5+T^2+2)/(T^3+2*T))*z^3) + O(z^8)
-
-    .. TODO::
-
-        Add validity checks to the list ``coeffs``.
     """
+    # Add validity checks to the list ``coeffs``.
     L = LazyPowerSeriesRing(coeffs[0].parent(), name)
     exp = lambda k: _compute_coefficient_exp(coeffs, k)
     return L(exp, valuation=1)
