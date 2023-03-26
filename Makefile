@@ -34,6 +34,9 @@ coverage:  # check the documentation coverage
 doc:
 	cd docs && $(SAGE) -sh -c "make html"
 
+build-dist:  # build the distribution for PyPI package
+	$(sage) -sh -c "python3 -m build"
+
 clean: clean-doc
 
 clean-doc:
