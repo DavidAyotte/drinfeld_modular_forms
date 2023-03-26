@@ -1,6 +1,6 @@
 r"""
 Functions for computing Goss polynomials and exponentials of general
-Drinfeld `\mathhb{F}_q[T]`-modules.
+Drinfeld `\mathbb{F}_q[T]`-modules.
 
 AUTHORS:
 
