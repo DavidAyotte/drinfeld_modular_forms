@@ -17,13 +17,18 @@ AUTHORS:
 # ****************************************************************************
 
 from sage.rings.polynomial.polynomial_ring_constructor import PolynomialRing
+from sage.rings.finite_rings.finite_field_constructor import GF
 from sage.rings.real_double import RDF
+from sage.rings.integer_ring import ZZ
 
 from sage.functions.log import log
 
 from drinfeld_modular_forms.drinfeld_modules import DrinfeldModule
+from sage.misc.lazy_import import lazy_import
 
-def bracket(n, polynomial_ring):
+lazy_import('sage.rings.lazy_series_ring', 'LazyPowerSeriesRing')
+
+def bracket(n, K):
     r"""
     Return the element `[n] = T^{q^n} - T` where `T` is the generator of the
     polynomial ring.
@@ -43,11 +48,11 @@ def bracket(n, polynomial_ring):
     """
     if n <= 0:
         raise ValueError(f"the integer n (={n}) must be postive.")
-    q = polynomial_ring.base_ring().cardinality()
-    T = polynomial_ring.gen()
+    q = K.base_ring().cardinality()
+    T = K.gen()
     return T ** (q ** n) - T
 
-def product_of_monic_polynomials(n, polynomial_ring):
+def product_of_monic_polynomials(n, K):
     r"""
     Return the product of all monic polynomials of degree `n`.
 
@@ -66,12 +71,12 @@ def product_of_monic_polynomials(n, polynomial_ring):
     """
     if n < 0:
         raise ValueError(f"the integer n (={n}) must be non-negative.")
-    ans = polynomial_ring.base_ring().one()
-    q = polynomial_ring.base_ring().cardinality()
+    ans = K.one()
+    q = K.base_ring().cardinality()
     if n == 0:
         return ans
     for j in range(1, n+1):
-        ans = ans * bracket(j, polynomial_ring) ** (q ** (n - j))
+        ans = ans * bracket(j, K) ** (q ** (n - j))
     return ans
 
 def lcm_of_monic_polynomials(n, polynomial_ring):
@@ -98,37 +103,121 @@ def lcm_of_monic_polynomials(n, polynomial_ring):
         ans = ans * bracket(j, polynomial_ring)
     return ans
 
-def goss_polynomial(n, polynomial_ring):
+def _compute_coefficient_log(coeffs, k):
+    if k not in ZZ:
+        raise TypeError("input must be an integer")
+    k = ZZ(k)
+    T = coeffs[0]
+    K = T.parent()
+    if k.is_zero():
+        return K.zero()
+    if k.is_one():
+        return K.one()
+    r = len(coeffs)
+    q = K.base_ring().cardinality()
+    if not k.is_power_of(q):
+        return K.zero()
+    c = K.zero()
+    for i in range(k.log(q)):
+        j = k.log(q) - i
+        if j < r:
+            c += _compute_coefficient_log(coeffs, q**i)*coeffs[j]**(q**i)
+    return c/(T - T**k)
+
+def drinfeld_logarithm(coeffs, name='t'):
+    if isinstance(coeffs, list):
+        if len(coeffs) < 1:
+            raise ValueError("input must be of length >= 1")
+    else:
+        raise TypeError("input must be a list representing a Drinfeld "
+                        "module")
+    L = LazyPowerSeriesRing(coeffs[0].parent(), name)
+    log = lambda k: _compute_coefficient_log(coeffs, k)
+    return L(log, valuation=1)
+
+def _compute_coefficient_exp(coeffs, k):
+    if k not in ZZ:
+        raise TypeError("input must be an integer")
+    k = ZZ(k)
+    K = coeffs[0].parent()
+    if k.is_zero():
+        return K.zero()
+    if k.is_one():
+        return K.one()
+    q = K.base_ring().cardinality()
+    if not k.is_power_of(q):
+        return K.zero()
+    c = K.zero()
+    for i in range(k.log(q)):
+        j = k.log(q) - i
+        c += _compute_coefficient_exp(coeffs, q**i)*_compute_coefficient_log(coeffs, q**j)**(q**i)
+    return -c
+
+def drinfeld_exponential(coeffs, name='t'):
+    L = LazyPowerSeriesRing(coeffs[0].parent(), name)
+    exp = lambda k: _compute_coefficient_exp(coeffs, k)
+    return L(exp, valuation=1)
+
+def goss_polynomial(coeffs, n, name='X'):
+    if n not in ZZ:
+        raise TypeError("n must be an integer")
+    if not isinstance(coeffs, list):
+        raise TypeError("coeffs must be a list")
+    if len(coeffs) <= 1:
+        raise ValueError("coeffs must be of length > 1")
+    n = ZZ(n)
+    K = coeffs[0].parent()
+    if len(coeffs) == 2 and coeffs[1].is_one():
+        return _carlitz_module_goss_polynomial(n, K, name)
+    R = K[name]
+    X = R.gen()
+    if n.is_zero():
+        return R.zero()
+    q = K.base_ring().cardinality()
+    if n <= q - 1:
+        return X**n
+    if n%q == 0:
+        return goss_polynomial(coeffs, ZZ(n/q))**q
+    exp = drinfeld_exponential(coeffs)
+    pol = sum(exp[q**(i+1)]*goss_polynomial(coeffs, n - q**(i+1))
+              for i in range(0, (n.log(q).n()).floor()))
+    return X*(goss_polynomial(coeffs, n - 1) + pol)
+
+def _carlitz_module_goss_polynomial(n, K, name='X'):
     r"""
     Return the `n`-th Goss polynomial for the Carlitz module.
 
     EXAMPLES::
 
-        sage: from drinfeld_modular_forms import goss_polynomial
+        sage: from drinfeld_modular_forms.goss_polynomials import _carlitz_module_goss_polynomial
         sage: A.<T> = GF(3)['T']
-        sage: goss_polynomial(1, A)
+        sage: _carlitz_module_goss_polynomial(1, A)
         X
-        sage: goss_polynomial(2, A)
+        sage: _carlitz_module_goss_polynomial(2, A)
         X^2
-        sage: goss_polynomial(3, A)
+        sage: _carlitz_module_goss_polynomial(3, A)
         X^3
-        sage: goss_polynomial(4, A)
+        sage: _carlitz_module_goss_polynomial(4, A)
         X^4 + (1/(T^3 + 2*T))*X^2
-        sage: goss_polynomial(5, A)
+        sage: _carlitz_module_goss_polynomial(5, A)
         X^5 + (2/(T^3 + 2*T))*X^3
-        sage: goss_polynomial(6, A)
+        sage: _carlitz_module_goss_polynomial(6, A)
         X^6
     """
-    q = polynomial_ring.base_ring().cardinality()
-    R = polynomial_ring['X']
+    if n not in ZZ:
+        raise TypeError("n must be an integer")
+    n = ZZ(n)
+    q = K.base_ring().cardinality()
+    R = K[name]
     X = R.gen()
     pol = R.zero()
-    if n == 0:
+    if n.is_zero():
         return pol
     if n <= q - 1:
         return X ** n
     if (n % q) == 0:
-        return goss_polynomial(n/q, polynomial_ring) ** q
-    for j in range(0, RDF(log(n, q)).floor() + 1):
-        pol = pol + X * goss_polynomial(n - q ** j, polynomial_ring) * (1/product_of_monic_polynomials(j, polynomial_ring))
+        return _carlitz_module_goss_polynomial(n/q, K, name) ** q
+    for j in range(0, n.log(q).n().floor() + 1):
+        pol += (X*_carlitz_module_goss_polynomial(n - q ** j, K, name)
+                     *(1/product_of_monic_polynomials(j, K)))
     return pol
