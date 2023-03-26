@@ -68,7 +68,7 @@ AUTHORS:
 # ****************************************************************************
 
 from drinfeld_modular_forms.drinfeld_modules import DrinfeldModule
-from drinfeld_modular_forms.goss_polynomials import bracket, goss_polynomial
+from drinfeld_modular_forms.goss_polynomials import bracket, _carlitz_module_goss_polynomial
 
 from functools import cache
 
@@ -172,7 +172,7 @@ def coefficient_petrov_expansion(k, n, i, polynomial_ring):
         raise ValueError("polynomials base ring must be a finite field")
     q = polynomial_ring.base_ring().cardinality()
 
-    n_th_goss_pol = goss_polynomial(n, polynomial_ring)
+    n_th_goss_pol = _carlitz_module_goss_polynomial(n, polynomial_ring)
     m, G_m = next(((d, c) for d, c in enumerate(n_th_goss_pol.list()) if c))
 
     # compute part 1
