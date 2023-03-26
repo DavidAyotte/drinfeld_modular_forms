@@ -103,28 +103,89 @@ def lcm_of_monic_polynomials(n, polynomial_ring):
         ans = ans * bracket(j, polynomial_ring)
     return ans
 
-def _compute_coefficient_log(coeffs, k):
-    if k not in ZZ:
+def _compute_coefficient_log(coeffs, n):
+    r"""
+    Return the `n`-th coefficient of the logarithm of the Drinfeld
+    module determined by the list ``coeffs``.
+
+    INPUT:
+
+    - ``coeffs`` (list) -- a list of coefficients in a field of
+      finite characteristic representing a Drinfeld
+      `\mathbb{F}_q[T]`-module.
+    - ``n`` (integer) -- the coefficient index
+
+    TESTS::
+
+        sage: from drinfeld_modular_forms.goss_polynomials import _compute_coefficient_log
+        sage: A = GF(3)['T']
+        sage: K.<T> = Frac(A)
+        sage: coeffs = [T, K.one()]  # Carlitz module
+        sage: _compute_coefficient_log(coeffs, 1)
+        1
+        sage: _compute_coefficient_log(coeffs, 3)
+        2/(T^3 + 2*T)
+        sage: _compute_coefficient_log(coeffs, 3^2)
+        1/(T^12 + 2*T^10 + 2*T^4 + T^2)
+        sage: _compute_coefficient_log(coeffs, 3^3)
+        2/(T^39 + 2*T^37 + 2*T^31 + T^29 + 2*T^13 + T^11 + T^5 + 2*T^3)
+    """
+    if n not in ZZ:
         raise TypeError("input must be an integer")
-    k = ZZ(k)
+    n = ZZ(n)
     T = coeffs[0]
     K = T.parent()
-    if k.is_zero():
+    if n.is_zero():
         return K.zero()
-    if k.is_one():
+    if n.is_one():
         return K.one()
     r = len(coeffs)
     q = K.base_ring().cardinality()
-    if not k.is_power_of(q):
+    if not n.is_power_of(q):
         return K.zero()
     c = K.zero()
-    for i in range(k.log(q)):
-        j = k.log(q) - i
+    for i in range(n.log(q)):
+        j = n.log(q) - i
         if j < r:
             c += _compute_coefficient_log(coeffs, q**i)*coeffs[j]**(q**i)
-    return c/(T - T**k)
+    return c/(T - T**n)
 
-def drinfeld_logarithm(coeffs, name='t'):
+def drinfeld_logarithm(coeffs, name='z'):
+    r"""
+    Return the logarithm of the Drinfeld module defined by the list
+    ``coeffs``.
+
+    Warning: the method does not check if the list ``coeffs`` is valid.
+
+    INPUT:
+
+    - ``coeffs`` (list) -- a list of coefficients in a field of
+      finite characteristic representing a Drinfeld
+      `\mathbb{F}_q[T]`-module.
+    - ``name`` (str, default: ``'T'``) -- the name of the lazy power
+      series ring.
+
+    OUTPUT: a lazy power series in ``name``.
+
+    EXAMPLES::
+
+        sage: from drinfeld_modular_forms import drinfeld_logarithm
+        sage: A = GF(3)['T']
+        sage: K.<T> = Frac(A)
+        sage: coeffs = [T, K.one()]  # Carlitz module
+        sage: drinfeld_logarithm(coeffs)
+        z + ((2/(T^3+2*T))*z^3) + O(z^8)
+
+    ::
+
+        sage: coeffs = [T, T^5 + T^2 + 2, 1/T, T^3]
+        sage: drinfeld_logarithm(coeffs)
+        z + (((2*T^5+2*T^2+1)/(T^3+2*T))*z^3) + O(z^8)
+
+    .. TODO::
+
+        Add validity checks to the list ``coeffs``.
+    """
     if isinstance(coeffs, list):
         if len(coeffs) < 1:
             raise ValueError("input must be of length >= 1")
@@ -136,6 +197,32 @@ def drinfeld_logarithm(coeffs, name='t'):
     return L(log, valuation=1)
 
 def _compute_coefficient_exp(coeffs, k):
+    r"""
+    Return the `n`-th coefficient of the exponential of the Drinfeld
+    module determined by the list ``coeffs``.
+
+    INPUT:
+
+    - ``coeffs`` (list) -- a list of coefficients in a field of
+      finite characteristic representing a Drinfeld
+      `\mathbb{F}_q[T]`-module.
+    - ``n`` (integer) -- the coefficient index
+
+    TESTS::
+
+        sage: from drinfeld_modular_forms.goss_polynomials import _compute_coefficient_exp
+        sage: A = GF(3)['T']
+        sage: K.<T> = Frac(A)
+        sage: coeffs = [T, K.one()]  # Carlitz module
+        sage: _compute_coefficient_exp(coeffs, 1)
+        1
+        sage: _compute_coefficient_exp(coeffs, 3)
+        1/(T^3 + 2*T)
+        sage: _compute_coefficient_exp(coeffs, 3^2)
+        1/(T^18 + 2*T^12 + 2*T^10 + T^4)
+        sage: _compute_coefficient_exp(coeffs, 3^3)
+        1/(T^81 + 2*T^63 + 2*T^57 + 2*T^55 + T^39 + T^37 + T^31 + 2*T^13)
+    """
     if k not in ZZ:
         raise TypeError("input must be an integer")
     k = ZZ(k)
@@ -153,12 +240,87 @@ def _compute_coefficient_exp(coeffs, k):
         c += _compute_coefficient_exp(coeffs, q**i)*_compute_coefficient_log(coeffs, q**j)**(q**i)
     return -c
 
-def drinfeld_exponential(coeffs, name='t'):
+def drinfeld_exponential(coeffs, name='z'):
+    r"""
+    Return the exponential of the Drinfeld module defined by the list
+    ``coeffs``.
+
+    Warning: the method does not check if the list ``coeffs`` is valid.
+
+    INPUT:
+
+    - ``coeffs`` (list) -- a list of coefficients in a field of
+      finite characteristic representing a Drinfeld
+      `\mathbb{F}_q[T]`-module.
+    - ``name`` (str, default: ``'T'``) -- the name of the lazy power
+      series ring.
+
+    OUTPUT: a lazy power series in ``name``.
+
+    EXAMPLES::
+
+        sage: from drinfeld_modular_forms import drinfeld_exponential
+        sage: A = GF(3)['T']
+        sage: K.<T> = Frac(A)
+        sage: coeffs = [T, K.one()]  # Carlitz module
+        sage: drinfeld_exponential(coeffs)
+        z + ((1/(T^3+2*T))*z^3) + O(z^8)
+
+    ::
+
+        sage: coeffs = [T, T^5 + T^2 + 2, 1/T, T^3]
+        sage: drinfeld_exponential(coeffs)
+        z + (((T^5+T^2+2)/(T^3+2*T))*z^3) + O(z^8)
+
+    .. TODO::
+
+        Add validity checks to the list ``coeffs``.
+    """
     L = LazyPowerSeriesRing(coeffs[0].parent(), name)
     exp = lambda k: _compute_coefficient_exp(coeffs, k)
     return L(exp, valuation=1)
 
 def goss_polynomial(coeffs, n, name='X'):
+    r"""
+    Return the `n`-th Goss polynomial of the Drinfeld module defined by
+    the list ``coeffs``.
+
+    Warning: the method does not check if the list ``coeffs`` is valid.
+
+    INPUT:
+
+    - ``coeffs`` (list) -- a list of coefficients in a field of
+      finite characteristic representing a Drinfeld
+      `\mathbb{F}_q[T]`-module.
+    - ``n`` (integer) -- the index of the Goss polynomial.
+    - ``name`` (str, default: ``'X'``) -- the name of polynomial
+      variable.
+
+    OUTPUT: a univariate polynomial in ``name``.
+
+    EXAMPLES::
+
+        sage: from drinfeld_modular_forms import goss_polynomial
+        sage: A = GF(3)['T']
+        sage: K.<T> = Frac(A)
+        sage: coeffs = [T, K.one()]  # Carlitz module
+        sage: goss_polynomial(coeffs, 1)
+        X
+        sage: goss_polynomial(coeffs, 2)
+        X^2
+        sage: goss_polynomial(coeffs, 4)
+        X^4 + (1/(T^3 + 2*T))*X^2
+        sage: goss_polynomial(coeffs, 5)
+        X^5 + (2/(T^3 + 2*T))*X^3
+        sage: goss_polynomial(coeffs, 10)
+        X^10 + (1/(T^3 + 2*T))*X^8 + (1/(T^6 + T^4 + T^2))*X^6 + (1/(T^9 + 2*T^3))*X^4 + (1/(T^18 + 2*T^12 + 2*T^10 + T^4))*X^2
+
+    ::
+
+        sage: coeffs = [T, 1/(T^2 + 1), T^10 + T^5 + 1, T^2 + 2]
+        sage: goss_polynomial(coeffs, 10)
+        X^10 + (1/(T^5 + 2*T))*X^8 + (1/(T^10 + T^6 + T^2))*X^6 + (1/(T^15 + 2*T^3))*X^4 + ((T^25 + 2*T^24 + 2*T^22 + T^21 + 2*T^20 + 2*T^19 + T^18 + T^17 + 2*T^15 + T^14 + T^13 + 2*T^8 + T^7 + T^5 + 2*T^4 + T^3 + T^2 + 2*T + 2)/(T^24 + 2*T^23 + 2*T^21 + T^20 + T^19 + T^17 + T^16 + 2*T^12 + T^11 + T^9 + 2*T^8 + 2*T^7 + 2*T^5 + 2*T^4))*X^2
+    """
     if n not in ZZ:
         raise TypeError("n must be an integer")
     if not isinstance(coeffs, list):
