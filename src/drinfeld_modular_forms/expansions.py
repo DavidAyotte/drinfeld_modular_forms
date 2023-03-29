@@ -311,3 +311,9 @@ def compute_eisentein_series_rank_2(polynomial_ring, name='t'):
 def compute_h_rank_2(polynomial_ring, name='t'):
     q = polynomial_ring.base_ring().cardinality()
     return compute_petrov_expansion(q + 1, 1, polynomial_ring, name)
+
+def j_invariant(K, name='t'):
+    q = K.base_ring().cardinality()
+    E = compute_eisentein_series_rank_2(K.base(), name)
+    D = compute_delta_rank_2(K.base(), name)
+    return E**(q+1)/D
