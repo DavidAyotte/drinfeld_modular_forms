@@ -507,7 +507,7 @@ class DrinfeldModularFormsRing(Parent, UniqueRepresentation):
         """
         return self._poly_ring
 
-    def petrov_expansion(self, k, n):
+    def petrov_expansion(self, k, n, name='t'):
         r"""
         Return a Drinfeld modular form which admits the `A`-expansion
         for `k` and `n` as defined by Petrov.
@@ -523,10 +523,11 @@ class DrinfeldModularFormsRing(Parent, UniqueRepresentation):
 
         INPUT:
 
-        - ``k`` -- an integer divisible by `q-1`.
-        - ``n`` -- an integer divisible by `q-1` which is stricly less than
-          `p^{v_{p}(k - n)}`.
-        - ``name`` -- string, the name of the parameter at infinity.
+        - ``k`` -- an integer equal to the weight of the resulting form.
+        - ``n`` -- an integer congruent to the type modulo `q-1` which is
+          stricly less than `p^{v_{p}(k - n)}`.
+        - ``name`` -- string (default: ``'T'``), the name of the
+          parameter at infinity.
 
         OUTPUT: a Drinfeld modular form of weight `k`.
 
@@ -542,6 +543,16 @@ class DrinfeldModularFormsRing(Parent, UniqueRepresentation):
             g1^6*g2
             sage: M.petrov_expansion((q^3 + 1)*(q - 1), q - 1)
             g1^24*g2 + (T^27 - T^9)*g1^12*g2^4 + (T^54 + T^36 + T^18)*g2^7
+
+        ::
+
+            sage: M = DrinfeldModularFormsRing(K, 2, has_type=True)
+            sage: M.petrov_expansion(q + 1, 1)
+            h
+            sage: M.petrov_expansion(q^2 - 1, 1)
+            g1^2*h
+            sage: M.petrov_expansion(q^3 - 1, 1)
+            g1^11*h + (T^21 - T^19 + T^15 - T^13 + T^9 - T^7)*g1^7*h^3 + (-T^24 - T^22 - T^20 - T^18 - T^16 - T^14 - T^12 - T^10 - T^8)*g1^3*h^5
         """
         if self._rank != 2:
             raise NotImplementedError("A-expansions are only known in rank 2 for the moment")
@@ -550,16 +561,23 @@ class DrinfeldModularFormsRing(Parent, UniqueRepresentation):
         if k == n:
             raise ValueError("k must be different from n")
         q = self.base_ring().base_ring().cardinality()
-        if k%(q-1):
-            raise ValueError("k must be divisible by q - 1")
-        if n%(q-1):
-            raise ValueError("n must be divisible by q - 1")
         k = ZZ(k)
         n = ZZ(n)
         p = self.base_ring().characteristic()
-        if n > p**(k-n).valuation(p):
-            raise ValueError("n must be less or equal to p^v_p(k-n)")
-        expansion = compute_petrov_expansion(k, n, self.base_ring().base())
+        if k - 2*n <= 0:
+            raise ValueError(f"k - 2n must be > 0 (current value: {k - 2*n})")
+        if self._has_type:
+            if (k - 2*n)%(q - 1):
+                raise ValueError("k - 2n must be a multiple of q - 1")
+        else:
+            if k%(q-1):
+                raise ValueError("k must be divisible by q - 1")
+            if n%(q-1):
+                raise ValueError("n must be divisible by q - 1")
+        if n > p**((k-n).valuation(p)):
+            raise ValueError(f"n (={n}) must be less than p^val(p, k - n)"
+                             f"(={p**((k-n).valuation(p))})")
+        expansion = compute_petrov_expansion(k, n, self.base_ring().base(), name=name, check=False)
         return self.from_expansion(expansion, k)
 
     def sturm_bound(self, k):

@@ -231,8 +231,8 @@ modulo <span class="math notranslate nohighlight">\(q - 1\)</span> and <span cla
 the forms <span class="math notranslate nohighlight">\(f_{k, n}\)</span>.</p>
 <p>EXAMPLES:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sage</span><span class="p">:</span> <span class="kn">from</span> <span class="nn">drinfeld_modular_forms</span> <span class="kn">import</span> <span class="n">compute_petrov_expansion</span>
-<span class="n">sage</span><span class="p">:</span> <span class="n">A</span> <span class="o">=</span> <span class="n">GF</span><span class="p">(</span><span class="mi">3</span><span class="p">)[</span><span class="s1">&#39;T&#39;</span><span class="p">]</span>
-<span class="n">sage</span><span class="p">:</span> <span class="n">D</span> <span class="o">=</span> <span class="n">compute_petrov_expansion</span><span class="p">(</span><span class="mi">3</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">A</span><span class="p">);</span> <span class="n">D</span>
+<span class="n">sage</span><span class="p">:</span> <span class="n">q</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">sage</span><span class="p">:</span> <span class="n">D</span> <span class="o">=</span> <span class="n">compute_petrov_expansion</span><span class="p">(</span><span class="n">q</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">q</span><span class="p">);</span> <span class="n">D</span>
 <span class="n">t</span> <span class="o">+</span> <span class="n">t</span><span class="o">^</span><span class="mi">5</span> <span class="o">+</span> <span class="p">((</span><span class="mi">2</span><span class="o">*</span><span class="n">T</span><span class="o">^</span><span class="mi">3</span><span class="o">+</span><span class="n">T</span><span class="p">)</span><span class="o">*</span><span class="n">t</span><span class="o">^</span><span class="mi">7</span><span class="p">)</span> <span class="o">+</span> <span class="n">O</span><span class="p">(</span><span class="n">t</span><span class="o">^</span><span class="mi">8</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -250,7 +250,7 @@ series:</p>
 </ul>
 <dl class="py function">
 <dt class="sig sig-object py" id="drinfeld_modular_forms.expansions.coefficient_petrov_expansion">
-<span class="sig-prename descclassname"><span class="pre">drinfeld_modular_forms.expansions.</span></span><span class="sig-name descname"><span class="pre">coefficient_petrov_expansion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">polynomial_ring</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#drinfeld_modular_forms.expansions.coefficient_petrov_expansion" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">drinfeld_modular_forms.expansions.</span></span><span class="sig-name descname"><span class="pre">coefficient_petrov_expansion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">param</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#drinfeld_modular_forms.expansions.coefficient_petrov_expansion" title="Permalink to this definition">#</a></dt>
 <dd><p>Return the <span class="math notranslate nohighlight">\(i\)</span>-th coefficient of the expansion for the form
 <span class="math notranslate nohighlight">\(f_{k, n}\)</span>.</p>
 <p>INPUT:</p>
@@ -259,18 +259,19 @@ series:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">n</span></code> – an integer. The type of the resulting form will be congruent to
 this integer modulo <span class="math notranslate nohighlight">\(q-1\)</span>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">i</span></code> – an integer representing the index of the coefficient to compute.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">polynomial_ring</span></code> – a univariate polynomial ring over a finite field.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">param</span></code> – a prime power, a univariate polynomial ring over
+<span class="math notranslate nohighlight">\(\mathbb{F}_q\)</span> or the fraction field of such polynomial ring.</p></li>
 </ul>
 <p>EXAMPLES:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sage</span><span class="p">:</span> <span class="kn">from</span> <span class="nn">drinfeld_modular_forms</span> <span class="kn">import</span> <span class="n">coefficient_petrov_expansion</span>
-<span class="n">sage</span><span class="p">:</span> <span class="n">A</span> <span class="o">=</span> <span class="n">GF</span><span class="p">(</span><span class="mi">3</span><span class="p">)[</span><span class="s1">&#39;T&#39;</span><span class="p">]</span>
-<span class="n">sage</span><span class="p">:</span> <span class="n">coefficient_petrov_expansion</span><span class="p">(</span><span class="mi">3</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">A</span><span class="p">)</span>
+<span class="n">sage</span><span class="p">:</span> <span class="n">q</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">sage</span><span class="p">:</span> <span class="n">coefficient_petrov_expansion</span><span class="p">(</span><span class="n">q</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">q</span><span class="p">)</span>
 <span class="mi">1</span>
-<span class="n">sage</span><span class="p">:</span> <span class="n">coefficient_petrov_expansion</span><span class="p">(</span><span class="mi">3</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">A</span><span class="p">)</span>
+<span class="n">sage</span><span class="p">:</span> <span class="n">coefficient_petrov_expansion</span><span class="p">(</span><span class="n">q</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">q</span><span class="p">)</span>
 <span class="mi">0</span>
-<span class="n">sage</span><span class="p">:</span> <span class="n">coefficient_petrov_expansion</span><span class="p">(</span><span class="mi">3</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">A</span><span class="p">)</span>
+<span class="n">sage</span><span class="p">:</span> <span class="n">coefficient_petrov_expansion</span><span class="p">(</span><span class="n">q</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">q</span><span class="p">)</span>
 <span class="mi">1</span>
-<span class="n">sage</span><span class="p">:</span> <span class="n">coefficient_petrov_expansion</span><span class="p">(</span><span class="mi">3</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="n">A</span><span class="p">)</span>
+<span class="n">sage</span><span class="p">:</span> <span class="n">coefficient_petrov_expansion</span><span class="p">(</span><span class="n">q</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="n">q</span><span class="p">)</span>
 <span class="mi">2</span><span class="o">*</span><span class="n">T</span><span class="o">^</span><span class="mi">3</span> <span class="o">+</span> <span class="n">T</span>
 </pre></div>
 </div>
@@ -278,7 +279,7 @@ this integer modulo <span class="math notranslate nohighlight">\(q-1\)</span>.</
 
 <dl class="py function">
 <dt class="sig sig-object py" id="drinfeld_modular_forms.expansions.compute_delta_rank_2">
-<span class="sig-prename descclassname"><span class="pre">drinfeld_modular_forms.expansions.</span></span><span class="sig-name descname"><span class="pre">compute_delta_rank_2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">polynomial_ring</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'t'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#drinfeld_modular_forms.expansions.compute_delta_rank_2" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">drinfeld_modular_forms.expansions.</span></span><span class="sig-name descname"><span class="pre">compute_delta_rank_2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">param</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'t'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#drinfeld_modular_forms.expansions.compute_delta_rank_2" title="Permalink to this definition">#</a></dt>
 <dd><p>Return the expansion of the normalized Drinfeld modular discriminant of
 rank 2.</p>
 <p>Recall that for <span class="math notranslate nohighlight">\(w\in \Omega^2(\mathbb{C}_{\infty})\)</span> the <em>Drinfeld modular
@@ -292,8 +293,10 @@ discriminant is the form <span class="math notranslate nohighlight">\(\Delta_0(w
 coefficient is 1.</p>
 <p>INPUT:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">polynomial_ring</span></code> – a univariate polynomial ring over a finite field.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">name</span></code> – string (default: ‘t’).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">param</span></code> – a prime power, a univariate polynomial ring over
+<span class="math notranslate nohighlight">\(\mathbb{F}_q\)</span> or the fraction field of such polynomial ring.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">name</span></code> (string, default: <code class="docutils literal notranslate"><span class="pre">'t'</span></code>) – represent the parameter at
+infinity.</p></li>
 </ul>
 <p>OUTPUT: a lazy power series over the base ring.</p>
 <div class="admonition note">
@@ -302,8 +305,8 @@ coefficient is 1.</p>
 </div>
 <p>EXAMPLES:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sage</span><span class="p">:</span> <span class="kn">from</span> <span class="nn">drinfeld_modular_forms</span> <span class="kn">import</span> <span class="n">compute_delta_rank_2</span>
-<span class="n">sage</span><span class="p">:</span> <span class="n">A</span> <span class="o">=</span> <span class="n">GF</span><span class="p">(</span><span class="mi">3</span><span class="p">)[</span><span class="s1">&#39;T&#39;</span><span class="p">]</span>
-<span class="n">sage</span><span class="p">:</span> <span class="n">D</span> <span class="o">=</span> <span class="n">compute_delta_rank_2</span><span class="p">(</span><span class="n">A</span><span class="p">);</span> <span class="n">D</span>
+<span class="n">sage</span><span class="p">:</span> <span class="n">q</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">sage</span><span class="p">:</span> <span class="n">D</span> <span class="o">=</span> <span class="n">compute_delta_rank_2</span><span class="p">(</span><span class="n">q</span><span class="p">);</span> <span class="n">D</span>
 <span class="n">t</span><span class="o">^</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">t</span><span class="o">^</span><span class="mi">6</span> <span class="o">+</span> <span class="n">O</span><span class="p">(</span><span class="n">t</span><span class="o">^</span><span class="mi">8</span><span class="p">)</span>
 <span class="n">sage</span><span class="p">:</span> <span class="n">D</span><span class="p">[</span><span class="mi">38</span><span class="p">]</span>
 <span class="n">T</span><span class="o">^</span><span class="mi">18</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">T</span><span class="o">^</span><span class="mi">12</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">T</span><span class="o">^</span><span class="mi">10</span> <span class="o">+</span> <span class="n">T</span><span class="o">^</span><span class="mi">4</span> <span class="o">+</span> <span class="mi">1</span>
@@ -315,7 +318,7 @@ coefficient is 1.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="drinfeld_modular_forms.expansions.compute_eisentein_series_rank_2">
-<span class="sig-prename descclassname"><span class="pre">drinfeld_modular_forms.expansions.</span></span><span class="sig-name descname"><span class="pre">compute_eisentein_series_rank_2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">polynomial_ring</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'t'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#drinfeld_modular_forms.expansions.compute_eisentein_series_rank_2" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">drinfeld_modular_forms.expansions.</span></span><span class="sig-name descname"><span class="pre">compute_eisentein_series_rank_2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">param</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'t'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#drinfeld_modular_forms.expansions.compute_eisentein_series_rank_2" title="Permalink to this definition">#</a></dt>
 <dd><p>Return the expansion fo the normalized Drinfeld Eisenstein series of
 weight <span class="math notranslate nohighlight">\(q-1\)</span>.</p>
 <p>Recall that this form is defined by:</p>
@@ -326,8 +329,10 @@ weight <span class="math notranslate nohighlight">\(q-1\)</span>.</p>
 <p>where <span class="math notranslate nohighlight">\(\tilde{\pi}\)</span> is the Carlitz period.</p>
 <p>INPUT:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">polynomial_ring</span></code> – a univariate polynomial ring over a finite field.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">name</span></code> – string (default: ‘t’).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">param</span></code> – a prime power, a univariate polynomial ring over
+<span class="math notranslate nohighlight">\(\mathbb{F}_q\)</span> or the fraction field of such polynomial ring.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">name</span></code> (string, default: <code class="docutils literal notranslate"><span class="pre">'t'</span></code>) – represent the parameter at
+infinity.</p></li>
 </ul>
 <p>OUTPUT: a lazy power series over the base ring.</p>
 <div class="admonition note">
@@ -336,8 +341,8 @@ weight <span class="math notranslate nohighlight">\(q-1\)</span>.</p>
 </div>
 <p>EXAMPLES:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sage</span><span class="p">:</span> <span class="kn">from</span> <span class="nn">drinfeld_modular_forms</span> <span class="kn">import</span> <span class="n">compute_eisentein_series_rank_2</span>
-<span class="n">sage</span><span class="p">:</span> <span class="n">A</span> <span class="o">=</span> <span class="n">GF</span><span class="p">(</span><span class="mi">3</span><span class="p">)[</span><span class="s1">&#39;T&#39;</span><span class="p">]</span>
-<span class="n">sage</span><span class="p">:</span> <span class="n">E</span> <span class="o">=</span> <span class="n">compute_eisentein_series_rank_2</span><span class="p">(</span><span class="n">A</span><span class="p">);</span> <span class="n">E</span>
+<span class="n">sage</span><span class="p">:</span> <span class="n">q</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">sage</span><span class="p">:</span> <span class="n">E</span> <span class="o">=</span> <span class="n">compute_eisentein_series_rank_2</span><span class="p">(</span><span class="n">q</span><span class="p">);</span> <span class="n">E</span>
 <span class="mi">1</span> <span class="o">+</span> <span class="p">((</span><span class="mi">2</span><span class="o">*</span><span class="n">T</span><span class="o">^</span><span class="mi">3</span><span class="o">+</span><span class="n">T</span><span class="p">)</span><span class="o">*</span><span class="n">t</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">O</span><span class="p">(</span><span class="n">t</span><span class="o">^</span><span class="mi">7</span><span class="p">)</span>
 <span class="n">sage</span><span class="p">:</span> <span class="n">E</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">15</span><span class="p">]</span>
 <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">T</span><span class="o">^</span><span class="mi">3</span> <span class="o">+</span> <span class="n">T</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">T</span><span class="o">^</span><span class="mi">3</span> <span class="o">+</span> <span class="n">T</span><span class="p">]</span>
@@ -347,30 +352,67 @@ weight <span class="math notranslate nohighlight">\(q-1\)</span>.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="drinfeld_modular_forms.expansions.compute_h_rank_2">
-<span class="sig-prename descclassname"><span class="pre">drinfeld_modular_forms.expansions.</span></span><span class="sig-name descname"><span class="pre">compute_h_rank_2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">polynomial_ring</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'t'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#drinfeld_modular_forms.expansions.compute_h_rank_2" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
+<span class="sig-prename descclassname"><span class="pre">drinfeld_modular_forms.expansions.</span></span><span class="sig-name descname"><span class="pre">compute_h_rank_2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">param</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'t'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#drinfeld_modular_forms.expansions.compute_h_rank_2" title="Permalink to this definition">#</a></dt>
+<dd><p>Return the expansion of the function <span class="math notranslate nohighlight">\(h\)</span> defined by
+<span class="math notranslate nohighlight">\(\Delta = h^{q-1}\)</span> and having an expansion of the form <span class="math notranslate nohighlight">\(t + O(t^2)\)</span>.</p>
+<p>INPUT:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">param</span></code> – a prime power, a univariate polynomial ring over
+<span class="math notranslate nohighlight">\(\mathbb{F}_q\)</span> or the fraction field of such polynomial ring.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">name</span></code> (string, default: <code class="docutils literal notranslate"><span class="pre">'t'</span></code>) – represent the parameter at
+infinity.</p></li>
+</ul>
+<p>EXAMPLES:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sage</span><span class="p">:</span> <span class="kn">from</span> <span class="nn">drinfeld_modular_forms</span> <span class="kn">import</span> <span class="n">compute_h_rank_2</span>
+<span class="n">sage</span><span class="p">:</span> <span class="n">q</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">sage</span><span class="p">:</span> <span class="n">h</span> <span class="o">=</span> <span class="n">compute_h_rank_2</span><span class="p">(</span><span class="n">q</span><span class="p">);</span> <span class="n">h</span>
+<span class="n">t</span> <span class="o">+</span> <span class="n">t</span><span class="o">^</span><span class="mi">5</span> <span class="o">+</span> <span class="p">((</span><span class="mi">2</span><span class="o">*</span><span class="n">T</span><span class="o">^</span><span class="mi">3</span><span class="o">+</span><span class="n">T</span><span class="p">)</span><span class="o">*</span><span class="n">t</span><span class="o">^</span><span class="mi">7</span><span class="p">)</span> <span class="o">+</span> <span class="n">O</span><span class="p">(</span><span class="n">t</span><span class="o">^</span><span class="mi">8</span><span class="p">)</span>
+<span class="n">sage</span><span class="p">:</span> <span class="n">h</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">15</span><span class="p">]</span>
+<span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">T</span><span class="o">^</span><span class="mi">3</span> <span class="o">+</span> <span class="n">T</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">T</span><span class="o">^</span><span class="mi">3</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">T</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">T</span><span class="o">^</span><span class="mi">6</span> <span class="o">+</span> <span class="n">T</span><span class="o">^</span><span class="mi">4</span> <span class="o">+</span> <span class="n">T</span><span class="o">^</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="drinfeld_modular_forms.expansions.compute_petrov_expansion">
-<span class="sig-prename descclassname"><span class="pre">drinfeld_modular_forms.expansions.</span></span><span class="sig-name descname"><span class="pre">compute_petrov_expansion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">polynomial_ring</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'t'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#drinfeld_modular_forms.expansions.compute_petrov_expansion" title="Permalink to this definition">#</a></dt>
-<dd><p>Return the <span class="math notranslate nohighlight">\(A\)</span>-expansion of the form <span class="math notranslate nohighlight">\(f_{k, n}\)</span> as a lazy power series.</p>
+<span class="sig-prename descclassname"><span class="pre">drinfeld_modular_forms.expansions.</span></span><span class="sig-name descname"><span class="pre">compute_petrov_expansion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">param</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'t'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">check</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#drinfeld_modular_forms.expansions.compute_petrov_expansion" title="Permalink to this definition">#</a></dt>
+<dd><p>Return the <span class="math notranslate nohighlight">\(A\)</span>-expansion of the form <span class="math notranslate nohighlight">\(f_{k, n}\)</span> as a lazy power
+series.</p>
+<p>Recall that it is defined by:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}f_{k, n} =
+\sum_{\substack{a\in \mathbb{F}_q[T] \\ a\text{ monic}}}
+a^{k - n}G_n(t(az))\end{split}\]</div>
+</div>
 <p>INPUT:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">k</span></code> – an integer representing the weight of the resulting form.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">n</span></code> – an integer which will be congruent to the type modulo <span class="math notranslate nohighlight">\(q-1\)</span>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">polynomial_ring</span></code> – a univariate polynomial ring over a finite field.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">name</span></code> – string (default: ‘t’).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">k</span></code> – an integer equal to the weight of the resulting form.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">n</span></code> – an integer congruent to the type modulo <span class="math notranslate nohighlight">\(q-1\)</span>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">param</span></code> – a prime power, a univariate polynomial ring over
+<span class="math notranslate nohighlight">\(\mathbb{F}_q\)</span> or the fraction field of such polynomial ring.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">name</span></code> (string, default: <code class="docutils literal notranslate"><span class="pre">'t'</span></code>) – represent the parameter at
+infinity.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">check</span></code> (Boolean, default: <code class="docutils literal notranslate"><span class="pre">True</span></code>) – If this parameter is set
+to <code class="docutils literal notranslate"><span class="pre">True</span></code>, the code will check if  <span class="math notranslate nohighlight">\(k\)</span> and <span class="math notranslate nohighlight">\(n\)</span> verify the three
+conditions:</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(k - 2n &gt; 0\)</span>;</p></li>
+<li><p><span class="math notranslate nohighlight">\(q - 1\)</span> divides <span class="math notranslate nohighlight">\(k - 2n\)</span>;</p></li>
+<li><p><span class="math notranslate nohighlight">\(n &gt; p^{v_p(k - n)}\)</span>.</p></li>
 </ul>
-<p>OUTPUT: A lazy power series over the fraction field of <code class="docutils literal notranslate"><span class="pre">polynomial_ring</span></code>.</p>
+</li>
+</ul>
+<p>OUTPUT: A lazy power series.</p>
 <p>EXAMPLES:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sage</span><span class="p">:</span> <span class="kn">from</span> <span class="nn">drinfeld_modular_forms</span> <span class="kn">import</span> <span class="n">compute_petrov_expansion</span>
-<span class="n">sage</span><span class="p">:</span> <span class="n">A</span> <span class="o">=</span> <span class="n">GF</span><span class="p">(</span><span class="mi">3</span><span class="p">)[</span><span class="s1">&#39;T&#39;</span><span class="p">]</span>
-<span class="n">sage</span><span class="p">:</span> <span class="n">D</span> <span class="o">=</span> <span class="n">compute_petrov_expansion</span><span class="p">(</span><span class="mi">3</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">A</span><span class="p">);</span> <span class="n">D</span>
+<span class="n">sage</span><span class="p">:</span> <span class="n">q</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">sage</span><span class="p">:</span> <span class="n">D</span> <span class="o">=</span> <span class="n">compute_petrov_expansion</span><span class="p">(</span><span class="n">q</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">q</span><span class="p">);</span> <span class="n">D</span>
 <span class="n">t</span> <span class="o">+</span> <span class="n">t</span><span class="o">^</span><span class="mi">5</span> <span class="o">+</span> <span class="p">((</span><span class="mi">2</span><span class="o">*</span><span class="n">T</span><span class="o">^</span><span class="mi">3</span><span class="o">+</span><span class="n">T</span><span class="p">)</span><span class="o">*</span><span class="n">t</span><span class="o">^</span><span class="mi">7</span><span class="p">)</span> <span class="o">+</span> <span class="n">O</span><span class="p">(</span><span class="n">t</span><span class="o">^</span><span class="mi">8</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>To obtain more coefficient, one just need to take slices the series:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sage</span><span class="p">:</span> <span class="n">D</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">10</span><span class="p">]</span>  <span class="c1"># output the coefficient from i=0...9</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sage</span><span class="p">:</span> <span class="n">D</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">10</span><span class="p">]</span>  <span class="c1"># output the coefficients from i=0...9</span>
 <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">T</span><span class="o">^</span><span class="mi">3</span> <span class="o">+</span> <span class="n">T</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
 <span class="n">sage</span><span class="p">:</span> <span class="n">D</span><span class="p">[</span><span class="mi">39</span><span class="p">]</span>  <span class="c1"># print the 39-th coefficient</span>
 <span class="n">T</span><span class="o">^</span><span class="mi">9</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">T</span><span class="o">^</span><span class="mi">3</span>
@@ -386,6 +428,11 @@ weight <span class="math notranslate nohighlight">\(q-1\)</span>.</p>
 <dd><p>Return the polynomial <span class="math notranslate nohighlight">\(f_a(X) = \rho_a(X^{-1}) X^{q^{\mathrm{deg}(a)}}\)</span>
 where <span class="math notranslate nohighlight">\(\rho_a\)</span> is the Carlitz module.</p>
 <p>This function is used in <a class="reference internal" href="#drinfeld_modular_forms.expansions.parameter_at_infinity" title="drinfeld_modular_forms.expansions.parameter_at_infinity"><code class="xref py py-func docutils literal notranslate"><span class="pre">parameter_at_infinity()</span></code></a></p>
+<p>INPUT:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">a</span></code> (polynomial) – univariate polynomial over a finite field.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">name</span></code> (string, default: <code class="docutils literal notranslate"><span class="pre">'X'</span></code>) – the name of the variable.</p></li>
+</ul>
 <p>EXAMPLES:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sage</span><span class="p">:</span> <span class="kn">from</span> <span class="nn">drinfeld_modular_forms.expansions</span> <span class="kn">import</span> <span class="n">inverse_cyclotomic_polynomial</span>
 <span class="n">sage</span><span class="p">:</span> <span class="n">A</span><span class="o">.&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="n">GF</span><span class="p">(</span><span class="mi">3</span><span class="p">)[</span><span class="s1">&#39;T&#39;</span><span class="p">]</span>
@@ -402,14 +449,38 @@ where <span class="math notranslate nohighlight">\(\rho_a\)</span> is the Carlit
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="drinfeld_modular_forms.expansions.j_invariant">
+<span class="sig-prename descclassname"><span class="pre">drinfeld_modular_forms.expansions.</span></span><span class="sig-name descname"><span class="pre">j_invariant</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">param</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'t'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#drinfeld_modular_forms.expansions.j_invariant" title="Permalink to this definition">#</a></dt>
+<dd><p>Return the <span class="math notranslate nohighlight">\(j\)</span>-invariant defined by <span class="math notranslate nohighlight">\(j := g_1^{q+1}/g_2\)</span>.</p>
+<p>It is normalized so that <span class="math notranslate nohighlight">\(j = 1/t^{q - 1} + O(1)\)</span>.</p>
+<p>INPUT:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">param</span></code> – a prime power, a univariate polynomial ring over
+<span class="math notranslate nohighlight">\(\mathbb{F}_q\)</span> or the fraction field of such polynomial ring.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">name</span></code> (string, default: <code class="docutils literal notranslate"><span class="pre">'t'</span></code>) – represent the parameter at
+infinity.</p></li>
+</ul>
+<p>EXAMPLES:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sage</span><span class="p">:</span> <span class="kn">from</span> <span class="nn">drinfeld_modular_forms</span> <span class="kn">import</span> <span class="n">j_invariant</span>
+<span class="n">sage</span><span class="p">:</span> <span class="n">q</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">sage</span><span class="p">:</span> <span class="n">j_invariant</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+<span class="mi">1</span><span class="o">/</span><span class="n">t</span><span class="o">^</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">T</span><span class="o">^</span><span class="mi">3</span><span class="o">+</span><span class="n">T</span><span class="p">)</span> <span class="o">+</span> <span class="n">t</span><span class="o">^</span><span class="mi">2</span> <span class="o">+</span> <span class="p">((</span><span class="mi">2</span><span class="o">*</span><span class="n">T</span><span class="o">^</span><span class="mi">9</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">T</span><span class="o">^</span><span class="mi">3</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">T</span><span class="p">)</span><span class="o">*</span><span class="n">t</span><span class="o">^</span><span class="mi">4</span><span class="p">)</span> <span class="o">+</span> <span class="n">O</span><span class="p">(</span><span class="n">t</span><span class="o">^</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">sage</span><span class="p">:</span> <span class="n">q</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">sage</span><span class="p">:</span> <span class="n">j_invariant</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+<span class="mi">1</span><span class="o">/</span><span class="n">t</span><span class="o">^</span><span class="mi">3</span> <span class="o">+</span> <span class="p">(</span><span class="n">T</span><span class="o">^</span><span class="mi">4</span><span class="o">+</span><span class="n">T</span><span class="p">)</span> <span class="o">+</span> <span class="n">O</span><span class="p">(</span><span class="n">t</span><span class="o">^</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="drinfeld_modular_forms.expansions.parameter_at_infinity">
 <span class="sig-prename descclassname"><span class="pre">drinfeld_modular_forms.expansions.</span></span><span class="sig-name descname"><span class="pre">parameter_at_infinity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'t'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#drinfeld_modular_forms.expansions.parameter_at_infinity" title="Permalink to this definition">#</a></dt>
 <dd><p>Return the function <span class="math notranslate nohighlight">\(t(aw)\)</span> as a power series in <span class="math notranslate nohighlight">\(t\)</span>.</p>
 <p>INPUT:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">a</span></code> (polynomial) – univariate polynomial over a finite field.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">name</span></code> (Str, default: ‘t’) – the name of the lazy power series
-ring generator</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">name</span></code> (string, default: <code class="docutils literal notranslate"><span class="pre">'t'</span></code>) – the name of the lazy power
+series ring generator.</p></li>
 </ul>
 <p>EXAMPLES:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sage</span><span class="p">:</span> <span class="kn">from</span> <span class="nn">drinfeld_modular_forms</span> <span class="kn">import</span> <span class="n">parameter_at_infinity</span>
@@ -490,6 +561,7 @@ ring generator</p></li>
 <li><a class="reference internal" href="#drinfeld_modular_forms.expansions.compute_h_rank_2"><code class="docutils literal notranslate"><span class="pre">compute_h_rank_2()</span></code></a></li>
 <li><a class="reference internal" href="#drinfeld_modular_forms.expansions.compute_petrov_expansion"><code class="docutils literal notranslate"><span class="pre">compute_petrov_expansion()</span></code></a></li>
 <li><a class="reference internal" href="#drinfeld_modular_forms.expansions.inverse_cyclotomic_polynomial"><code class="docutils literal notranslate"><span class="pre">inverse_cyclotomic_polynomial()</span></code></a></li>
+<li><a class="reference internal" href="#drinfeld_modular_forms.expansions.j_invariant"><code class="docutils literal notranslate"><span class="pre">j_invariant()</span></code></a></li>
 <li><a class="reference internal" href="#drinfeld_modular_forms.expansions.parameter_at_infinity"><code class="docutils literal notranslate"><span class="pre">parameter_at_infinity()</span></code></a></li>
 </ul>
 </li>

@@ -219,6 +219,26 @@ class DrinfeldModularFormsRingElement(ModuleElement):
         """
         return bool(self._polynomial)
 
+    def _latex_(self):
+        r"""
+        Return the latex expression of self.
+
+        TESTS::
+
+            sage: from drinfeld_modular_forms import DrinfeldModularFormsRing
+            sage: A = GF(3)['T']; K.<T> = Frac(A)
+            sage: M = DrinfeldModularFormsRing(K, 2)
+            sage: M.inject_variables()
+            Defining g1, g2
+            sage: latex(g1)
+            g_{1}
+            sage: latex(g2)
+            g_{2}
+            sage: latex(1/T*g1^5 + g2*g1)
+            \frac{1}{T} g_{1}^{5} + g_{1} g_{2}
+        """
+        return self._polynomial._latex_()
+
     def _richcmp_(self, other, op):
         r"""
         Return the comparison of self with other.

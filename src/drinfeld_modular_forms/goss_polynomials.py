@@ -163,7 +163,7 @@ def drinfeld_logarithm(coeffs, name='z'):
     - ``coeffs`` (list) -- a list of coefficients in a field of
       finite characteristic representing a Drinfeld
       `\mathbb{F}_q[T]`-module.
-    - ``name`` (str, default: ``'T'``) -- the name of the lazy power
+    - ``name`` (str, default: ``'z'``) -- the name of the lazy power
       series ring.
 
     OUTPUT: a lazy power series in ``name``.
@@ -250,7 +250,7 @@ def drinfeld_exponential(coeffs, name='z'):
     - ``coeffs`` (list) -- a list of coefficients in a field of
       finite characteristic representing a Drinfeld
       `\mathbb{F}_q[T]`-module.
-    - ``name`` (str, default: ``'T'``) -- the name of the lazy power
+    - ``name`` (str, default: ``'z'``) -- the name of the lazy power
       series ring.
 
     OUTPUT: a lazy power series in ``name``.

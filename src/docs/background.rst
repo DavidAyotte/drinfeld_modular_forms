@@ -26,7 +26,7 @@ defined by
 
     \Omega^r(\mathbb{C}_{\infty}) :=
     \mathbb{P}^{r-1}(\mathbb{C}_{\infty})
-    \setminus \mathbb{P}^{r-1}(K_{\infty}).
+    \setminus \{K_{\infty}\text{-rational hyperplanes}\}.
 
 This space is a rigid analytic space
 and plays the role of the complex upper half plane. We identify the elements
