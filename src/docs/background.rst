@@ -114,7 +114,7 @@ The reader is refered to
 part I of [BRP2018]_ for more information about the analytic theory of
 Drinfeld modular form of arbitrary rank.
 
-.. RUBRIC:: Ring of Drinfeld modular form
+.. RUBRIC:: Ring of Drinfeld modular forms
 
 Letting `M_k^{r, m}(\mathrm{GL}_r(A))` denote the space of rank `r`,
 weight `k` and type `m` (`k\geq 0` and `m\in (q - 1)\mathbb{Z}`)
