@@ -175,7 +175,8 @@ class DrinfeldModularFormsRing(Parent, UniqueRepresentation):
       comma seperated string of character representing the names of the
       generators.
 
-    TESTS::
+    .. doctest::
+       :hide:
 
         sage: from drinfeld_modular_forms import DrinfeldModularFormsRing
         sage: K = Frac(GF(3)['T'])
