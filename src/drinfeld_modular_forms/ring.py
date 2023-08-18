@@ -136,14 +136,18 @@ from sage.categories.graded_algebras import GradedAlgebras
 
 from sage.structure.parent import Parent
 
-from sage.rings.function_field.function_field import FunctionField
 from sage.matrix.constructor import Matrix
+
+from sage.rings.function_field.function_field import FunctionField
+from sage.rings.polynomial.ore_polynomial_ring import OrePolynomialRing
 from sage.rings.polynomial.polynomial_ring_constructor import PolynomialRing
 from sage.rings.polynomial.term_order import TermOrder
 from sage.rings.integer import Integer
 from sage.rings.integer_ring import ZZ
+
 from sage.structure.sequence import Sequence
 from sage.structure.unique_representation import UniqueRepresentation
+
 from sage.misc.lazy_import import lazy_import
 
 from .element import DrinfeldModularFormsRingElement
@@ -304,10 +308,52 @@ class DrinfeldModularFormsRing(Parent, UniqueRepresentation):
                              "form of the given weight")
         return sum(c[0][i]*b for i, b in enumerate(basis))
 
-    def coefficient_form(self, i):
+    def _generator_coefficient_form(self, i):
+        r"""
+        Return the i-th coefficient form at `T`.
+
+        For internal use only, the user should use
+        :meth:`coefficient_form` instead.
+
+        TESTS::
+
+            sage: from drinfeld_modular_forms import DrinfeldModularFormsRing
+            sage: q = 3
+            sage: A = GF(q)['T']
+            sage: K.<T> = Frac(A)
+            sage: M = DrinfeldModularFormsRing(K, 3)
+            sage: M._generator_coefficient_form(1)
+            g1
+            sage: M._generator_coefficient_form(2)
+            g2
+            sage: M._generator_coefficient_form(3)
+            g3
+        """
+        if i == 1:
+            return self.gen(0)
+        if self._has_type and i == 2:
+            q = self._base_ring.base_ring().cardinality()
+            return self.gen(1)**(q - 1)
+        return self.gen(i - 1)
+
+    def coefficient_form(self, i, a=None):
         r"""
         Return the `i`-th coefficient form of the universal Drinfeld
-        module over `\Omega^r(\mathbb{C}_{\infty})`.
+        module over `\Omega^r(\mathbb{C}_{\infty})`:
+
+        ..MATH::
+
+            \phi_{w, a} = a + g_{1, a}\tau + \cdots + g_{r d_a, a}\tau^{r d_a}
+
+        where `d_a := \mathrm{deg}(a)`.
+
+        INPUT:
+
+        - ``i`` -- an integer between 1 and `r d_a`;
+
+        - ``a`` -- (default: ``None``) an element in the ring of regular
+          functions. If `a` is ``None``, then the method returns the
+          `i`-th coefficient form of `\phi_{w, T}`.
 
         EXAMPLES::
 
@@ -322,6 +368,8 @@ class DrinfeldModularFormsRing(Parent, UniqueRepresentation):
             g2
             sage: M.coefficient_form(3)
             g3
+            sage: M.coefficient_form(5, T^2)
+            g2^27*g3 + g2*g3^9
 
         ::
 
@@ -330,18 +378,68 @@ class DrinfeldModularFormsRing(Parent, UniqueRepresentation):
             g1
             sage: M.coefficient_form(2)
             h^2
+            sage: M.coefficient_form(2, T^3 + T^2 + T)
+            (T^9 + T^3 + T + 1)*g1^4 + (T^18 + T^10 + T^9 + T^2 + T + 1)*h^2
         """
         if i not in ZZ:
             raise TypeError("i must be an integer")
         i = ZZ(i)
         if i < 1:
             raise ValueError("i must be >= 1")
-        if i == 1:
-            return self.gen(0)
-        if self._has_type and i == 2:
-            q = self._base_ring.base_ring().cardinality()
-            return self.gen(1)**(q - 1)
-        return self.gen(i - 1)
+        if a is None:
+            return self._generator_coefficient_form(i)
+        if not a in self._base_ring:
+            raise TypeError("a should be an element of the base ring")
+        a = self._base_ring(a)
+        if not a.denominator().is_one():
+            raise ValueError("a should be in the ring of regular functions")
+        a = a.numerator()
+        poly_ring = PolynomialRing(self._base_ring, self.rank(), 'g')
+        poly_ring_gens = poly_ring.gens()
+        Frob = poly_ring.frobenius_endomorphism()
+        gen = [self._base_ring.gen()]
+        for g in poly_ring_gens:
+            gen.append(g)
+        ore_pol_ring = OrePolynomialRing(poly_ring, Frob, 't')
+        gen = ore_pol_ring(gen)
+        f = sum(c*(gen**idx) for idx, c in enumerate(a.coefficients(sparse=False)))
+        form = f[i]
+        coeff_form = form.subs({g: self._generator_coefficient_form(j+1) for j, g in enumerate(poly_ring_gens)})
+        return coeff_form
+
+    def coefficient_forms(self, a=None):
+        r"""
+        Return the list of all coefficient forms at `a`.
+
+        See also :meth:`coefficient_form`.
+
+        EXAMPLE::
+
+            sage: from drinfeld_modular_forms import DrinfeldModularFormsRing
+            sage: q = 3
+            sage: A = GF(q)['T']
+            sage: K.<T> = Frac(A)
+            sage: M = DrinfeldModularFormsRing(K, 2)
+            sage: M.coefficient_forms()
+            [g1, g2]
+            sage: M.coefficient_forms(T^2)
+            [(T^3 + T)*g1, g1^4 + (T^9 + T)*g2, g1^9*g2 + g1*g2^3, g2^10]
+            sage: M.coefficient_forms(T^3)
+            [(T^6 + T^4 + T^2)*g1,
+             (T^9 + T^3 + T)*g1^4 + (T^18 + T^10 + T^2)*g2,
+             g1^13 + (T^27 + T^9 + T)*g1^9*g2 + (T^27 + T^3 + T)*g1*g2^3,
+             g1^36*g2 + g1^28*g2^3 + g1^4*g2^9 + (T^81 + T^9 + T)*g2^10,
+             g1^81*g2^10 + g1^9*g2^28 + g1*g2^30,
+             g2^91]
+        """
+        # This method could be optimized
+        if a is None:
+            return [self._generator_coefficient_form(i) for i in range(1, self.rank() + 1)]
+        a = self._base_ring(a)
+        if not a.denominator().is_one():
+            raise ValueError("a should be in the ring of regular functions")
+        d = a.numerator().degree()
+        return [self.coefficient_form(i, a) for i in range(1, self.rank()*d + 1)]
 
     def gen(self, n):
         r"""
