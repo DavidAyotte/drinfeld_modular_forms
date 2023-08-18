@@ -103,6 +103,22 @@ as they may have mixed weight components::
 
 This is why we call these elements *graded Drinfeld modular forms*.
 
+One can also consider the ring Drinfeld modular forms of arbitrary type::
+
+    sage: A = GF(7)['T']
+    sage: K.<T> = Frac(A)
+    sage: M = DrinfeldModularFormsRing(K, 4, has_type=True)
+    sage: M.inject_variables()
+    Defining g1, g2, g3, h
+    sage: h.weight()
+    400
+    sage: h.type_m()
+    1
+    sage: (g1*h^4).type_m()
+    4
+
+The last generator is is known as Gekeler's `h` function.
+
 .. RUBRIC:: The rank 2 case
 
 In rank 2 case, one can also compute the expansion at infinity of Drinfeld
@@ -133,6 +149,15 @@ any coefficient at any precision on demands::
     2*T^9 + T^3
     sage: g2[702]  # long time
     2*T^252 + T^246 + 2*T^90 + T^84 + 2*T^36 + T^30 + T^18 + T^12 + T^6
+
+::
+
+    sage: M = DrinfeldModularFormsRing(K, 2, has_type=True)
+    sage: M.inject_variables()
+    Defining g1, h
+    sage: h.expansion()
+    t + t^5 + ((2*T^3+T)*t^7) + O(t^8)
+
 
 AUTHORS:
 
@@ -186,8 +211,7 @@ class DrinfeldModularFormsRing(Parent, UniqueRepresentation):
       implementation only supports the full group
       `\mathrm{GL}_r(A)`.
     - ``has_type`` (bool, default: ``False``) -- if set to True, returns
-      the graded ring of arbitrary type. Currently only implemented in
-      rank two.
+      the graded ring of arbitrary type.
     - ``names`` (string, default: ``'g'``) -- a single character or a
       comma seperated string of character representing the names of the
       generators.
@@ -216,24 +240,23 @@ class DrinfeldModularFormsRing(Parent, UniqueRepresentation):
         if not isinstance(names, str):
             raise TypeError("names must be string type")
         q = base_ring.base_ring().cardinality()
-        if has_type:
-            if rank != 2:
-                raise NotImplementedError("ring with type are not "
-                                          "implemented in rank =/= 2")
-            if len(names) == 1:
-                names += "1, h"
-            degs = [q - 1, q + 1]
-        else:
-            if len(names) == 1:
-                n = names
-                names += "1, "
-                for i in range(2, rank, 1):
-                    names += n + str(i) + ", "
-                names += n + str(rank)
+        if len(names) == 1:
+            n = names
+            names += "1, "
+            for i in range(2, rank, 1):
+                names += n + str(i) + ", "
+            if has_type:
+                names += 'h'
             else:
-                if len(names.split()) != rank:
-                    raise ValueError("the rank does not corresponds to"
-                                    " the number of generators")
+                names += n + str(rank)
+        else:
+            if len(names.split()) != rank:
+                raise ValueError("the rank does not corresponds to"
+                                " the number of generators")
+        if has_type:
+            degs = [q**i - 1 for i in range(1, rank, 1)]
+            degs.append((q**rank - 1)/(q - 1))
+        else:
             degs = [q ** i - 1 for i in range(1, rank + 1, 1)]
         self._has_type = has_type
         self._rank = rank
