@@ -34,11 +34,11 @@ In the rank 2 case, on can compute the expansion at infinity of any
 graded Drinfeld modular form::
 
     sage: g1.expansion()
-    1 + ((2*T^3+T)*t^2) + O(t^7)
+    1 + ((2*T^3+T)*u^2) + O(u^7)
     sage: g2.expansion()
-    t^2 + 2*t^6 + O(t^8)
+    u^2 + 2*u^6 + O(u^8)
     sage: F.expansion()
-    2*t^2 + ((2*T^3+T)*t^4) + t^6 + O(t^8)
+    2*u^2 + ((2*T^3+T)*u^4) + u^6 + O(u^8)
 
 To access the `i`-th coefficient of the expansion::
 
@@ -61,7 +61,7 @@ arbitrary type using the option ``has_type=True``::
     sage: h.weight()
     4
     sage: h.expansion()
-    t + t^5 + ((2*T^3+T)*t^7) + O(t^8)
+    u + u^5 + ((2*T^3+T)*u^7) + O(u^8)
     sage: M.coefficient_form(1)
     g1
     sage: M.coefficient_form(2)
@@ -389,7 +389,7 @@ class DrinfeldModularFormsRingElement(ModuleElement):
         components = self._polynomial.homogeneous_components().items()
         return {k: elt_class(M, p) for k, p in components}
 
-    def expansion(self, name='t'):
+    def expansion(self, name='u'):
         r"""
         Return the expansion at infinity of the graded Drinfeld form.
 
@@ -405,12 +405,12 @@ class DrinfeldModularFormsRingElement(ModuleElement):
             sage: M.inject_variables()
             Defining g1, g2
             sage: g1.expansion()
-            1 + ((2*T^3+T)*t^2) + O(t^7)
+            1 + ((2*T^3+T)*u^2) + O(u^7)
             sage: g2.expansion()
-            t^2 + 2*t^6 + O(t^8)
+            u^2 + 2*u^6 + O(u^8)
             sage: F = (g1 + g2)*g1
             sage: F.expansion()
-            1 + ((T^3+2*T+1)*t^2) + ((T^6+T^4+2*T^3+T^2+T)*t^4) + 2*t^6 + O(t^7)
+            1 + ((T^3+2*T+1)*u^2) + ((T^6+T^4+2*T^3+T^2+T)*u^4) + 2*u^6 + O(u^7)
         """
         if self.parent()._rank != 2:
             raise NotImplementedError
