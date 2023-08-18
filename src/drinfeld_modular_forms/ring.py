@@ -134,9 +134,9 @@ EXAMPLES::
     sage: M.inject_variables()
     Defining g1, g2
     sage: g1.expansion()
-    1 + ((2*T^3+T)*t^2) + O(t^7)
+    1 + ((2*T^3+T)*u^2) + O(u^7)
     sage: g2.expansion()
-    t^2 + 2*t^6 + O(t^8)
+    u^2 + 2*u^6 + O(u^8)
 
 The returned series is a lazy power series, meaning that it can compute
 any coefficient at any precision on demands::
@@ -156,7 +156,7 @@ any coefficient at any precision on demands::
     sage: M.inject_variables()
     Defining g1, h
     sage: h.expansion()
-    t + t^5 + ((2*T^3+T)*t^7) + O(t^8)
+    u + u^5 + ((2*T^3+T)*u^7) + O(u^8)
 
 
 AUTHORS:
