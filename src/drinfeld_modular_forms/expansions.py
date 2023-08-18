@@ -213,6 +213,103 @@ def parameter_at_infinity(a, name='u'):
     u = R.gen()
     return u**(q**d)*fpol.inverse_of_unit()
 
+def coefficient_A_expansion(coeff_stream, n, i, param):
+    r"""
+    Return the `i`-th coefficient of a general `A`-expansion.
+
+    INPUT:
+
+    - ``coeff_stream`` (function) -- corresponds to the function
+      `a\mapsto c_a` where `c_a` is the `a`-th coefficient of the
+      `A`-expansion;
+    - `n` (integer) -- the exponent of the `A`-expansion;
+    - ``i`` -- an integer representing the index of the coefficient to
+      compute;
+    - ``param`` -- a prime power, a univariate polynomial ring over
+      `\mathbb{F}_q` or the fraction field of such polynomial ring.
+
+    EXAMPLE::
+
+        sage: from drinfeld_modular_forms import coefficient_A_expansion
+        sage: coeff_stream = lambda a: a^2 - 1
+        sage: coefficient_A_expansion(coeff_stream, 6, 4, 3)
+        2
+        sage: coeff_stream = lambda a: a^3
+        sage: coefficient_A_expansion(coeff_stream, 1, 7, 3)
+        2*T^3 + T
+    """
+    q, polynomial_ring = _format_param(param)
+    i = ZZ(i)
+    n_th_goss_pol = _carlitz_module_goss_polynomial(n, polynomial_ring)
+    m, G_m = next(((d, c) for d, c in enumerate(n_th_goss_pol.list()) if c))
+
+    # compute part 1
+    part1 = polynomial_ring.zero()
+    if not i%m:
+        if ZZ(i/m).is_power_of(q):
+            d = ZZ(i/m).log(q)
+            part1 = sum(coeff_stream(a)*G_m for a in polynomial_ring.monics(of_degree=d))
+
+    # compute part 2
+    part2 = polynomial_ring.zero()
+    for d in range(1, i+1, 1):
+        s = polynomial_ring.zero()
+        if i >= (q**d + 1)*m:
+            for a in polynomial_ring.monics(of_degree=d):
+                G_ta = n_th_goss_pol.subs({n_th_goss_pol.parent().gen(): parameter_at_infinity(a)})
+                dn = G_ta[i]
+                s += coeff_stream(a)*dn
+        part2 += s
+    return coeff_stream(polynomial_ring.zero()) + part1 + part2
+
+def compute_A_expansion(coeff_stream, n, param, name='u'):
+    r"""
+    Return the general `A`-expansion defined by
+
+    .. MATH::
+
+        c_0 +
+        \sum_{\substack{a\in \mathbb{F}_q[T] \\ a\text{ monic}}}
+        c_a G_n(u(az))
+
+    as a lazy power series.
+
+    INPUT:
+
+    - ``coeff_stream`` (function) -- corresponds to the function
+      `a\mapsto c_a` where `c_a` is the `a`-th coefficient of the
+      `A`-expansion;
+    - `n` (integer) -- the exponent of the `A`-expansion;
+    - ``param`` -- a prime power, a univariate polynomial ring over
+      `\mathbb{F}_q` or the fraction field of such polynomial ring;
+    - ``name`` (string, default: ``'u'``) -- represent the parameter at
+      infinity.
+
+    EXAMPLE::
+
+        sage: from drinfeld_modular_forms import compute_A_expansion
+        sage: c_h = lambda a: a^3
+        sage: compute_A_expansion(c_h, 1, 3)
+        u + u^5 + O(u^7)
+        sage: c_Delta = lambda a: a^6
+        sage: D = compute_A_expansion(c_Delta, 2, 3); D
+        u^2 + 2*u^6 + O(u^7)
+        sage: D[38]
+        T^18 + 2*T^12 + 2*T^10 + T^4 + 1
+
+    ::
+
+        sage: c = lambda a: a^5 - a + 2
+        sage: compute_A_expansion(c, 8, 5)
+        2 + 2*u + 2*u^2 + 2*u^3 + (((2*T^5+3*T+1)/(T^5+4*T))*u^4) + 2*u^5 + 2*u^6 + O(u^7)
+    """
+    if n not in ZZ:
+        raise TypeError("n must be a integer")
+    q, polynomial_ring = _format_param(param)
+    f = lambda i: coefficient_A_expansion(coeff_stream, n, i, polynomial_ring)
+    R = LazyPowerSeriesRing(polynomial_ring.fraction_field(), name)
+    return R(f)
+
 def coefficient_petrov_expansion(k, n, i, param):
     r"""
     Return the `i`-th coefficient of the expansion for the form
