@@ -500,15 +500,12 @@ class DrinfeldModularFormsRingElement(ModuleElement):
             sage: g1.type_m()
             0
         """
-        if self.parent()._rank != 2:
-            raise NotImplementedError("type not implemented when "
-                                      "rank is not two")
         if not self.is_drinfeld_modular_form():
             raise ValueError("self should be a Drinfeld modular form")
         if not self.parent()._has_type:
             return ZZ(0)
         q = self.base_ring().base_ring().cardinality()
-        return self.polynomial().degrees()[1]%(q-1)
+        return self.polynomial().degrees()[-1]%(q-1)
 
     def weight(self):
         r"""
