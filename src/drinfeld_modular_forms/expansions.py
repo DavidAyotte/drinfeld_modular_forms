@@ -5,9 +5,9 @@ an *expansion at infinity* of the form:
 
 .. MATH::
 
-    f(w) = \sum_{i = 0}^{\infty} a_i(f) t(w)^i
+    f(w) = \sum_{i = 0}^{\infty} a_i(f) u(w)^i
 
-where `t(w) := 1/e(w)` and `e(w)` is the exponential of the Carlitz
+where `u(w) := 1/e(w)` and `e(w)` is the exponential of the Carlitz
 module `T\mapsto T + \tau`.
 
 We say that a Drinfeld modular forms of weight `k` admits a
@@ -18,7 +18,7 @@ and coefficients `c_{a}(f)` such that
 
     f =
     \sum_{\substack{a\in \mathbb{F}_q[T] \\ a\text{ monic}}}
-    c_a(f)G_n(t(az))
+    c_a(f)G_n(u(az))
 
 where `G_n(X)` is the `n`-th Goss polynomial of the Carlitz module.
 
@@ -29,7 +29,7 @@ forms with `A`-expansion:
 
     f_{k, n} =
     \sum_{\substack{a\in \mathbb{F}_q[T] \\ a\text{ monic}}}
-    a^{k - n}G_n(t(az))
+    a^{k - n}G_n(u(az))
 
 provided that `k` and `n` are integers such that `k - 2n \equiv 0`
 modulo `q - 1` and `n \leq p^{v_p(k - n)}`.
@@ -42,7 +42,7 @@ EXAMPLES::
     sage: from drinfeld_modular_forms import compute_petrov_expansion
     sage: q = 3
     sage: D = compute_petrov_expansion(q + 1, 1, q); D
-    t + t^5 + ((2*T^3+T)*t^7) + O(t^8)
+    u + u^5 + ((2*T^3+T)*u^7) + O(u^8)
 
 It is possible to compute on demands any coefficients of the above
 series::
@@ -182,14 +182,14 @@ def inverse_cyclotomic_polynomial(a, name='X'):
     N = q ** a.degree()
     return act.subs(X ** (-1)) * X ** N
 
-def parameter_at_infinity(a, name='t'):
+def parameter_at_infinity(a, name='u'):
     r"""
-    Return the function `t(aw)` as a power series in `t`.
+    Return the function `u(aw)` as a power series in `u`.
 
     INPUT:
 
     - ``a`` (polynomial) -- univariate polynomial over a finite field.
-    - ``name`` (string, default: ``'t'``) -- the name of the lazy power
+    - ``name`` (string, default: ``'u'``) -- the name of the lazy power
       series ring generator.
 
     EXAMPLES::
@@ -197,11 +197,11 @@ def parameter_at_infinity(a, name='t'):
         sage: from drinfeld_modular_forms import parameter_at_infinity
         sage: A.<T> = GF(3)['T']
         sage: parameter_at_infinity(A.one())
-        t
+        u
         sage: parameter_at_infinity(T)
-        t^3 + 2*T*t^5 + T^2*t^7 + 2*T^3*t^9 + O(t^10)
+        u^3 + 2*T*u^5 + T^2*u^7 + 2*T^3*u^9 + O(u^10)
         sage: parameter_at_infinity(T^2)
-        t^9 + ((2*T^3+2*T)*t^15) + O(t^16)
+        u^9 + ((2*T^3+2*T)*u^15) + O(u^16)
     """
     if a.is_zero():
         return ValueError("the polynomial must be non-zero")
@@ -281,7 +281,7 @@ def coefficient_petrov_expansion(k, n, i, param):
         part2 += s
     return part1 + part2
 
-def compute_petrov_expansion(k, n, param, name='t', check=True):
+def compute_petrov_expansion(k, n, param, name='u', check=True):
     r"""
     Return the `A`-expansion of the form `f_{k, n}` as a lazy power
     series.
@@ -292,7 +292,7 @@ def compute_petrov_expansion(k, n, param, name='t', check=True):
 
         f_{k, n} =
         \sum_{\substack{a\in \mathbb{F}_q[T] \\ a\text{ monic}}}
-        a^{k - n}G_n(t(az))
+        a^{k - n}G_n(u(az))
 
     INPUT:
 
@@ -300,7 +300,7 @@ def compute_petrov_expansion(k, n, param, name='t', check=True):
     - ``n`` -- an integer congruent to the type modulo `q-1`.
     - ``param`` -- a prime power, a univariate polynomial ring over
       `\mathbb{F}_q` or the fraction field of such polynomial ring.
-    - ``name`` (string, default: ``'t'``) -- represent the parameter at
+    - ``name`` (string, default: ``'u'``) -- represent the parameter at
       infinity.
     - ``check`` (Boolean, default: ``True``) -- If this parameter is set
       to ``True``, the code will check if  `k` and `n` verify the three
@@ -319,7 +319,7 @@ def compute_petrov_expansion(k, n, param, name='t', check=True):
         sage: from drinfeld_modular_forms import compute_petrov_expansion
         sage: q = 3
         sage: D = compute_petrov_expansion(q + 1, 1, q); D
-        t + t^5 + ((2*T^3+T)*t^7) + O(t^8)
+        u + u^5 + ((2*T^3+T)*u^7) + O(u^8)
 
     To obtain more coefficient, one just need to take slices the series::
 
@@ -337,9 +337,9 @@ def compute_petrov_expansion(k, n, param, name='t', check=True):
         sage: q = 7
         sage: A = GF(q)['T']; K = Frac(A)
         sage: compute_petrov_expansion(q + 1, 1, A)
-        t + O(t^8)
+        u + O(u^8)
         sage: compute_petrov_expansion(q + 1, 1, K)
-        t + O(t^8)
+        u + O(u^8)
     """
     if k not in ZZ:
         raise TypeError("k must be an integer")
@@ -359,7 +359,7 @@ def compute_petrov_expansion(k, n, param, name='t', check=True):
     R = LazyPowerSeriesRing(polynomial_ring.fraction_field(), name)
     return R(f, valuation=1)
 
-def compute_delta_rank_2(param, name='t'):
+def compute_delta_rank_2(param, name='u'):
     r"""
     Return the expansion of the normalized Drinfeld modular discriminant of
     rank 2.
@@ -379,7 +379,7 @@ def compute_delta_rank_2(param, name='t'):
 
     - ``param`` -- a prime power, a univariate polynomial ring over
       `\mathbb{F}_q` or the fraction field of such polynomial ring.
-    - ``name`` (string, default: ``'t'``) -- represent the parameter at
+    - ``name`` (string, default: ``'u'``) -- represent the parameter at
       infinity.
 
     OUTPUT: a lazy power series over the base ring.
@@ -393,7 +393,7 @@ def compute_delta_rank_2(param, name='t'):
         sage: from drinfeld_modular_forms import compute_delta_rank_2
         sage: q = 3
         sage: D = compute_delta_rank_2(q); D
-        t^2 + 2*t^6 + O(t^8)
+        u^2 + 2*u^6 + O(u^8)
         sage: D[38]
         T^18 + 2*T^12 + 2*T^10 + T^4 + 1
         sage: D[56]
@@ -406,14 +406,14 @@ def compute_delta_rank_2(param, name='t'):
         sage: q = 9
         sage: A = GF(q)['T']; K = Frac(A)
         sage: compute_delta_rank_2(A)
-        O(t^8)
+        O(u^8)
         sage: compute_delta_rank_2(K)
-        O(t^8)
+        O(u^8)
     """
     q = _format_param(param)[0]
     return compute_petrov_expansion(q**2 - 1, q - 1, param, name, check=False)
 
-def compute_eisentein_series_rank_2(param, name='t'):
+def compute_eisentein_series_rank_2(param, name='u'):
     r"""
     Return the expansion fo the normalized Drinfeld Eisenstein series of
     weight `q-1`.
@@ -430,7 +430,7 @@ def compute_eisentein_series_rank_2(param, name='t'):
 
     - ``param`` -- a prime power, a univariate polynomial ring over
       `\mathbb{F}_q` or the fraction field of such polynomial ring.
-    - ``name`` (string, default: ``'t'``) -- represent the parameter at
+    - ``name`` (string, default: ``'u'``) -- represent the parameter at
       infinity.
 
     OUTPUT: a lazy power series over the base ring.
@@ -444,7 +444,7 @@ def compute_eisentein_series_rank_2(param, name='t'):
         sage: from drinfeld_modular_forms import compute_eisentein_series_rank_2
         sage: q = 3
         sage: E = compute_eisentein_series_rank_2(q); E
-        1 + ((2*T^3+T)*t^2) + O(t^7)
+        1 + ((2*T^3+T)*u^2) + O(u^7)
         sage: E[0:15]
         [1, 0, 2*T^3 + T, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2*T^3 + T]
 
@@ -455,9 +455,9 @@ def compute_eisentein_series_rank_2(param, name='t'):
         sage: q = 4
         sage: A = GF(q)['T']; K = Frac(A)
         sage: compute_eisentein_series_rank_2(A)
-        1 + ((T^4+T)*t^3) + O(t^7)
+        1 + ((T^4+T)*u^3) + O(u^7)
         sage: compute_eisentein_series_rank_2(K)
-        1 + ((T^4+T)*t^3) + O(t^7)
+        1 + ((T^4+T)*u^3) + O(u^7)
     """
     q, polynomial_ring = _format_param(param)
     T = polynomial_ring.gen()
@@ -465,16 +465,16 @@ def compute_eisentein_series_rank_2(param, name='t'):
     b = K(T**q - T)
     return K.one() - b*compute_petrov_expansion(q - 1, q - 1, param, name, check=False)
 
-def compute_h_rank_2(param, name='t'):
+def compute_h_rank_2(param, name='u'):
     r"""
     Return the expansion of the function `h` defined by
-    `\Delta = h^{q-1}` and having an expansion of the form `t + O(t^2)`.
+    `\Delta = h^{q-1}` and having an expansion of the form `u + O(u^2)`.
 
     INPUT:
 
     - ``param`` -- a prime power, a univariate polynomial ring over
       `\mathbb{F}_q` or the fraction field of such polynomial ring.
-    - ``name`` (string, default: ``'t'``) -- represent the parameter at
+    - ``name`` (string, default: ``'u'``) -- represent the parameter at
       infinity.
 
     EXAMPLES::
@@ -482,7 +482,7 @@ def compute_h_rank_2(param, name='t'):
         sage: from drinfeld_modular_forms import compute_h_rank_2
         sage: q = 3
         sage: h = compute_h_rank_2(q); h
-        t + t^5 + ((2*T^3+T)*t^7) + O(t^8)
+        u + u^5 + ((2*T^3+T)*u^7) + O(u^8)
         sage: h[0:15]
         [0, 1, 0, 0, 0, 1, 0, 2*T^3 + T, 0, 1, 0, T^3 + 2*T, 0, T^6 + T^4 + T^2 + 1, 0]
 
@@ -493,24 +493,24 @@ def compute_h_rank_2(param, name='t'):
         sage: q = 2
         sage: A = GF(q)['T']; K = Frac(A)
         sage: compute_h_rank_2(A)
-        t + t^2 + ((T^2+T+1)*t^3) + t^4 + ((T^4+T+1)*t^5) + ((T^4+T^2)*t^6) + ((T^6+T^5+T^4+T^3+1)*t^7) + O(t^8)
+        u + u^2 + ((T^2+T+1)*u^3) + u^4 + ((T^4+T+1)*u^5) + ((T^4+T^2)*u^6) + ((T^6+T^5+T^4+T^3+1)*u^7) + O(u^8)
         sage: compute_h_rank_2(K)
-        t + t^2 + ((T^2+T+1)*t^3) + t^4 + ((T^4+T+1)*t^5) + ((T^4+T^2)*t^6) + ((T^6+T^5+T^4+T^3+1)*t^7) + O(t^8)
+        u + u^2 + ((T^2+T+1)*u^3) + u^4 + ((T^4+T+1)*u^5) + ((T^4+T^2)*u^6) + ((T^6+T^5+T^4+T^3+1)*u^7) + O(u^8)
     """
     q = _format_param(param)[0]
     return compute_petrov_expansion(q + 1, 1, param, name)
 
-def j_invariant(param, name='t'):
+def j_invariant(param, name='u'):
     r"""
     Return the `j`-invariant defined by `j := g_1^{q+1}/g_2`.
 
-    It is normalized so that `j = 1/t^{q - 1} + O(1)`.
+    It is normalized so that `j = 1/u^{q - 1} + O(1)`.
 
     INPUT:
 
     - ``param`` -- a prime power, a univariate polynomial ring over
       `\mathbb{F}_q` or the fraction field of such polynomial ring.
-    - ``name`` (string, default: ``'t'``) -- represent the parameter at
+    - ``name`` (string, default: ``'u'``) -- represent the parameter at
       infinity.
 
     EXAMPLES::
@@ -518,10 +518,10 @@ def j_invariant(param, name='t'):
         sage: from drinfeld_modular_forms import j_invariant
         sage: q = 3
         sage: j_invariant(q)
-        1/t^2 + (2*T^3+T) + t^2 + ((2*T^9+2*T^3+2*T)*t^4) + O(t^5)
+        1/u^2 + (2*T^3+T) + u^2 + ((2*T^9+2*T^3+2*T)*u^4) + O(u^5)
         sage: q = 4
         sage: j_invariant(q)
-        1/t^3 + (T^4+T) + O(t^4)
+        1/u^3 + (T^4+T) + O(u^4)
 
     .. doctest::
        :hide:
@@ -530,9 +530,9 @@ def j_invariant(param, name='t'):
         sage: q = 8
         sage: A = GF(q)['T']; K = Frac(A)
         sage: j_invariant(A)
-        1/t^7 + O(1)
+        1/u^7 + O(1)
         sage: j_invariant(K)
-        1/t^7 + O(1)
+        1/u^7 + O(1)
     """
     q = _format_param(param)[0]
     E = compute_eisentein_series_rank_2(q, name)
