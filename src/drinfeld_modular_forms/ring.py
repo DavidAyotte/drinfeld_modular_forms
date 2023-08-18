@@ -117,7 +117,7 @@ One can also consider the ring Drinfeld modular forms of arbitrary type::
     sage: (g1*h^4).type_m()
     4
 
-The last generator is is known as Gekeler's `h` function.
+The last generator is known as Gekeler's `h` function.
 
 .. RUBRIC:: The rank 2 case
 
