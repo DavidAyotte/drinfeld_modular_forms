@@ -45,6 +45,23 @@ EXAMPLES::
     sage: g3.weight() == 3^3 - 1
     True
 
+It is possible to compute the coefficient forms::
+
+    sage: M = DrinfeldModularFormsRing(K, 2)
+    sage: M.coefficient_form(1)
+    g1
+    sage: M.coefficient_form(2)
+    g2
+    sage: M.coefficient_form(2, T^2)
+    g1^4 + (T^9 + T)*g2
+    sage: M.coefficient_forms(T^3)
+    [(T^6 + T^4 + T^2)*g1,
+     (T^9 + T^3 + T)*g1^4 + (T^18 + T^10 + T^2)*g2,
+     g1^13 + (T^27 + T^9 + T)*g1^9*g2 + (T^27 + T^3 + T)*g1*g2^3,
+     g1^36*g2 + g1^28*g2^3 + g1^4*g2^9 + (T^81 + T^9 + T)*g2^10,
+     g1^81*g2^10 + g1^9*g2^28 + g1*g2^30,
+     g2^91]
+
 One can compute basis for any subspace of given weight::
 
     sage: M = DrinfeldModularFormsRing(K, 4)
