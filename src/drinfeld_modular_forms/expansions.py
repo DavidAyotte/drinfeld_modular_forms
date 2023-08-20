@@ -33,7 +33,7 @@ forms with `A`-expansion:
 
 provided that `k` and `n` are integers such that `k - 2n \equiv 0`
 modulo `q - 1` and `n \leq p^{v_p(k - n)}`. The set of all forms
-`f_{k, n}` will be called the Petrov family.
+`f_{k, n}` will be called the *Petrov family*.
 
 This module defines functions that compute the expansion at infinity of
 any `A`-expansion.
