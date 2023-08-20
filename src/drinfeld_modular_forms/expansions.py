@@ -10,9 +10,9 @@ an *expansion at infinity* of the form:
 where `u(w) := 1/e(w)` and `e(w)` is the exponential of the Carlitz
 module `T\mapsto T + \tau`.
 
-We say that a Drinfeld modular forms of weight `k` admits a
-*Petrov expansion* or an `A`-*expansion* if there exists an integer `n`
-and coefficients `c_{a}(f)` such that
+We say that a Drinfeld modular forms of weight `k` admits an
+`A`-*expansion* if there exists an integer `n` and coefficients
+`c_{a}(f)` such that
 
 .. MATH::
 
@@ -32,10 +32,11 @@ forms with `A`-expansion:
     a^{k - n}G_n(u(az))
 
 provided that `k` and `n` are integers such that `k - 2n \equiv 0`
-modulo `q - 1` and `n \leq p^{v_p(k - n)}`.
+modulo `q - 1` and `n \leq p^{v_p(k - n)}`. The set of all forms
+`f_{k, n}` will be called the Petrov family.
 
 This module defines functions that compute the expansion at infinity of
-the forms `f_{k, n}`.
+any `A`-expansion.
 
 EXAMPLES::
 
@@ -273,6 +274,9 @@ def compute_A_expansion(coeff_stream, n, param, name='u'):
         c_a G_n(u(az))
 
     as a lazy power series.
+
+    Note that the returned power series might not always represent a
+    Drinfeld modular form.
 
     INPUT:
 
