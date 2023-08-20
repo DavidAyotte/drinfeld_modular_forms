@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Drinfeld modules" href="drinfeld_modules.html" /><link rel="prev" title="Expansion at infinity for rank 2" href="expansions.html" />
 
     <meta name="generator" content="sphinx-5.2.3, furo 2022.09.29"/>
-        <title>Goss polynomials and exponentials - Drinfeld modular forms 0.1.0 documentation</title>
+        <title>Goss polynomials and exponentials - Drinfeld modular forms 0.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=d81277517bee4d6b0349d71bb2661d4890b5617c" />
     <link rel="stylesheet" type="text/css" href="_static/plot_directive.css" />
@@ -124,7 +124,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand">Drinfeld modular forms 0.1.0 documentation</div></a>
+      <a href="index.html"><div class="brand">Drinfeld modular forms 0.2 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -147,7 +147,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
   
   
-  <span class="sidebar-brand-text">Drinfeld modular forms 0.1.0 documentation</span>
+  <span class="sidebar-brand-text">Drinfeld modular forms 0.2 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="search.html" role="search">
   <input class="sidebar-search" placeholder=Search name="q" aria-label="Search">
@@ -198,8 +198,46 @@
         <article role="main">
           <section id="module-drinfeld_modular_forms.goss_polynomials">
 <span id="goss-polynomials-and-exponentials"></span><h1>Goss polynomials and exponentials<a class="headerlink" href="#module-drinfeld_modular_forms.goss_polynomials" title="Permalink to this heading">#</a></h1>
-<p>Functions for computing Goss polynomials and exponentials of general
-Drinfeld <span class="math notranslate nohighlight">\(\mathbb{F}_q[T]\)</span>-modules.</p>
+<p>Functions for computing Goss polynomials and exponentials of Drinfeld
+<span class="math notranslate nohighlight">\(\mathbb{F}_q[T]\)</span>-modules over fields of generic characteristics.</p>
+<p class="rubric">Exponentials and logarithms</p>
+<p>Let <span class="math notranslate nohighlight">\(\phi\)</span> be a Drinfeld <span class="math notranslate nohighlight">\(\mathbb{F}_q[T]\)</span>-module of rank <span class="math notranslate nohighlight">\(r\)</span> over
+<span class="math notranslate nohighlight">\(\mathbb{F}_q(T)\)</span> defined by</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\phi_T = T + g_1 \tau + \cdots + g_{r} \tau^r.\]</div>
+</div>
+<p>Then, there exists a power series</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[e_{\phi}(z) = z + \sum_{i = 1}^{\infty} \alpha_i z^{q^i}\]</div>
+</div>
+<p>such that the functional equation is satisfied
+<span class="math notranslate nohighlight">\(e_{\phi}(az) = \phi_a(e_{\phi}(z))\)</span>. The power series <span class="math notranslate nohighlight">\(e_{\phi}\)</span> is
+called the <em>exponential</em> of <span class="math notranslate nohighlight">\(\phi\)</span>.</p>
+<p>The compositional inverse of <span class="math notranslate nohighlight">\(e_{\phi}\)</span> is denoted</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\mathrm{log}_{\phi}(z) = z + \sum_{i = 1}^{\infty} \beta_i z^{q^i}\]</div>
+</div>
+<p>and is called the <em>logarithm</em> of <span class="math notranslate nohighlight">\(\phi\)</span>.</p>
+<p>One can show the following recursive formulas:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\beta_k = \frac{1}{T - T^{q^k}}\sum_{i = 0}^{k - 1} \beta_i g_{k - i}^{q^i}\)</span>;</p></li>
+<li><p><span class="math notranslate nohighlight">\(\alpha_k = - \sum_{i = 0}^{k - 1} \alpha_i \beta_{k - i}^{q^i}\)</span>.</p></li>
+</ul>
+<p class="rubric">Goss polynomials</p>
+<p>Let <span class="math notranslate nohighlight">\((\alpha_i)_{i\geq 0}\)</span> the sequence representing the coefficients
+of the exponential of a Drinfeld module <span class="math notranslate nohighlight">\(\phi\)</span>. The <span class="math notranslate nohighlight">\(n\)</span>-th <em>Goss
+polynomial</em> of <span class="math notranslate nohighlight">\(\phi\)</span> is defined by the recursive formula</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[G_n(X) = X\left(G_{n-1}(X) \sum_{i = 1}^{\lfloor \mathrm{log}_q(n)\rfloor}\alpha_i G_{k - q^i}(X)\right)\]</div>
+</div>
+<p>where <span class="math notranslate nohighlight">\(G_n(X) = X^n\)</span> if <span class="math notranslate nohighlight">\(n \leq q\)</span>.</p>
+<p>The <span class="math notranslate nohighlight">\(n\)</span>-th Goss polynomial is monic of degree <span class="math notranslate nohighlight">\(n\)</span> and satisfies
+<span class="math notranslate nohighlight">\(G_{pn}(X) = (G_n(X))^p\)</span> if <span class="math notranslate nohighlight">\(q = p^e\)</span>. Moreover, it satisfies the
+relation <span class="math notranslate nohighlight">\(X^2G_n'(X) = nG_{n+1}(X)\)</span>.</p>
 <p>AUTHORS:</p>
 <ul class="simple">
 <li><p>David Ayotte (2022): initial version</p></li>

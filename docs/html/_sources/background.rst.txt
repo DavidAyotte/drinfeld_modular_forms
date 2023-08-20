@@ -76,9 +76,9 @@ the rank two case, this expansion at infinity is of the form
 
 .. MATH::
 
-    g_i(w) = \sum_{i = 0}^{\infty} a_n(g_i)t(w)^i
+    g_i(w) = \sum_{i = 0}^{\infty} a_n(g_i)u(w)^i
 
-where `t(w) := e(w)^{-1}` and `e` is the exponential of the Carlitz
+where `u(w) := e(w)^{-1}` and `e` is the exponential of the Carlitz
 module. Any rigid analytic function
 `f : \Omega^r(\mathbb{C}_{\infty}) \rightarrow \mathbb{C}_{\infty}`
 that satisfies the invariance property and the expansion at infinity
@@ -108,7 +108,7 @@ such that
 
 The second condition is similar to the classical case. In the rank two
 situation, this expansion is simply given by
-`f = \sum_{n\geq 0} a_n(f) t^n` where `a_n(f)\in \mathbb{C}_{\infty}`.
+`f = \sum_{n\geq 0} a_n(f) u^n` where `a_n(f)\in \mathbb{C}_{\infty}`.
 
 The reader is refered to
 part I of [BRP2018]_ for more information about the analytic theory of
@@ -117,7 +117,7 @@ Drinfeld modular form of arbitrary rank.
 .. RUBRIC:: Ring of Drinfeld modular forms
 
 Letting `M_k^{r, m}(\mathrm{GL}_r(A))` denote the space of rank `r`,
-weight `k` and type `m` (`k\geq 0` and `m\in (q - 1)\mathbb{Z}`)
+weight `k\in (q - 1)\mathbb{Z}` and type `m~(\mathrm{mod}~q-1)`
 Drinfeld modular forms, we define
 
 .. MATH::
@@ -142,7 +142,7 @@ Furthermore, in the rank two case, we also have
     = \mathbb{C}_{\infty}[g_1, h]
 
 where `h` is a modular form of weight `q+1`, type 1 with expansion
-`t + O(t^2)` (see (5.13) of [Gek1988]_).
+`u + O(u^2)` (see (5.13) of [Gek1988]_).
 
 .. RUBRIC:: Rank two examples
 
@@ -163,7 +163,7 @@ expansion
 .. MATH::
 
     E_k(w) = \tilde{\pi}^k\delta_k
-    - \tilde{\pi}^k \sum_{\substack{a\in A \\a\text{ monic}}} G_k(t(aw))
+    - \tilde{\pi}^k \sum_{\substack{a\in A \\a\text{ monic}}} G_k(u(aw))
 
 where `\tilde{\pi}` is the Carlitz period (analogue of `\pi`) and `G_k` is
 the `k`-th Goss polynomial and `\delta_k \in K` is some constant
@@ -195,7 +195,7 @@ expansion of the form
 
     -\tilde{\pi}^{1 - q^2}\Delta(w)
     = \sum_{\substack{a\in A\\a \text{ monic}}}
-    a^{q(q-1)} t(aw)^{q-1}.
+    a^{q(q-1)} u(aw)^{q-1}.
 
 - Petrov `A`-expansions
 
@@ -207,7 +207,7 @@ and elements `c_{a}(f)\in \mathbb{C}_{\infty}` such that
 
     f =
     \sum_{\substack{a\in \mathbb{F}_q[T] \\ a\text{ monic}}}
-    c_a(f)G_n(t(az)).
+    c_a(f)G_n(u(az)).
 
 In [Pet2013]_, Petrov showed that
 
@@ -215,7 +215,7 @@ In [Pet2013]_, Petrov showed that
 
     f_{k, n} :=
     \sum_{\substack{a\in \mathbb{F}_q[T] \\ a\text{ monic}}}
-    a^{k - n}G_n(t(az))
+    a^{k - n}G_n(u(az))
 
 defines an infinite family of Drinfeld modular forms of weight `k`
 provided that `k - 2n \equiv 0` modulo `q - 1` and

@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Ring of Drinfeld modular forms" href="ring.html" /><link rel="prev" title="Drinfeld Modular Forms" href="index.html" />
 
     <meta name="generator" content="sphinx-5.2.3, furo 2022.09.29"/>
-        <title>Background material and notations - Drinfeld modular forms 0.1.0 documentation</title>
+        <title>Background material and notations - Drinfeld modular forms 0.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=d81277517bee4d6b0349d71bb2661d4890b5617c" />
     <link rel="stylesheet" type="text/css" href="_static/plot_directive.css" />
@@ -124,7 +124,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand">Drinfeld modular forms 0.1.0 documentation</div></a>
+      <a href="index.html"><div class="brand">Drinfeld modular forms 0.2 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -147,7 +147,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
   
   
-  <span class="sidebar-brand-text">Drinfeld modular forms 0.1.0 documentation</span>
+  <span class="sidebar-brand-text">Drinfeld modular forms 0.2 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="search.html" role="search">
   <input class="sidebar-search" placeholder=Search name="q" aria-label="Search">
@@ -259,9 +259,9 @@ admits an expansion at infinity, analogous to the classical theory. In
 the rank two case, this expansion at infinity is of the form</p>
 <div class="math-wrapper docutils container">
 <div class="math notranslate nohighlight">
-\[g_i(w) = \sum_{i = 0}^{\infty} a_n(g_i)t(w)^i\]</div>
+\[g_i(w) = \sum_{i = 0}^{\infty} a_n(g_i)u(w)^i\]</div>
 </div>
-<p>where <span class="math notranslate nohighlight">\(t(w) := e(w)^{-1}\)</span> and <span class="math notranslate nohighlight">\(e\)</span> is the exponential of the Carlitz
+<p>where <span class="math notranslate nohighlight">\(u(w) := e(w)^{-1}\)</span> and <span class="math notranslate nohighlight">\(e\)</span> is the exponential of the Carlitz
 module. Any rigid analytic function
 <span class="math notranslate nohighlight">\(f : \Omega^r(\mathbb{C}_{\infty}) \rightarrow \mathbb{C}_{\infty}\)</span>
 that satisfies the invariance property and the expansion at infinity
@@ -287,13 +287,13 @@ such that</p>
 </ul>
 <p>The second condition is similar to the classical case. In the rank two
 situation, this expansion is simply given by
-<span class="math notranslate nohighlight">\(f = \sum_{n\geq 0} a_n(f) t^n\)</span> where <span class="math notranslate nohighlight">\(a_n(f)\in \mathbb{C}_{\infty}\)</span>.</p>
+<span class="math notranslate nohighlight">\(f = \sum_{n\geq 0} a_n(f) u^n\)</span> where <span class="math notranslate nohighlight">\(a_n(f)\in \mathbb{C}_{\infty}\)</span>.</p>
 <p>The reader is refered to
 part I of <a class="reference internal" href="#brp2018" id="id2"><span>[BRP2018]</span></a> for more information about the analytic theory of
 Drinfeld modular form of arbitrary rank.</p>
 <p class="rubric">Ring of Drinfeld modular forms</p>
 <p>Letting <span class="math notranslate nohighlight">\(M_k^{r, m}(\mathrm{GL}_r(A))\)</span> denote the space of rank <span class="math notranslate nohighlight">\(r\)</span>,
-weight <span class="math notranslate nohighlight">\(k\)</span> and type <span class="math notranslate nohighlight">\(m\)</span> (<span class="math notranslate nohighlight">\(k\geq 0\)</span> and <span class="math notranslate nohighlight">\(m\in (q - 1)\mathbb{Z}\)</span>)
+weight <span class="math notranslate nohighlight">\(k\in (q - 1)\mathbb{Z}\)</span> and type <span class="math notranslate nohighlight">\(m~(\mathrm{mod}~q-1)\)</span>
 Drinfeld modular forms, we define</p>
 <div class="math-wrapper docutils container">
 <div class="math notranslate nohighlight">
@@ -315,7 +315,7 @@ part III of <a class="reference internal" href="#brp2018" id="id3"><span>[BRP201
 = \mathbb{C}_{\infty}[g_1, h]\]</div>
 </div>
 <p>where <span class="math notranslate nohighlight">\(h\)</span> is a modular form of weight <span class="math notranslate nohighlight">\(q+1\)</span>, type 1 with expansion
-<span class="math notranslate nohighlight">\(t + O(t^2)\)</span> (see (5.13) of <a class="reference internal" href="#gek1988" id="id4"><span>[Gek1988]</span></a>).</p>
+<span class="math notranslate nohighlight">\(u + O(u^2)\)</span> (see (5.13) of <a class="reference internal" href="#gek1988" id="id4"><span>[Gek1988]</span></a>).</p>
 <p class="rubric">Rank two examples</p>
 <ul class="simple">
 <li><p>Drinfeld Eisenstein series</p></li>
@@ -333,7 +333,7 @@ expansion</p>
 <div class="math-wrapper docutils container">
 <div class="math notranslate nohighlight">
 \[\begin{split}E_k(w) = \tilde{\pi}^k\delta_k
-- \tilde{\pi}^k \sum_{\substack{a\in A \\a\text{ monic}}} G_k(t(aw))\end{split}\]</div>
+- \tilde{\pi}^k \sum_{\substack{a\in A \\a\text{ monic}}} G_k(u(aw))\end{split}\]</div>
 </div>
 <p>where <span class="math notranslate nohighlight">\(\tilde{\pi}\)</span> is the Carlitz period (analogue of <span class="math notranslate nohighlight">\(\pi\)</span>) and <span class="math notranslate nohighlight">\(G_k\)</span> is
 the <span class="math notranslate nohighlight">\(k\)</span>-th Goss polynomial and <span class="math notranslate nohighlight">\(\delta_k \in K\)</span> is some constant
@@ -362,7 +362,7 @@ expansion of the form</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}-\tilde{\pi}^{1 - q^2}\Delta(w)
 = \sum_{\substack{a\in A\\a \text{ monic}}}
-a^{q(q-1)} t(aw)^{q-1}.\end{split}\]</div>
+a^{q(q-1)} u(aw)^{q-1}.\end{split}\]</div>
 </div>
 <ul class="simple">
 <li><p>Petrov <span class="math notranslate nohighlight">\(A\)</span>-expansions</p></li>
@@ -374,14 +374,14 @@ and elements <span class="math notranslate nohighlight">\(c_{a}(f)\in \mathbb{C}
 <div class="math notranslate nohighlight">
 \[\begin{split}f =
 \sum_{\substack{a\in \mathbb{F}_q[T] \\ a\text{ monic}}}
-c_a(f)G_n(t(az)).\end{split}\]</div>
+c_a(f)G_n(u(az)).\end{split}\]</div>
 </div>
 <p>In <a class="reference internal" href="#pet2013" id="id7"><span>[Pet2013]</span></a>, Petrov showed that</p>
 <div class="math-wrapper docutils container">
 <div class="math notranslate nohighlight">
 \[\begin{split}f_{k, n} :=
 \sum_{\substack{a\in \mathbb{F}_q[T] \\ a\text{ monic}}}
-a^{k - n}G_n(t(az))\end{split}\]</div>
+a^{k - n}G_n(u(az))\end{split}\]</div>
 </div>
 <p>defines an infinite family of Drinfeld modular forms of weight <span class="math notranslate nohighlight">\(k\)</span>
 provided that <span class="math notranslate nohighlight">\(k - 2n \equiv 0\)</span> modulo <span class="math notranslate nohighlight">\(q - 1\)</span> and
