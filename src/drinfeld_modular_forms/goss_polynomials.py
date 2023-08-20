@@ -1,6 +1,55 @@
 r"""
-Functions for computing Goss polynomials and exponentials of general
-Drinfeld `\mathbb{F}_q[T]`-modules.
+Functions for computing Goss polynomials and exponentials of Drinfeld
+`\mathbb{F}_q[T]`-modules over fields of generic characteristics.
+
+.. RUBRIC:: Exponentials and logarithms
+
+Let `\phi` be a Drinfeld `\mathbb{F}_q[T]`-module of rank `r` over
+`\mathbb{F}_q(T)` defined by
+
+.. MATH::
+
+    \phi_T = T + g_1 \tau + \cdots + g_{r} \tau^r.
+
+Then, there exists a power series
+
+.. MATH::
+
+    e_{\phi}(z) = z + \sum_{i = 1}^{\infty} \alpha_i z^{q^i}
+
+such that the functional equation is satisfied
+`e_{\phi}(az) = \phi_a(e_{\phi}(z))`. The power series `e_{\phi}` is
+called the *exponential* of `\phi`.
+
+The compositional inverse of `e_{\phi}` is denoted
+
+.. MATH::
+
+    \mathrm{log}_{\phi}(z) = z + \sum_{i = 1}^{\infty} \beta_i z^{q^i}
+
+and is called the *logarithm* of `\phi`.
+
+One can show the following recursive formulas:
+
+* `\beta_k = \frac{1}{T - T^{q^k}}\sum_{i = 0}^{k - 1} \beta_i g_{k - i}^{q^i}`;
+
+* `\alpha_k = - \sum_{i = 0}^{k - 1} \alpha_i \beta_{k - i}^{q^i}`.
+
+.. RUBRIC:: Goss polynomials
+
+Let `(\alpha_i)_{i\geq 0}` the sequence representing the coefficients
+of the exponential of a Drinfeld module `\phi`. The `n`-th *Goss
+polynomial* of `\phi` is defined by the recursive formula
+
+.. MATH::
+
+    G_n(X) = X\left(G_{n-1}(X) \sum_{i = 1}^{\lfloor \mathrm{log}_q(n)\rfloor}\alpha_i G_{k - q^i}(X)\right)
+
+where `G_n(X) = X^n` if `n \leq q`.
+
+The `n`-th Goss polynomial is monic of degree `n` and satisfies
+`G_{pn}(X) = (G_n(X))^p` if `q = p^e`. Moreover, it satisfies the
+relation `X^2G_n'(X) = nG_{n+1}(X)`.
 
 AUTHORS:
 
