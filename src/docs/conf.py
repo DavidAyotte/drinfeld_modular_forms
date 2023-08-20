@@ -152,7 +152,7 @@ master_doc = 'index'
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
 # built documents.
-release = "0.1.0"
+release = "0.2"
 #print("############# release reported: {} ##################".format(release))
 # The short X.Y version.
 version = '.'.join(release.split('.')[:2])
