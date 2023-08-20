@@ -232,8 +232,8 @@ def coefficient_A_expansion(coeff_stream, n, i, param):
 
         sage: from drinfeld_modular_forms import coefficient_A_expansion
         sage: coeff_stream = lambda a: a^2 - 1
-        sage: coefficient_A_expansion(coeff_stream, 6, 4, 3)
-        2
+        sage: coefficient_A_expansion(coeff_stream, 10, 6, 3)
+        2/(T^18 + 2*T^12 + 2*T^10 + T^4)
         sage: coeff_stream = lambda a: a^3
         sage: coefficient_A_expansion(coeff_stream, 1, 7, 3)
         2*T^3 + T
@@ -260,7 +260,7 @@ def coefficient_A_expansion(coeff_stream, n, i, param):
                 dn = G_ta[i]
                 s += coeff_stream(a)*dn
         part2 += s
-    return coeff_stream(polynomial_ring.zero()) + part1 + part2
+    return  part1 + part2
 
 def compute_A_expansion(coeff_stream, n, param, name='u'):
     r"""
@@ -301,14 +301,14 @@ def compute_A_expansion(coeff_stream, n, param, name='u'):
 
         sage: c = lambda a: a^5 - a + 2
         sage: compute_A_expansion(c, 8, 5)
-        2 + 2*u + 2*u^2 + 2*u^3 + (((2*T^5+3*T+1)/(T^5+4*T))*u^4) + 2*u^5 + 2*u^6 + O(u^7)
+        2 + ((1/(T^5+4*T))*u^4) + O(u^7)
     """
     if n not in ZZ:
         raise TypeError("n must be a integer")
     q, polynomial_ring = _format_param(param)
     f = lambda i: coefficient_A_expansion(coeff_stream, n, i, polynomial_ring)
     R = LazyPowerSeriesRing(polynomial_ring.fraction_field(), name)
-    return R(f)
+    return coeff_stream(polynomial_ring.zero()) + R(f)
 
 def coefficient_petrov_expansion(k, n, i, param):
     r"""
