@@ -298,8 +298,8 @@ class DrinfeldModularFormsRing(Parent, UniqueRepresentation):
         INPUT:
 
         - ``expansion`` -- a lazy power series, a power series, a list or a
-          tuple. The precision or the length must be at least the Sturm bound
-          of the weight `k` subspace.
+          tuple. The precision or the length must be at least the Sturm
+          bound + 2 of the weight `k` subspace.
         - ``k`` -- an integer representing the weight of the expected Drinfeld
           modular form.
 
@@ -310,9 +310,7 @@ class DrinfeldModularFormsRing(Parent, UniqueRepresentation):
             sage: A = GF(q)['T']
             sage: K.<T> = Frac(A)
             sage: M = DrinfeldModularFormsRing(K)
-            sage: M.sturm_bound(q - 1)
-            1
-            sage: M.from_expansion([K.one()], q - 1)
+            sage: M.from_expansion([1, 0, 2*T^3 + T], q - 1)
             g1
             sage: f = (M.1).expansion()
             sage: M.from_expansion(f, (M.1).weight())
@@ -321,7 +319,7 @@ class DrinfeldModularFormsRing(Parent, UniqueRepresentation):
         if self._rank != 2:
             raise NotImplementedError
         basis = self.basis_of_weight(k)
-        bound = self.sturm_bound(k)
+        bound = self.sturm_bound(k) + 2
         if isinstance(expansion, (list, tuple)):
             coefficients = Sequence(expansion)[0:bound]
             if coefficients.universe() != self.base_ring():
@@ -338,14 +336,14 @@ class DrinfeldModularFormsRing(Parent, UniqueRepresentation):
             raise TypeError("expansion must be a lazy power series, a power "
                             "series, a list or a tuple")
         if len(coefficients) < bound:
-            raise ValueError("not enough coefficients, please provide"
+            raise ValueError("not enough coefficients, please provide "
                                 f"at least {bound} coefficients")
         v = Matrix([coefficients])
         coeff_basis = [b.expansion()[0:bound] for b in basis]
         try:
             c = Matrix(coeff_basis).solve_left(v)
         except ValueError:
-            raise ValueError("the given expansion does not correspond to a"
+            raise ValueError("the given expansion does not correspond to a "
                              "form of the given weight")
         return sum(c[0][i]*b for i, b in enumerate(basis))
 
