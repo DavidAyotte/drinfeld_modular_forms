@@ -531,8 +531,8 @@ expansion.</p>
 <p>INPUT:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">expansion</span></code> – a lazy power series, a power series, a list or a
-tuple. The precision or the length must be at least the Sturm bound
-of the weight <span class="math notranslate nohighlight">\(k\)</span> subspace.</p></li>
+tuple. The precision or the length must be at least the Sturm
+bound + 2 of the weight <span class="math notranslate nohighlight">\(k\)</span> subspace.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">k</span></code> – an integer representing the weight of the expected Drinfeld
 modular form.</p></li>
 </ul>
@@ -542,9 +542,7 @@ modular form.</p></li>
 <span class="n">sage</span><span class="p">:</span> <span class="n">A</span> <span class="o">=</span> <span class="n">GF</span><span class="p">(</span><span class="n">q</span><span class="p">)[</span><span class="s1">&#39;T&#39;</span><span class="p">]</span>
 <span class="n">sage</span><span class="p">:</span> <span class="n">K</span><span class="o">.&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="n">Frac</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
 <span class="n">sage</span><span class="p">:</span> <span class="n">M</span> <span class="o">=</span> <span class="n">DrinfeldModularFormsRing</span><span class="p">(</span><span class="n">K</span><span class="p">)</span>
-<span class="n">sage</span><span class="p">:</span> <span class="n">M</span><span class="o">.</span><span class="n">sturm_bound</span><span class="p">(</span><span class="n">q</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
-<span class="mi">1</span>
-<span class="n">sage</span><span class="p">:</span> <span class="n">M</span><span class="o">.</span><span class="n">from_expansion</span><span class="p">([</span><span class="n">K</span><span class="o">.</span><span class="n">one</span><span class="p">()],</span> <span class="n">q</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">sage</span><span class="p">:</span> <span class="n">M</span><span class="o">.</span><span class="n">from_expansion</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">T</span><span class="o">^</span><span class="mi">3</span> <span class="o">+</span> <span class="n">T</span><span class="p">],</span> <span class="n">q</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
 <span class="n">g1</span>
 <span class="n">sage</span><span class="p">:</span> <span class="n">f</span> <span class="o">=</span> <span class="p">(</span><span class="n">M</span><span class="mf">.1</span><span class="p">)</span><span class="o">.</span><span class="n">expansion</span><span class="p">()</span>
 <span class="n">sage</span><span class="p">:</span> <span class="n">M</span><span class="o">.</span><span class="n">from_expansion</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="p">(</span><span class="n">M</span><span class="mf">.1</span><span class="p">)</span><span class="o">.</span><span class="n">weight</span><span class="p">())</span>
